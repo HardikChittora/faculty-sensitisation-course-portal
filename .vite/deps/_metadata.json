@@ -1,0 +1,44 @@
+{
+  "hash": "85531202",
+  "configHash": "a8e7764a",
+  "lockfileHash": "4871a0aa",
+  "browserHash": "cd62bd02",
+  "optimized": {
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.mjs",
+      "file": "lucide-react.js",
+      "fileHash": "81c7cacf",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "4651ac9f",
+      "needsInterop": true
+    },
+    "react-youtube": {
+      "src": "../../node_modules/react-youtube/dist/YouTube.esm.js",
+      "file": "react-youtube.js",
+      "fileHash": "5d7ed1ed",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "f84c67f9",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "9bc3c3bb",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "rolldown-runtime-DC62tzP2": {
+      "file": "rolldown-runtime-DC62tzP2.js",
+      "isDynamicEntry": false
+    }
+  }
+}
