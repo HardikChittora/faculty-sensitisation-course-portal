@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # 1. Containerized PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: fscp-postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: fscp_admin
+      POSTGRES_PASSWORD: fscp_secret_pass
+      POSTGRES_DB: faculty_course_portal
+    volumes:
+      # Persistent host volume for PostgreSQL data files
+      - pgdata:/var/lib/postgresql/data
+      # Automated schema initialization
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fscp_admin -d faculty_course_portal"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fscp-network
+
+  # 2. Application Server (Express API + Vite SPA Frontend)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fscp-app
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: fscp_admin
+      DB_PASSWORD: fscp_secret_pass
+      DB_NAME: faculty_course_portal
+      DATABASE_URL: postgresql://fscp_admin:fscp_secret_pass@postgres:5432/faculty_course_portal
+      ZIMBRA_HOST: mail.institute.edu.in
+      ZIMBRA_PORT: 993
+      ZIMBRA_USE_SSL: "true"
+      ZIMBRA_DOMAIN: institute.edu.in
+      ZIMBRA_DEV_MODE: "true"
+    networks:
+      - fscp-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  fscp-network:
+    driver: bridge

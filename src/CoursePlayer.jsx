@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
 import { AlertCircle, CheckCircle, Play, Pause, Volume2, VolumeX, ArrowRight, RotateCcw } from 'lucide-react';
+import { recordQuizAttempt } from './services/api';
 
-const QUIZ_QUESTIONS = [
+const DEFAULT_QUIZ_QUESTIONS = [
   {
     question: "What is the primary goal of this course module?",
     options: ["To skip videos", "To learn faculty sensitization", "To sleep", "Nothing"],
@@ -37,12 +38,27 @@ function formatTime(seconds) {
   return `${m}:${s < 10 ? '0' : ''}${s}`;
 }
 
-export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, moduleData, updateProgress, onNextModule }) {
+export default function CoursePlayer({ 
+  moduleKey, 
+  moduleNum, 
+  courseTitle, 
+  moduleData, 
+  moduleInfo,
+  userId,
+  courseId,
+  updateProgress, 
+  onNextModule 
+}) {
+  const activeQuestions = (moduleInfo && moduleInfo.quiz && moduleInfo.quiz.length > 0) 
+    ? moduleInfo.quiz 
+    : DEFAULT_QUIZ_QUESTIONS;
+
+  const passingThreshold = moduleInfo?.passingThreshold || 80;
+
   // Quiz State
   const [quizState, setQuizState] = useState('idle'); // 'idle' | 'taking' | 'passed' | 'failed'
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
-  // Using an array for answers to completely avoid stale keys mapping issues
-  const [answers, setAnswers] = useState(Array(QUIZ_QUESTIONS.length).fill(null));
+  const [answers, setAnswers] = useState(Array(activeQuestions.length).fill(null));
   const [score, setScore] = useState(0);
 
   // Custom Controls State
@@ -55,28 +71,28 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
 
   const intervalRef = useRef(null);
   const playerRef = useRef(null);
-  const maxTimeRef = useRef(moduleData.maxTimeWatched || 0);
+  const maxTimeRef = useRef(moduleData?.maxTimeWatched || 0);
 
   // Reset state on module switch
   useEffect(() => {
-    setQuizState(moduleData.passed ? 'passed' : 'idle');
+    setQuizState(moduleData?.passed ? 'passed' : 'idle');
     setCurrentQuestionIdx(0);
-    setAnswers(Array(QUIZ_QUESTIONS.length).fill(null));
-    setScore(moduleData.passed ? QUIZ_QUESTIONS.length : 0);
-    maxTimeRef.current = moduleData.maxTimeWatched || 0;
+    setAnswers(Array(activeQuestions.length).fill(null));
+    setScore(moduleData?.passed ? activeQuestions.length : 0);
+    maxTimeRef.current = moduleData?.maxTimeWatched || 0;
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [moduleKey, moduleData.passed]);
+  }, [moduleKey, moduleData?.passed, activeQuestions.length]);
 
   useEffect(() => {
-    maxTimeRef.current = moduleData.maxTimeWatched || 0;
-  }, [moduleData.maxTimeWatched]);
+    maxTimeRef.current = moduleData?.maxTimeWatched || 0;
+  }, [moduleData?.maxTimeWatched]);
 
   const onPlayerReady = (event) => {
     playerRef.current = event.target;
-    setDuration(10); // Hardcoded short duration for test
+    setDuration(10); // Short duration for test demo
     
     try {
       setVolume(playerRef.current.getVolume());
@@ -86,7 +102,7 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
       console.error(e);
     }
     
-    if (moduleData.maxTimeWatched > 0 && !moduleData.passed) {
+    if (moduleData?.maxTimeWatched > 0 && !moduleData?.passed) {
       playerRef.current.seekTo(moduleData.maxTimeWatched);
       setCurrentTime(moduleData.maxTimeWatched);
     }
@@ -105,9 +121,6 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
         const timeNow = player.getCurrentTime();
         setCurrentTime(timeNow);
         
-        // Fix for 2x playback speed skipping glitch:
-        // When speed is 2x, timeNow advances by 2s every 1000ms real-world interval.
-        // We calculate an allowed buffer dynamically based on the current playback rate.
         const currentSpeed = player.getPlaybackRate() || 1;
         const allowedBuffer = Math.max(4, currentSpeed * 2.5); 
         
@@ -185,20 +198,32 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIdx < QUIZ_QUESTIONS.length - 1) {
+    if (currentQuestionIdx < activeQuestions.length - 1) {
       setCurrentQuestionIdx(prev => prev + 1);
     } else {
-      // Evaluate quiz completely synchronously against the exact answers array
+      // Evaluate score
       let calculatedScore = 0;
-      QUIZ_QUESTIONS.forEach((q, idx) => {
+      activeQuestions.forEach((q, idx) => {
         if (answers[idx] === q.correct) {
           calculatedScore++;
         }
       });
       
       setScore(calculatedScore);
+      const percentage = (calculatedScore / activeQuestions.length) * 100;
+      const passed = percentage >= passingThreshold;
       
-      if (calculatedScore >= 4) { // 80% passing (4 out of 5)
+      // Record attempt into database/attempts log
+      recordQuizAttempt({
+        userId: userId || '123',
+        courseId: courseId || 'c1',
+        moduleNum,
+        score: calculatedScore,
+        totalQuestions: activeQuestions.length,
+        passed
+      });
+
+      if (passed) {
         setQuizState('passed');
         updateProgress(moduleKey, { passed: true });
       } else {
@@ -210,7 +235,7 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
   const handleReattempt = () => {
     setQuizState('idle');
     setCurrentQuestionIdx(0);
-    setAnswers(Array(QUIZ_QUESTIONS.length).fill(null));
+    setAnswers(Array(activeQuestions.length).fill(null));
     setScore(0);
     maxTimeRef.current = 0;
     updateProgress(moduleKey, { videoWatched: false, maxTimeWatched: 0, passed: false });
@@ -231,16 +256,18 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
     3: 'tPEE9ZwTmy0'
   };
 
+  const currentVideoId = moduleInfo?.videoId || videoIds[moduleNum] || 'jNQXAC9IVRw';
+
   // --- RENDER HELPERS ---
   const renderQuizContent = () => {
     if (quizState === 'taking') {
-      const question = QUIZ_QUESTIONS[currentQuestionIdx];
+      const question = activeQuestions[currentQuestionIdx];
       const hasAnsweredCurrent = answers[currentQuestionIdx] !== null;
 
       return (
         <div style={{ background: '#fff', borderRadius: '12px', padding: '40px', border: '1px solid var(--border-color)', minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '24px', fontWeight: '500' }}>
-            Question {currentQuestionIdx + 1} of {QUIZ_QUESTIONS.length}
+            Question {currentQuestionIdx + 1} of {activeQuestions.length} &bull; Passing Score: {passingThreshold}%
           </div>
           
           <h3 style={{ fontSize: '20px', marginBottom: '32px', color: 'var(--text-main)', lineHeight: '1.4' }}>
@@ -272,8 +299,8 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
               onClick={handleNextQuestion}
               style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px' }}
             >
-              {currentQuestionIdx === QUIZ_QUESTIONS.length - 1 ? 'Submit Assessment' : 'Next Question'}
-              {currentQuestionIdx !== QUIZ_QUESTIONS.length - 1 && <ArrowRight size={18} />}
+              {currentQuestionIdx === activeQuestions.length - 1 ? 'Submit Assessment' : 'Next Question'}
+              {currentQuestionIdx !== activeQuestions.length - 1 && <ArrowRight size={18} />}
             </button>
           </div>
         </div>
@@ -281,13 +308,13 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
     }
 
     if (quizState === 'passed') {
-      const percentage = (score / QUIZ_QUESTIONS.length) * 100;
+      const percentage = Math.round((score / activeQuestions.length) * 100);
       return (
         <div style={{ background: '#f0fdf4', borderRadius: '12px', padding: '60px 40px', border: '1px solid #bbf7d0', textAlign: 'center' }}>
           <CheckCircle size={64} color="#16a34a" style={{ margin: '0 auto 24px' }} />
           <h2 style={{ color: '#166534', margin: '0 0 16px', fontSize: '28px' }}>Assessment Passed!</h2>
           <p style={{ color: '#15803d', fontSize: '18px', marginBottom: '32px', fontWeight: '500' }}>
-            You scored {percentage}% ({score}/{QUIZ_QUESTIONS.length}).
+            You scored {percentage}% ({score}/{activeQuestions.length}).
           </p>
           <p style={{ color: '#166534', marginBottom: '40px', fontSize: '16px' }}>
             You have successfully mastered this module. You may now continue to the next section.
@@ -311,16 +338,16 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
     }
 
     if (quizState === 'failed') {
-      const percentage = (score / QUIZ_QUESTIONS.length) * 100;
+      const percentage = Math.round((score / activeQuestions.length) * 100);
       return (
         <div style={{ background: '#fef2f2', borderRadius: '12px', padding: '60px 40px', border: '1px solid #fecaca', textAlign: 'center' }}>
           <AlertCircle size={64} color="#dc2626" style={{ margin: '0 auto 24px' }} />
           <h2 style={{ color: '#991b1b', margin: '0 0 16px' }}>Assessment Failed</h2>
           <p style={{ color: '#b91c1c', fontSize: '18px', marginBottom: '16px' }}>
-            You scored {percentage}% ({score}/{QUIZ_QUESTIONS.length}).
+            You scored {percentage}% ({score}/{activeQuestions.length}).
           </p>
           <p style={{ color: '#991b1b', marginBottom: '32px', maxWidth: '400px', margin: '0 auto 32px' }}>
-            A minimum score of 80% is required to pass. You must re-watch the video lecture completely before attempting the quiz again.
+            A minimum score of {passingThreshold}% is required to pass. You must re-watch the video lecture completely before attempting the quiz again.
           </p>
           <button className="btn btn-danger" onClick={handleReattempt} style={{ padding: '12px 32px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', margin: '0 auto' }}>
             <RotateCcw size={18} /> Reattempt Module
@@ -336,12 +363,12 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
     <div>
       <div className="content-header">
         <div>
-          <h1>Module {moduleNum}</h1>
+          <h1>Module {moduleNum}: {moduleInfo?.title || ''}</h1>
           <p>{courseTitle}</p>
         </div>
       </div>
 
-      {moduleData.passed && (
+      {moduleData?.passed && (
         <div style={{ padding: '16px', background: '#f0fdf4', borderLeft: '4px solid #16a34a', color: '#166534', borderRadius: '8px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <CheckCircle size={20} />
           <strong>Module Completed!</strong> You have successfully passed this module.
@@ -355,7 +382,7 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
             
             <div className="video-wrapper">
               <YouTube
-                videoId={videoIds[moduleNum] || 'M7lc1UVf-VE'}
+                videoId={currentVideoId}
                 onReady={onPlayerReady}
                 onStateChange={onStateChange}
                 onEnd={onEnd}
@@ -433,7 +460,7 @@ export default function CoursePlayer({ moduleKey, moduleNum, courseTitle, module
             </div>
           </div>
           
-          {moduleData.videoWatched && !moduleData.passed && (
+          {moduleData?.videoWatched && !moduleData?.passed && (
             <div style={{ padding: '16px 20px', background: 'var(--bg-color)', border: '1px solid var(--border-color)', borderLeft: '4px solid var(--primary)', color: 'var(--text-main)', borderRadius: '4px', marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <CheckCircle size={20} />
