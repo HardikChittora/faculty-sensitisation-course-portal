@@ -26,7 +26,7 @@ export async function authenticateZimbra(usernameOrEmail, password) {
   }
 
   // 1. Check for Admin Login
-  if ((username === 'admin' || fullEmail === `admin@${ZIMBRA_DOMAIN}`) && password === 'admin123') {
+  if ((username === 'admin' || fullEmail === `admin@${ZIMBRA_DOMAIN}`) && password === 'IITKgpAdmin2026!') {
     return {
       success: true,
       user: {
@@ -41,20 +41,8 @@ export async function authenticateZimbra(usernameOrEmail, password) {
   }
 
   // 2. Check for Faculty Demo Account ('123' / '123')
-  if (username === '123' && password === '123') {
-    return {
-      success: true,
-      user: {
-        id: '123',
-        email: `123@${ZIMBRA_DOMAIN}`,
-        name: 'Dr. John Doe',
-        department: 'Computer Science & Engineering',
-        role: 'faculty',
-        authMethod: 'Zimbra-SSO'
-      }
-    };
-  }
-
+  // Removed mock faculty account for real Zimbra login
+  
   // 3. If Live Zimbra connection is enabled & not in pure dev mode, attempt IMAPS authentication
   if (!ZIMBRA_DEV_MODE && ZIMBRA_HOST && ZIMBRA_HOST !== 'localhost') {
     try {
@@ -80,24 +68,25 @@ export async function authenticateZimbra(usernameOrEmail, password) {
   }
 
   // 4. Development mode directory check (allows faculty testing accounts)
-  const existingUser = await dbManager.getUserById(username) || await dbManager.getUserById(fullEmail);
-  if (existingUser) {
-    // In dev mode, accept any password or 'password123' / '123'
-    if (password === 'password123' || password === '123' || ZIMBRA_DEV_MODE) {
-      return {
-        success: true,
-        user: {
-          ...existingUser,
-          authMethod: 'Zimbra-DevMode'
-        }
-      };
+  if (ZIMBRA_DEV_MODE) {
+    const existingUser = await dbManager.getUserById(username) || await dbManager.getUserById(fullEmail);
+    if (existingUser) {
+      if (password === 'password123' || password === '123') {
+        return {
+          success: true,
+          user: {
+            ...existingUser,
+            authMethod: 'Zimbra-DevMode'
+          }
+        };
+      }
     }
   }
 
   // If credentials did not match
   return {
     success: false,
-    message: 'Invalid Zimbra credentials. Hint: use 123 / 123 (Faculty) or admin / admin123 (Admin)'
+    message: 'Invalid Zimbra credentials.'
   };
 }
 

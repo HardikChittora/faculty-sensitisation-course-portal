@@ -4,21 +4,16 @@ import { loginWithZimbra } from './services/api';
 
 export default function Login({ onLogin }) {
   const [roleMode, setRoleMode] = useState('faculty'); // 'faculty' | 'admin'
-  const [email, setEmail] = useState('123');
-  const [password, setPassword] = useState('123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleRoleToggle = (mode) => {
     setRoleMode(mode);
     setError('');
-    if (mode === 'faculty') {
-      setEmail('123');
-      setPassword('123');
-    } else {
-      setEmail('admin');
-      setPassword('admin123');
-    }
+    setEmail('');
+    setPassword('');
   };
 
   const handleSubmit = async (e) => {
@@ -88,7 +83,7 @@ export default function Login({ onLogin }) {
                 type="text" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={roleMode === 'admin' ? 'admin@institute.edu.in' : 'faculty@institute.edu.in or 123'}
+                placeholder={roleMode === 'admin' ? 'admin@iitkgp.ac.in' : 'prof@dept.iitkgp.ac.in'}
                 required
               />
             </div>
@@ -121,33 +116,8 @@ export default function Login({ onLogin }) {
           </button>
         </form>
 
-        {/* Quick Demo Test Helper Chips */}
-        <div className="test-credentials-box">
-          <div className="test-creds-title">Institute Test Credentials</div>
-          <div className="test-creds-pills">
-            <button 
-              type="button"
-              className="cred-pill"
-              onClick={() => {
-                setRoleMode('faculty');
-                setEmail('123');
-                setPassword('123');
-              }}
-            >
-              Faculty: <code>123 / 123</code> (Dr. John Doe)
-            </button>
-            <button 
-              type="button"
-              className="cred-pill"
-              onClick={() => {
-                setRoleMode('admin');
-                setEmail('admin');
-                setPassword('admin123');
-              }}
-            >
-              Admin: <code>admin / admin123</code> (Dean)
-            </button>
-          </div>
+        <div className="mt-8 text-center text-sm text-slate-500">
+          Use your institute Zimbra credentials to login.
         </div>
       </div>
     </div>

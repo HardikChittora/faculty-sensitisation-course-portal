@@ -94,37 +94,8 @@ export async function loginWithZimbra(email, password) {
     if (!res.ok) throw new Error(data.error || 'Authentication failed');
     return data;
   } catch (err) {
-    // Offline / Direct fallback
-    console.warn('[API] Server request failed, using client authentication:', err.message);
-    const cleanEmail = email.trim().toLowerCase();
-    if (cleanEmail === 'admin' || cleanEmail.startsWith('admin@')) {
-      if (password === 'admin123') {
-        return {
-          user: {
-            id: 'admin',
-            email: 'admin@institute.edu.in',
-            name: 'Dean of Academic Affairs (Admin)',
-            department: 'Institute Administration',
-            role: 'admin',
-            authMethod: 'Zimbra-Admin'
-          }
-        };
-      }
-    } else if (cleanEmail === '123' || cleanEmail.startsWith('123@')) {
-      if (password === '123') {
-        return {
-          user: {
-            id: '123',
-            email: '123@institute.edu.in',
-            name: 'Dr. John Doe',
-            department: 'Computer Science & Engineering',
-            role: 'faculty',
-            authMethod: 'Zimbra-SSO'
-          }
-        };
-      }
-    }
-    throw new Error('Invalid Zimbra credentials. Hint: use 123 / 123 for Faculty or admin / admin123 for Admin.');
+    console.error('[API] Login request failed:', err.message);
+    throw err;
   }
 }
 
