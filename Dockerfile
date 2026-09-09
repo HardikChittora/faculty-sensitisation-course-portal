@@ -15,7 +15,6 @@ COPY package*.json ./
 RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist
 COPY server ./server
-COPY .env.example ./.env
 
 EXPOSE 5000
 CMD ["node", "server/server.js"]
