@@ -92,14 +92,15 @@ export default function CoursePlayer({
 
   const onPlayerReady = (event) => {
     playerRef.current = event.target;
-    setDuration(10); // Short duration for test demo
-    
     try {
+      const realDur = playerRef.current.getDuration();
+      setDuration(realDur > 0 ? realDur : (moduleInfo?.durationSeconds || 600));
       setVolume(playerRef.current.getVolume());
       setIsMuted(playerRef.current.isMuted());
       setPlaybackRate(playerRef.current.getPlaybackRate());
     } catch (e) {
       console.error(e);
+      setDuration(moduleInfo?.durationSeconds || 600);
     }
     
     if (moduleData?.maxTimeWatched > 0 && !moduleData?.passed) {

@@ -62,27 +62,6 @@ const DEFAULT_COURSE = {
   }
 };
 
-const DEFAULT_FACULTY_RECORDS = [
-  { id: '123', name: 'Dr. John Doe', email: '123@institute.edu.in', department: 'Computer Science & Engineering', totalModules: 3, completedModulesCount: 0, progressPercent: 0, totalAttempts: 0, isCompleted: false, latestAttemptDate: null },
-  { id: 'u-sarah', name: 'Dr. Sarah Smith', email: 's.smith@institute.edu.in', department: 'Biotechnology', totalModules: 3, completedModulesCount: 3, progressPercent: 100, totalAttempts: 4, isCompleted: true, latestAttemptDate: '2026-09-04T10:20:00Z' },
-  { id: 'u-anita', name: 'Dr. Anita Sharma', email: 'a.sharma@institute.edu.in', department: 'Physics & Materials Science', totalModules: 3, completedModulesCount: 3, progressPercent: 100, totalAttempts: 3, isCompleted: true, latestAttemptDate: '2026-09-02T09:45:00Z' },
-  { id: 'u-robert', name: 'Prof. Robert Miller', email: 'r.miller@institute.edu.in', department: 'Electrical Engineering', totalModules: 3, completedModulesCount: 1, progressPercent: 33, totalAttempts: 3, isCompleted: false, latestAttemptDate: '2026-09-06T15:30:00Z' },
-  { id: 'u-chen', name: 'Prof. David Chen', email: 'd.chen@institute.edu.in', department: 'Mathematics & Computing', totalModules: 3, completedModulesCount: 0, progressPercent: 0, totalAttempts: 0, isCompleted: false, latestAttemptDate: null },
-];
-
-const DEFAULT_ATTEMPTS = [
-  { id: 1, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 1, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-02T11:30:00Z' },
-  { id: 2, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 1, score: 3, totalQuestions: 5, percentage: 60, passed: false, timestamp: '2026-09-03T14:10:00Z' },
-  { id: 3, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 2, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-03T16:45:00Z' },
-  { id: 4, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m3', moduleNum: 3, attemptNumber: 1, score: 4, totalQuestions: 5, percentage: 80, passed: true, timestamp: '2026-09-04T10:20:00Z' },
-  { id: 5, userId: 'u-robert', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 1, score: 2, totalQuestions: 5, percentage: 40, passed: false, timestamp: '2026-09-05T09:15:00Z' },
-  { id: 6, userId: 'u-robert', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 2, score: 4, totalQuestions: 5, percentage: 80, passed: true, timestamp: '2026-09-05T11:00:00Z' },
-  { id: 7, userId: 'u-robert', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 1, score: 3, totalQuestions: 5, percentage: 60, passed: false, timestamp: '2026-09-06T15:30:00Z' },
-  { id: 8, userId: 'u-anita', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 1, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-01T10:00:00Z' },
-  { id: 9, userId: 'u-anita', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 1, score: 4, totalQuestions: 5, percentage: 80, passed: true, timestamp: '2026-09-01T14:30:00Z' },
-  { id: 10, userId: 'u-anita', courseId: 'c1', moduleId: 'c1-m3', moduleNum: 3, attemptNumber: 1, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-02T09:45:00Z' }
-];
-
 export async function loginWithZimbra(email, password) {
   try {
     const res = await fetch(`${API_BASE}/auth/login`, {
@@ -108,7 +87,7 @@ export async function fetchCourseData() {
       return data;
     }
   } catch (e) {
-    // ignore and use local
+    // ignore and use local cache
   }
   const cached = localStorage.getItem(LOCAL_STORAGE_KEY_COURSE);
   return cached ? JSON.parse(cached) : DEFAULT_COURSE;
@@ -126,13 +105,12 @@ export async function updateModuleContent(courseId, modNum, updates) {
       return data.module;
     }
   } catch (e) {
-    // ignore and update local
+    // fallback
   }
 
-  // Update local
   const cached = localStorage.getItem(LOCAL_STORAGE_KEY_COURSE);
   const course = cached ? JSON.parse(cached) : JSON.parse(JSON.stringify(DEFAULT_COURSE));
-  if (course.modules[modNum]) {
+  if (course.modules && course.modules[modNum]) {
     course.modules[modNum] = { ...course.modules[modNum], ...updates };
     localStorage.setItem(LOCAL_STORAGE_KEY_COURSE, JSON.stringify(course));
     return course.modules[modNum];
@@ -145,7 +123,7 @@ export async function fetchAdminAnalytics() {
     const res = await fetch(`${API_BASE}/admin/analytics`);
     if (res.ok) return await res.json();
   } catch (e) {
-    // local fallback
+    // fallback to calculating from live records
   }
 
   const records = await fetchFacultyRecords();
@@ -154,7 +132,7 @@ export async function fetchAdminAnalytics() {
   const inProgressCount = records.filter(r => !r.isCompleted && r.completedModulesCount > 0).length;
   const notStartedCount = records.filter(r => r.completedModulesCount === 0).length;
   const completionRate = totalEnrolled > 0 ? Math.round((completedCount / totalEnrolled) * 100) : 0;
-  const totalAttempts = records.reduce((sum, r) => sum + r.totalAttempts, 0);
+  const totalAttempts = records.reduce((sum, r) => sum + (r.totalAttempts || 0), 0);
   const avgAttempts = totalEnrolled > 0 ? (totalAttempts / totalEnrolled).toFixed(1) : '0';
 
   return {
@@ -173,31 +151,9 @@ export async function fetchFacultyRecords() {
     const res = await fetch(`${API_BASE}/admin/faculty-records`);
     if (res.ok) return await res.json();
   } catch (e) {
-    // local fallback
+    console.warn('[API] Failed to fetch faculty records from server:', e.message);
   }
-
-  const rawRecords = JSON.parse(JSON.stringify(DEFAULT_FACULTY_RECORDS));
-  const rawProgress = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_PROGRESS) || '{}');
-  const rawAttempts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ATTEMPTS) || JSON.stringify(DEFAULT_ATTEMPTS));
-
-  return rawRecords.map(r => {
-    const userProg = rawProgress[r.id] || {};
-    const userAtts = rawAttempts.filter(a => a.userId === r.id);
-    let passedCount = 0;
-    for (let i = 1; i <= r.totalModules; i++) {
-      if (userProg[`c1-m${i}`]?.passed) passedCount++;
-    }
-    if (r.id === 'u-sarah' || r.id === 'u-anita') passedCount = 3;
-    if (r.id === 'u-robert' && passedCount === 0) passedCount = 1;
-
-    return {
-      ...r,
-      completedModulesCount: passedCount,
-      progressPercent: Math.round((passedCount / r.totalModules) * 100),
-      totalAttempts: Math.max(r.totalAttempts, userAtts.length),
-      isCompleted: passedCount === r.totalModules
-    };
-  });
+  return [];
 }
 
 export async function fetchFacultyAttempts(userId) {
@@ -205,13 +161,9 @@ export async function fetchFacultyAttempts(userId) {
     const res = await fetch(`${API_BASE}/admin/faculty/${userId}/attempts`);
     if (res.ok) return await res.json();
   } catch (e) {
-    // local fallback
+    console.warn('[API] Failed to fetch faculty attempts:', e.message);
   }
-
-  const attempts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ATTEMPTS) || JSON.stringify(DEFAULT_ATTEMPTS));
-  return attempts
-    .filter(a => a.userId === userId)
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  return [];
 }
 
 export async function recordQuizAttempt({ userId, courseId, moduleNum, score, totalQuestions, passed }) {

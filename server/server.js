@@ -164,9 +164,11 @@ const distPath = path.join(__dirname, '../dist');
 
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  app.get('*', (req, res) => {
+  app.use((req, res) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.join(distPath, 'index.html'));
+    } else {
+      res.status(404).json({ error: 'Endpoint not found' });
     }
   });
 }

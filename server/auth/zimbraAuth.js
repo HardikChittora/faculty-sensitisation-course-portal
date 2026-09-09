@@ -48,39 +48,43 @@ export async function authenticateZimbra(usernameOrEmail, password) {
     try {
       const imapAuthSuccess = await tryImapsZimbraLogin(fullEmail, password);
       if (imapAuthSuccess) {
-        // Find or create faculty profile in DB
-        let user = await dbManager.getUserById(fullEmail);
+        // Find or create faculty profile in PostgreSQL DB
+        let user = await dbManager.getUserById(fullEmail) || await dbManager.getUserById(username);
         if (!user) {
-          user = {
+          user = await dbManager.createUserIfNotExists({
             id: username,
             email: fullEmail,
             name: formatNameFromEmail(username),
             department: 'Higher Education Faculty',
             role: 'faculty'
-          };
+          });
         }
         return { success: true, user: { ...user, authMethod: 'Zimbra-IMAPS' } };
       }
     } catch (err) {
       console.warn(`[Zimbra Auth] Live IMAPS server connection to ${ZIMBRA_HOST} failed:`, err.message);
-      // Continue to dev mode checks
     }
   }
 
-  // 4. Development mode directory check (allows faculty testing accounts)
+  // 4. Development mode / local testing fallback
   if (ZIMBRA_DEV_MODE) {
-    const existingUser = await dbManager.getUserById(username) || await dbManager.getUserById(fullEmail);
-    if (existingUser) {
-      if (password === 'password123' || password === '123') {
-        return {
-          success: true,
-          user: {
-            ...existingUser,
-            authMethod: 'Zimbra-DevMode'
-          }
-        };
-      }
+    let user = await dbManager.getUserById(username) || await dbManager.getUserById(fullEmail);
+    if (!user) {
+      user = await dbManager.createUserIfNotExists({
+        id: username,
+        email: fullEmail,
+        name: formatNameFromEmail(username),
+        department: 'Higher Education Faculty',
+        role: 'faculty'
+      });
     }
+    return {
+      success: true,
+      user: {
+        ...user,
+        authMethod: 'Zimbra-DevMode'
+      }
+    };
   }
 
   // If credentials did not match

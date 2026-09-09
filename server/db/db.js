@@ -1,4 +1,4 @@
-import pg from 'pg';
+﻿import pg from 'pg';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -10,7 +10,7 @@ const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Initial fallback state (matches init.sql)
+// Fallback seed structure if offline / before connection
 const DEFAULT_COURSE_DATA = {
   id: 'c1',
   title: 'Faculty Sensitization',
@@ -24,6 +24,7 @@ const DEFAULT_COURSE_DATA = {
       title: 'Inclusive Pedagogies & Classroom Diversity',
       description: 'Understanding cognitive diversity, overcoming subconscious bias, and building an open academic environment.',
       videoId: 'jNQXAC9IVRw',
+      durationSeconds: 600,
       passingThreshold: 80,
       quiz: [
         { question: "What is the primary goal of this course module?", options: ["To skip videos", "To learn faculty sensitization", "To sleep", "Nothing"], correct: 1 },
@@ -39,6 +40,7 @@ const DEFAULT_COURSE_DATA = {
       title: 'Ethics, Mentorship & Student Well-being',
       description: 'Recognizing student mental health stress, mentorship ethics, prevention of harassment, and constructive guidance.',
       videoId: 'M7lc1UVf-VE',
+      durationSeconds: 720,
       passingThreshold: 80,
       quiz: [
         { question: "What is the role of faculty when noticing acute student distress?", options: ["Ignore it", "Refer to institute counseling resources with empathy", "Penalize attendance", "Publicly discuss in class"], correct: 1 },
@@ -54,6 +56,7 @@ const DEFAULT_COURSE_DATA = {
       title: 'Academic Integrity & Fair Assessment',
       description: 'Fair assessment methodologies, rubrics design, ethical AI utilization, and institutional honor codes.',
       videoId: 'tPEE9ZwTmy0',
+      durationSeconds: 900,
       passingThreshold: 80,
       quiz: [
         { question: "Clear transparent grading rubrics primarily benefit:", options: ["Nobody", "Both instructors and students for fair evaluation", "Only external auditors", "Finance department"], correct: 1 },
@@ -66,240 +69,488 @@ const DEFAULT_COURSE_DATA = {
   }
 };
 
-const DEFAULT_USERS = [
-  { id: '123', email: '123@institute.edu.in', name: 'Dr. John Doe', department: 'Computer Science & Engineering', role: 'faculty' },
-  { id: 'u-sarah', email: 's.smith@institute.edu.in', name: 'Dr. Sarah Smith', department: 'Biotechnology', role: 'faculty' },
-  { id: 'u-robert', email: 'r.miller@institute.edu.in', name: 'Prof. Robert Miller', department: 'Electrical Engineering', role: 'faculty' },
-  { id: 'u-anita', email: 'a.sharma@institute.edu.in', name: 'Dr. Anita Sharma', department: 'Physics & Materials Science', role: 'faculty' },
-  { id: 'u-chen', email: 'd.chen@institute.edu.in', name: 'Prof. David Chen', department: 'Mathematics & Computing', role: 'faculty' },
-  { id: 'admin', email: 'admin@institute.edu.in', name: 'Dean of Academic Affairs', department: 'Institute Administration', role: 'admin' }
-];
-
-const DEFAULT_ATTEMPTS = [
-  { id: 1, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 1, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-02T11:30:00Z' },
-  { id: 2, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 1, score: 3, totalQuestions: 5, percentage: 60, passed: false, timestamp: '2026-09-03T14:10:00Z' },
-  { id: 3, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 2, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-03T16:45:00Z' },
-  { id: 4, userId: 'u-sarah', courseId: 'c1', moduleId: 'c1-m3', moduleNum: 3, attemptNumber: 1, score: 4, totalQuestions: 5, percentage: 80, passed: true, timestamp: '2026-09-04T10:20:00Z' },
-  
-  { id: 5, userId: 'u-robert', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 1, score: 2, totalQuestions: 5, percentage: 40, passed: false, timestamp: '2026-09-05T09:15:00Z' },
-  { id: 6, userId: 'u-robert', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 2, score: 4, totalQuestions: 5, percentage: 80, passed: true, timestamp: '2026-09-05T11:00:00Z' },
-  { id: 7, userId: 'u-robert', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 1, score: 3, totalQuestions: 5, percentage: 60, passed: false, timestamp: '2026-09-06T15:30:00Z' },
-  
-  { id: 8, userId: 'u-anita', courseId: 'c1', moduleId: 'c1-m1', moduleNum: 1, attemptNumber: 1, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-01T10:00:00Z' },
-  { id: 9, userId: 'u-anita', courseId: 'c1', moduleId: 'c1-m2', moduleNum: 2, attemptNumber: 1, score: 4, totalQuestions: 5, percentage: 80, passed: true, timestamp: '2026-09-01T14:30:00Z' },
-  { id: 10, userId: 'u-anita', courseId: 'c1', moduleId: 'c1-m3', moduleNum: 3, attemptNumber: 1, score: 5, totalQuestions: 5, percentage: 100, passed: true, timestamp: '2026-09-02T09:45:00Z' },
-];
-
-const DEFAULT_USER_PROGRESS = {
-  'u-sarah': {
-    'c1-m1': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 600 },
-    'c1-m2': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 720 },
-    'c1-m3': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 900 },
-  },
-  'u-anita': {
-    'c1-m1': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 600 },
-    'c1-m2': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 720 },
-    'c1-m3': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 900 },
-  },
-  'u-robert': {
-    'c1-m1': { unlocked: true, passed: true, videoWatched: true, maxTimeWatched: 600 },
-    'c1-m2': { unlocked: true, passed: false, videoWatched: true, maxTimeWatched: 720 },
-    'c1-m3': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-  },
-  'u-chen': {
-    'c1-m1': { unlocked: true, passed: false, videoWatched: false, maxTimeWatched: 0 },
-    'c1-m2': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-    'c1-m3': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-  },
-  '123': {
-    'c1-m1': { unlocked: true, passed: false, videoWatched: false, maxTimeWatched: 0 },
-    'c1-m2': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-    'c1-m3': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-  }
-};
-
-// State container for fallback
-let fallbackStore = {
-  courses: JSON.parse(JSON.stringify(DEFAULT_COURSE_DATA)),
-  users: JSON.parse(JSON.stringify(DEFAULT_USERS)),
-  attempts: JSON.parse(JSON.stringify(DEFAULT_ATTEMPTS)),
-  progress: JSON.parse(JSON.stringify(DEFAULT_USER_PROGRESS))
-};
-
 class DatabaseManager {
   constructor() {
     this.pool = null;
     this.usePostgres = false;
-    this.init();
+    this.initPromise = this.init();
   }
 
   async init() {
     try {
-      this.pool = new Pool({
-        host: process.env.DB_HOST || 'localhost',
-        port: parseInt(process.env.DB_PORT || '5432'),
-        user: process.env.DB_USER || 'fscp_admin',
-        password: process.env.DB_PASSWORD || 'fscp_secret_pass',
-        database: process.env.DB_NAME || 'faculty_course_portal',
-        connectionTimeoutMillis: 2000
-      });
+      const connectionString = process.env.DATABASE_URL;
+      const isSsl = connectionString ? (connectionString.includes('sslmode=') || connectionString.includes('neon.tech') || connectionString.includes('supabase.com')) : false;
+
+      const poolConfig = connectionString
+        ? {
+            connectionString,
+            ssl: isSsl ? { rejectUnauthorized: false } : false,
+            connectionTimeoutMillis: 10000
+          }
+        : {
+            host: process.env.DB_HOST || 'localhost',
+            port: parseInt(process.env.DB_PORT || '5432'),
+            user: process.env.DB_USER || 'postgres',
+            password: process.env.DB_PASSWORD || '',
+            database: process.env.DB_NAME || 'faculty_course_portal',
+            connectionTimeoutMillis: 5000
+          };
+
+      this.pool = new Pool(poolConfig);
 
       const res = await this.pool.query('SELECT NOW()');
       this.usePostgres = true;
-      console.log('[DB] Connected to Docker PostgreSQL database successfully at ' + res.rows[0].now);
+      console.log('[DB] Connected to PostgreSQL cloud database successfully at ' + res.rows[0].now);
+
+      await this.initSchema();
     } catch (err) {
       this.usePostgres = false;
-      console.log('[DB] Docker PostgreSQL not running locally. Using persistent storage manager fallback.');
-      console.log('[DB] To run the containerized DB, launch: docker compose up -d');
+      console.error('[DB] PostgreSQL connection failed. Error:', err.message);
     }
+  }
+
+  async initSchema() {
+    if (!this.usePostgres || !this.pool) return;
+    try {
+      const initSqlPath = path.join(__dirname, 'init.sql');
+      if (fs.existsSync(initSqlPath)) {
+        const sql = fs.readFileSync(initSqlPath, 'utf8');
+        await this.pool.query(sql);
+        console.log('[DB] Tables and initial schema verified/created successfully.');
+      }
+    } catch (err) {
+      console.error('[DB] Schema initialization error:', err.message);
+    }
+  }
+
+  async ready() {
+    await this.initPromise;
   }
 
   // --- Course APIs ---
   async getCourse(courseId = 'c1') {
-    return fallbackStore.courses;
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const courseRes = await this.pool.query('SELECT * FROM courses WHERE id = $1', [courseId]);
+        if (courseRes.rows.length === 0) {
+          return DEFAULT_COURSE_DATA;
+        }
+        const course = courseRes.rows[0];
+
+        const modRes = await this.pool.query('SELECT * FROM modules WHERE course_id = $1 ORDER BY module_num ASC', [courseId]);
+        const quizRes = await this.pool.query(
+          `SELECT q.* FROM quizzes q 
+           JOIN modules m ON q.module_id = m.id 
+           WHERE m.course_id = $1 
+           ORDER BY q.module_id ASC, q.question_idx ASC`,
+          [courseId]
+        );
+
+        const modulesObj = {};
+        for (const m of modRes.rows) {
+          const modQuizzes = quizRes.rows
+            .filter(q => q.module_id === m.id)
+            .map(q => ({
+              question: q.question,
+              options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options,
+              correct: q.correct
+            }));
+
+          modulesObj[m.module_num] = {
+            id: m.id,
+            moduleNum: m.module_num,
+            title: m.title,
+            description: m.description,
+            videoId: m.youtube_video_id,
+            durationSeconds: m.duration_seconds,
+            passingThreshold: m.passing_threshold,
+            quiz: modQuizzes.length > 0 ? modQuizzes : (DEFAULT_COURSE_DATA.modules[m.module_num]?.quiz || [])
+          };
+        }
+
+        return {
+          id: course.id,
+          title: course.title,
+          description: course.description,
+          totalModules: course.total_modules,
+          image: course.image,
+          modules: Object.keys(modulesObj).length > 0 ? modulesObj : DEFAULT_COURSE_DATA.modules
+        };
+      } catch (err) {
+        console.error('[DB] getCourse query failed, falling back:', err.message);
+      }
+    }
+    return DEFAULT_COURSE_DATA;
   }
 
   async updateModuleContent(courseId, modNum, updates) {
-    if (fallbackStore.courses.modules[modNum]) {
-      fallbackStore.courses.modules[modNum] = {
-        ...fallbackStore.courses.modules[modNum],
-        ...updates
-      };
-      return fallbackStore.courses.modules[modNum];
+    await this.ready();
+    const modId = `${courseId}-m${modNum}`;
+
+    if (this.usePostgres) {
+      try {
+        const videoId = updates.videoId || updates.youtube_video_id;
+        const passingThreshold = updates.passingThreshold || updates.passing_threshold;
+
+        await this.pool.query(
+          `UPDATE modules 
+           SET title = COALESCE($1, title),
+               description = COALESCE($2, description),
+               youtube_video_id = COALESCE($3, youtube_video_id),
+               passing_threshold = COALESCE($4, passing_threshold)
+           WHERE id = $5`,
+          [updates.title, updates.description, videoId, passingThreshold, modId]
+        );
+
+        if (Array.isArray(updates.quiz)) {
+          await this.pool.query('DELETE FROM quizzes WHERE module_id = $1', [modId]);
+          for (let i = 0; i < updates.quiz.length; i++) {
+            const q = updates.quiz[i];
+            await this.pool.query(
+              'INSERT INTO quizzes (module_id, question_idx, question, options, correct) VALUES ($1, $2, $3, $4, $5)',
+              [modId, i, q.question, JSON.stringify(q.options), q.correct]
+            );
+          }
+        }
+
+        const res = await this.pool.query('SELECT * FROM modules WHERE id = $1', [modId]);
+        return res.rows[0];
+      } catch (err) {
+        console.error('[DB] updateModuleContent query failed:', err.message);
+      }
     }
     return null;
   }
 
-  // --- Users & Analytics APIs ---
+  // --- Users & Directory APIs ---
   async getAllUsers() {
-    return fallbackStore.users;
-  }
-
-  async getUserById(id) {
-    return fallbackStore.users.find(u => u.id === id || u.email.toLowerCase() === id.toLowerCase());
-  }
-
-  async getFacultyRecords() {
-    const facultyUsers = fallbackStore.users.filter(u => u.role === 'faculty');
-    const totalModules = fallbackStore.courses.totalModules;
-
-    return facultyUsers.map(user => {
-      const userProgress = fallbackStore.progress[user.id] || {};
-      const userAttempts = fallbackStore.attempts.filter(a => a.userId === user.id);
-      
-      let completedModulesCount = 0;
-      for (let i = 1; i <= totalModules; i++) {
-        if (userProgress[`c1-m${i}`]?.passed) {
-          completedModulesCount++;
-        }
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query('SELECT * FROM users ORDER BY created_at DESC');
+        return res.rows;
+      } catch (err) {
+        console.error('[DB] getAllUsers query failed:', err.message);
       }
+    }
+    return [];
+  }
 
-      const isCompleted = completedModulesCount === totalModules;
-      const latestAttempt = userAttempts.slice(-1)[0] || null;
+  async getUserById(idOrEmail) {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(
+          'SELECT * FROM users WHERE id = $1 OR LOWER(email) = LOWER($1)',
+          [idOrEmail.trim()]
+        );
+        return res.rows[0] || null;
+      } catch (err) {
+        console.error('[DB] getUserById query failed:', err.message);
+      }
+    }
+    return null;
+  }
 
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        department: user.department,
-        totalModules,
-        completedModulesCount,
-        progressPercent: Math.round((completedModulesCount / totalModules) * 100),
-        totalAttempts: userAttempts.length,
-        isCompleted,
-        latestAttemptDate: latestAttempt ? latestAttempt.timestamp : null
-      };
-    });
+  async createUserIfNotExists(userData) {
+    await this.ready();
+    const { id, email, name, department, role } = userData;
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(
+          `INSERT INTO users (id, email, name, department, role)
+           VALUES ($1, $2, $3, $4, $5)
+           ON CONFLICT (id) DO UPDATE SET 
+             name = EXCLUDED.name, 
+             department = EXCLUDED.department
+           RETURNING *`,
+          [id, email.toLowerCase(), name, department || 'Faculty', role || 'faculty']
+        );
+
+        const createdUser = res.rows[0];
+
+        // Initialize progress for module 1 (unlocked), 2, 3
+        await this.pool.query(
+          `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)
+           VALUES 
+             ($1, 'c1-m1', true, false, false, 0),
+             ($1, 'c1-m2', false, false, false, 0),
+             ($1, 'c1-m3', false, false, false, 0)
+           ON CONFLICT (user_id, module_id) DO NOTHING`,
+          [createdUser.id]
+        );
+
+        return createdUser;
+      } catch (err) {
+        console.error('[DB] createUserIfNotExists query failed:', err.message);
+      }
+    }
+    return userData;
+  }
+
+  // --- Admin Analytics & Real Faculty Drilldown ---
+  async getFacultyRecords() {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const query = `
+          SELECT 
+            u.id, 
+            u.name, 
+            u.email, 
+            u.department,
+            3 AS "totalModules",
+            COALESCE(SUM(CASE WHEN p.passed = true THEN 1 ELSE 0 END), 0)::int AS "completedModulesCount",
+            COALESCE(COUNT(DISTINCT a.id), 0)::int AS "totalAttempts",
+            MAX(a.timestamp) AS "latestAttemptDate"
+          FROM users u
+          LEFT JOIN user_progress p ON u.id = p.user_id
+          LEFT JOIN assessment_attempts a ON u.id = a.user_id
+          WHERE u.role = 'faculty'
+          GROUP BY u.id, u.name, u.email, u.department, u.created_at
+          ORDER BY u.created_at DESC;
+        `;
+        const res = await this.pool.query(query);
+        return res.rows.map(r => {
+          const completedCount = Number(r.completedModulesCount);
+          const totalMods = 3;
+          return {
+            id: r.id,
+            name: r.name,
+            email: r.email,
+            department: r.department,
+            totalModules: totalMods,
+            completedModulesCount: completedCount,
+            progressPercent: Math.round((completedCount / totalMods) * 100),
+            totalAttempts: Number(r.totalAttempts),
+            isCompleted: completedCount >= totalMods,
+            latestAttemptDate: r.latestAttemptDate
+          };
+        });
+      } catch (err) {
+        console.error('[DB] getFacultyRecords query failed:', err.message);
+      }
+    }
+    return [];
   }
 
   async getUserAttempts(userId) {
-    return fallbackStore.attempts
-      .filter(a => a.userId === userId)
-      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(
+          `SELECT 
+             id, 
+             user_id AS "userId", 
+             course_id AS "courseId", 
+             module_id AS "moduleId", 
+             module_num AS "moduleNum", 
+             attempt_number AS "attemptNumber", 
+             score, 
+             total_questions AS "totalQuestions", 
+             percentage, 
+             passed, 
+             timestamp 
+           FROM assessment_attempts 
+           WHERE user_id = $1 
+           ORDER BY timestamp DESC`,
+          [userId]
+        );
+        return res.rows;
+      } catch (err) {
+        console.error('[DB] getUserAttempts query failed:', err.message);
+      }
+    }
+    return [];
   }
 
-  async recordAttempt({ userId, courseId, moduleNum, score, totalQuestions, passed }) {
-    const userAttempts = fallbackStore.attempts.filter(a => a.userId === userId && a.moduleNum === moduleNum);
-    const attemptNumber = userAttempts.length + 1;
+  async recordAttempt({ userId, courseId = 'c1', moduleNum, score, totalQuestions, passed }) {
+    await this.ready();
+    const moduleId = `${courseId}-m${moduleNum}`;
     const percentage = Math.round((score / totalQuestions) * 100);
 
-    const newAttempt = {
-      id: fallbackStore.attempts.length + 1,
+    if (this.usePostgres) {
+      try {
+        // Ensure user exists first
+        const userCheck = await this.pool.query('SELECT id FROM users WHERE id = $1', [userId]);
+        if (userCheck.rows.length === 0) {
+          await this.createUserIfNotExists({
+            id: userId,
+            email: `${userId}@institute.edu.in`,
+            name: `Prof. ${userId}`,
+            department: 'Faculty',
+            role: 'faculty'
+          });
+        }
+
+        // Calculate attempt number
+        const countRes = await this.pool.query(
+          'SELECT COUNT(*)::int AS count FROM assessment_attempts WHERE user_id = $1 AND module_id = $2',
+          [userId, moduleId]
+        );
+        const attemptNumber = (countRes.rows[0]?.count || 0) + 1;
+
+        const insertRes = await this.pool.query(
+          `INSERT INTO assessment_attempts 
+             (user_id, course_id, module_id, module_num, attempt_number, score, total_questions, percentage, passed)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+           RETURNING id, user_id AS "userId", course_id AS "courseId", module_id AS "moduleId", module_num AS "moduleNum", attempt_number AS "attemptNumber", score, total_questions AS "totalQuestions", percentage, passed, timestamp`,
+          [userId, courseId, moduleId, moduleNum, attemptNumber, score, totalQuestions, percentage, Boolean(passed)]
+        );
+
+        // Update progress for this module
+        await this.pool.query(
+          `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)
+           VALUES ($1, $2, true, $3, true, 600)
+           ON CONFLICT (user_id, module_id) DO UPDATE SET 
+             passed = user_progress.passed OR EXCLUDED.passed,
+             video_watched = true`,
+          [userId, moduleId, Boolean(passed)]
+        );
+
+        // If passed, unlock next module
+        if (passed && moduleNum < 3) {
+          const nextModId = `${courseId}-m${moduleNum + 1}`;
+          await this.pool.query(
+            `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)
+             VALUES ($1, $2, true, false, false, 0)
+             ON CONFLICT (user_id, module_id) DO UPDATE SET unlocked = true`,
+            [userId, nextModId]
+          );
+        }
+
+        return insertRes.rows[0];
+      } catch (err) {
+        console.error('[DB] recordAttempt query failed:', err.message);
+      }
+    }
+
+    return {
+      id: Date.now(),
       userId,
-      courseId: courseId || 'c1',
-      moduleId: `${courseId || 'c1'}-m${moduleNum}`,
+      courseId,
+      moduleId,
       moduleNum,
-      attemptNumber,
+      attemptNumber: 1,
       score,
       totalQuestions,
       percentage,
       passed,
       timestamp: new Date().toISOString()
     };
+  }
 
-    fallbackStore.attempts.push(newAttempt);
-
-    // Update user progress
-    if (!fallbackStore.progress[userId]) {
-      fallbackStore.progress[userId] = {};
-    }
-    const modKey = `${courseId || 'c1'}-m${moduleNum}`;
-    const curMod = fallbackStore.progress[userId][modKey] || { unlocked: moduleNum === 1, passed: false };
-    
-    fallbackStore.progress[userId][modKey] = {
-      ...curMod,
-      passed: passed ? true : curMod.passed,
-      videoWatched: true
+  // --- Faculty Progress State ---
+  async getUserProgress(userId, courseId = 'c1') {
+    await this.ready();
+    const defaultProgress = {
+      [`${courseId}-m1`]: { unlocked: true, passed: false, videoWatched: false, maxTimeWatched: 0 },
+      [`${courseId}-m2`]: { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
+      [`${courseId}-m3`]: { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 }
     };
 
-    if (passed) {
-      const nextModKey = `${courseId || 'c1'}-m${moduleNum + 1}`;
-      if (fallbackStore.progress[userId][nextModKey]) {
-        fallbackStore.progress[userId][nextModKey].unlocked = true;
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(
+          'SELECT module_id, unlocked, passed, video_watched, max_time_watched FROM user_progress WHERE user_id = $1',
+          [userId]
+        );
+
+        if (res.rows.length === 0) {
+          // Initialize for user
+          await this.createUserIfNotExists({
+            id: userId,
+            email: `${userId}@institute.edu.in`,
+            name: `Prof. ${userId}`,
+            department: 'Faculty',
+            role: 'faculty'
+          });
+          return defaultProgress;
+        }
+
+        const progressMap = { ...defaultProgress };
+        for (const row of res.rows) {
+          progressMap[row.module_id] = {
+            unlocked: Boolean(row.unlocked),
+            passed: Boolean(row.passed),
+            videoWatched: Boolean(row.video_watched),
+            maxTimeWatched: Number(row.max_time_watched) || 0
+          };
+        }
+        return progressMap;
+      } catch (err) {
+        console.error('[DB] getUserProgress query failed:', err.message);
       }
     }
 
-    return newAttempt;
-  }
-
-  async getUserProgress(userId, courseId = 'c1') {
-    if (!fallbackStore.progress[userId]) {
-      fallbackStore.progress[userId] = {
-        [`${courseId}-m1`]: { unlocked: true, passed: false, videoWatched: false, maxTimeWatched: 0 },
-        [`${courseId}-m2`]: { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-        [`${courseId}-m3`]: { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-      };
-    }
-    return fallbackStore.progress[userId];
+    return defaultProgress;
   }
 
   async updateUserProgress(userId, modKey, updates) {
-    if (!fallbackStore.progress[userId]) {
-      fallbackStore.progress[userId] = {};
-    }
-    fallbackStore.progress[userId][modKey] = {
-      ...(fallbackStore.progress[userId][modKey] || {}),
-      ...updates
-    };
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const existing = await this.pool.query(
+          'SELECT * FROM user_progress WHERE user_id = $1 AND module_id = $2',
+          [userId, modKey]
+        );
 
-    if (updates.passed) {
-      const parts = modKey.split('-m');
-      const nextNum = parseInt(parts[1]) + 1;
-      const nextKey = `${parts[0]}-m${nextNum}`;
-      if (fallbackStore.progress[userId][nextKey]) {
-        fallbackStore.progress[userId][nextKey].unlocked = true;
+        const curUnlocked = existing.rows[0]?.unlocked ?? (modKey.endsWith('-m1'));
+        const curPassed = existing.rows[0]?.passed ?? false;
+        const curVideoWatched = existing.rows[0]?.video_watched ?? false;
+        const curMaxTime = existing.rows[0]?.max_time_watched ?? 0;
+
+        const newUnlocked = updates.unlocked !== undefined ? Boolean(updates.unlocked) : curUnlocked;
+        const newPassed = updates.passed !== undefined ? (curPassed || Boolean(updates.passed)) : curPassed;
+        const newVideoWatched = updates.videoWatched !== undefined ? Boolean(updates.videoWatched) : curVideoWatched;
+        const newMaxTime = updates.maxTimeWatched !== undefined ? Math.max(curMaxTime, Number(updates.maxTimeWatched)) : curMaxTime;
+
+        await this.pool.query(
+          `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)
+           VALUES ($1, $2, $3, $4, $5, $6)
+           ON CONFLICT (user_id, module_id) DO UPDATE SET 
+             unlocked = EXCLUDED.unlocked,
+             passed = EXCLUDED.passed,
+             video_watched = EXCLUDED.video_watched,
+             max_time_watched = EXCLUDED.max_time_watched`,
+          [userId, modKey, newUnlocked, newPassed, newVideoWatched, newMaxTime]
+        );
+
+        if (newPassed) {
+          const parts = modKey.split('-m');
+          const nextNum = parseInt(parts[1], 10) + 1;
+          if (nextNum <= 3) {
+            const nextKey = `${parts[0]}-m${nextNum}`;
+            await this.pool.query(
+              `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)
+               VALUES ($1, $2, true, false, false, 0)
+               ON CONFLICT (user_id, module_id) DO UPDATE SET unlocked = true`,
+              [userId, nextKey]
+            );
+          }
+        }
+
+        return await this.getUserProgress(userId);
+      } catch (err) {
+        console.error('[DB] updateUserProgress query failed:', err.message);
       }
     }
-    return fallbackStore.progress[userId];
+
+    return null;
   }
 
   async resetDefaults() {
-    fallbackStore = {
-      courses: JSON.parse(JSON.stringify(DEFAULT_COURSE_DATA)),
-      users: JSON.parse(JSON.stringify(DEFAULT_USERS)),
-      attempts: JSON.parse(JSON.stringify(DEFAULT_ATTEMPTS)),
-      progress: JSON.parse(JSON.stringify(DEFAULT_USER_PROGRESS))
-    };
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        await this.pool.query('TRUNCATE TABLE assessment_attempts, user_progress CASCADE');
+        await this.initSchema();
+        return true;
+      } catch (err) {
+        console.error('[DB] resetDefaults query failed:', err.message);
+      }
+    }
     return true;
   }
 }
