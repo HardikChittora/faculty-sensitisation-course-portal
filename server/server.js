@@ -65,9 +65,9 @@ app.post('/api/auth/request-otp', async (req, res) => {
       fullEmail = `${fullEmail}@${domain}`;
     }
 
-    // Validate domain (allow @domain or @subdomain.domain)
-    if (!fullEmail.endsWith(`@${domain}`) && !fullEmail.endsWith(`.${domain}`)) {
-      return res.status(400).json({ error: `Email must belong to ${domain}` });
+    // Validate domain
+    if (!fullEmail.endsWith(domain)) {
+      return res.status(400).json({ error: `Email must end in ${domain}` });
     }
 
     // Generate 6-digit OTP
