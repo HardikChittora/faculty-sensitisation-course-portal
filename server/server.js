@@ -12,7 +12,20 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// --- Authentication (Zimbra Mail) ---
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '465'),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+  }
+});
+
+// --- Authentication ---
+// Admin Login
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -34,6 +47,92 @@ app.post('/api/auth/login', async (req, res) => {
     return res.status(500).json({ error: 'Internal authentication error' });
   }
 });
+
+// Faculty OTP Request
+app.post('/api/auth/request-otp', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email is required' });
+
+    let fullEmail = email.trim().toLowerCase();
+    let username = fullEmail;
+    
+    // Auto-append domain if missing
+    const domain = process.env.ZIMBRA_DOMAIN || 'iitkgp.ac.in';
+    if (fullEmail.includes('@')) {
+      username = fullEmail.split('@')[0];
+    } else {
+      fullEmail = `${fullEmail}@${domain}`;
+    }
+
+    // Validate domain
+    if (!fullEmail.endsWith(`@${domain}`)) {
+      return res.status(400).json({ error: `Email must belong to ${domain}` });
+    }
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+    const saved = await dbManager.saveOtp(fullEmail, otp, expiresAt);
+    if (!saved) return res.status(500).json({ error: 'Failed to generate OTP' });
+
+    console.log(`[OTP] Generated for ${fullEmail}: ${otp}`);
+
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      await transporter.sendMail({
+        from: `"Faculty Portal" <${process.env.SMTP_USER}>`,
+        to: fullEmail,
+        subject: 'Your Login Verification Code',
+        html: `<p>Your verification code for the Faculty Sensitisation Portal is:</p>
+               <h2>${otp}</h2>
+               <p>This code will expire in 5 minutes.</p>`
+      });
+      console.log(`[OTP] Email sent to ${fullEmail}`);
+    } else {
+      console.warn('[OTP] SMTP credentials missing. OTP logged to console only.');
+    }
+
+    res.json({ message: 'OTP sent successfully', email: fullEmail });
+  } catch (err) {
+    console.error('OTP request error:', err);
+    res.status(500).json({ error: 'Failed to request OTP' });
+  }
+});
+
+// Faculty OTP Verify
+app.post('/api/auth/verify-otp', async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) return res.status(400).json({ error: 'Email and OTP are required' });
+
+    const isValid = await dbManager.verifyOtp(email, otp);
+    if (!isValid) return res.status(401).json({ error: 'Invalid or expired OTP' });
+
+    const username = email.split('@')[0];
+    
+    // Find or create user
+    let user = await dbManager.getUserById(email);
+    if (!user) {
+      user = await dbManager.createUserIfNotExists({
+        id: username,
+        email: email,
+        name: `Prof. ${username}`, // Might want a better formatter
+        department: 'Higher Education Faculty',
+        role: 'faculty'
+      });
+    }
+
+    res.json({
+      user: { ...user, authMethod: 'Email-OTP' },
+      token: 'jwt-session-token-' + Date.now()
+    });
+  } catch (err) {
+    console.error('OTP verify error:', err);
+    res.status(500).json({ error: 'Failed to verify OTP' });
+  }
+});
+
 
 // --- Course & Content Management ---
 app.get('/api/courses', async (req, res) => {

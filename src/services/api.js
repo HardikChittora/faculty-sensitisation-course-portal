@@ -78,6 +78,38 @@ export async function loginWithZimbra(email, password) {
   }
 }
 
+export async function requestOtp(email) {
+  try {
+    const res = await fetch(`${API_BASE}/auth/request-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to request OTP');
+    return data;
+  } catch (err) {
+    console.error('[API] requestOtp failed:', err.message);
+    throw err;
+  }
+}
+
+export async function verifyOtp(email, otp) {
+  try {
+    const res = await fetch(`${API_BASE}/auth/verify-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, otp })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Invalid OTP');
+    return data;
+  } catch (err) {
+    console.error('[API] verifyOtp failed:', err.message);
+    throw err;
+  }
+}
+
 export async function fetchCourseData() {
   try {
     const res = await fetch(`${API_BASE}/courses`);

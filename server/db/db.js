@@ -1,4 +1,4 @@
-﻿import pg from 'pg';
+import pg from 'pg';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -221,6 +221,46 @@ class DatabaseManager {
       }
     }
     return null;
+  }
+
+  // --- OTP APIs ---
+  async saveOtp(email, otp, expiresAt) {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        await this.pool.query(
+          `INSERT INTO otps (email, otp, expires_at) 
+           VALUES ($1, $2, $3) 
+           ON CONFLICT (email) DO UPDATE SET 
+           otp = EXCLUDED.otp, expires_at = EXCLUDED.expires_at`,
+          [email.toLowerCase(), otp, expiresAt]
+        );
+        return true;
+      } catch (err) {
+        console.error('[DB] saveOtp query failed:', err.message);
+      }
+    }
+    return false;
+  }
+
+  async verifyOtp(email, otp) {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(
+          `SELECT * FROM otps WHERE email = $1 AND otp = $2 AND expires_at > NOW()`,
+          [email.toLowerCase(), otp]
+        );
+        if (res.rows.length > 0) {
+          // Delete OTP after successful verification
+          await this.pool.query('DELETE FROM otps WHERE email = $1', [email.toLowerCase()]);
+          return true;
+        }
+      } catch (err) {
+        console.error('[DB] verifyOtp query failed:', err.message);
+      }
+    }
+    return false;
   }
 
   // --- Users & Directory APIs ---
