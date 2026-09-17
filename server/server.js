@@ -15,17 +15,18 @@ app.use(express.json());
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,       // false for port 587 (STARTTLS), true only for port 465
-  requireTLS: true,    // force STARTTLS upgrade
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
   },
   tls: {
-    rejectUnauthorized: false  // needed for cloud servers like Railway
-  }
+    rejectUnauthorized: false
+  },
+  family: 4   // Force IPv4 — Railway doesn't support IPv6 outbound
 });
 
 // --- Authentication ---
