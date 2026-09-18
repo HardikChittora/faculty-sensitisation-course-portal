@@ -12,8 +12,17 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-import { Resend } from 'resend';
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_SECURE === 'true',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+  }
+});
 
 // --- Authentication ---
 // Admin Login
@@ -70,18 +79,18 @@ app.post('/api/auth/request-otp', async (req, res) => {
 
     console.log(`[OTP] Generated for ${fullEmail}: ${otp}`);
 
-    if (process.env.RESEND_API_KEY) {
-      const result = await resend.emails.send({
-        from: 'Faculty Portal <onboarding@resend.dev>',
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      await transporter.sendMail({
+        from: `"Faculty Portal" <${process.env.SMTP_USER}>`,
         to: fullEmail,
         subject: 'Your Login Verification Code - Faculty Portal',
         html: `<p>Your verification code for the Faculty Sensitisation Portal is:</p>
                <h2 style="font-size:36px;letter-spacing:8px;">${otp}</h2>
                <p>This code will expire in 5 minutes. Do not share it with anyone.</p>`
       });
-      console.log(`[OTP] Email sent via Resend to ${fullEmail}. Result:`, JSON.stringify(result));
+      console.log(`[OTP] Email sent via SMTP to ${fullEmail}`);
     } else {
-      console.warn('[OTP] RESEND_API_KEY missing. OTP logged to console only:', otp);
+      console.warn('[OTP] SMTP credentials missing. OTP logged to console only:', otp);
     }
 
     res.json({ message: 'OTP sent successfully', email: fullEmail });
