@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # 1. Containerized PostgreSQL Database
+  # 1. Containerized PostgreSQL Database (no exposed port - internal only)
   postgres:
     image: postgres:16-alpine
     container_name: fscp-postgres-db
@@ -11,9 +11,7 @@ services:
       POSTGRES_PASSWORD: fscp_secret_pass
       POSTGRES_DB: faculty_course_portal
     volumes:
-      # Persistent host volume for PostgreSQL data files
       - pgdata:/var/lib/postgresql/data
-      # Automated schema initialization
       - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U fscp_admin -d faculty_course_portal"]
@@ -23,7 +21,7 @@ services:
     networks:
       - fscp-network
 
-  # 2. Application Server (Express API + Vite SPA Frontend)
+  # 2. Application Server (Express API + React Frontend)
   app:
     build:
       context: .
@@ -35,19 +33,12 @@ services:
         condition: service_healthy
     ports:
       - "5000:5000"
+    env_file:
+      - .env
     environment:
       PORT: 5000
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: fscp_admin
-      DB_PASSWORD: fscp_secret_pass
-      DB_NAME: faculty_course_portal
+      # Override DATABASE_URL to point to the local postgres container
       DATABASE_URL: postgresql://fscp_admin:fscp_secret_pass@postgres:5432/faculty_course_portal
-      ZIMBRA_HOST: mail.institute.edu.in
-      ZIMBRA_PORT: 993
-      ZIMBRA_USE_SSL: "true"
-      ZIMBRA_DOMAIN: institute.edu.in
-      ZIMBRA_DEV_MODE: "true"
     networks:
       - fscp-network
 
