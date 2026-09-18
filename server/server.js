@@ -138,6 +138,78 @@ app.post('/api/auth/verify-otp', async (req, res) => {
   }
 });
 
+// Faculty Enrollment on First Login
+// Called by the frontend when a faculty member successfully logs in
+// Upserts the user in the DB so they appear in admin portal records
+app.post('/api/auth/enroll', async (req, res) => {
+  try {
+    const { id, email, name, department, role } = req.body;
+    if (!id || !email) return res.status(400).json({ error: 'id and email are required' });
+
+    await dbManager.createUserIfNotExists({
+      id,
+      email: email.toLowerCase(),
+      name: name || `Prof. ${id}`,
+      department: department || 'Faculty',
+      role: role || 'faculty'
+    });
+
+    res.json({ success: true, message: 'Faculty enrolled successfully' });
+  } catch (err) {
+    console.error('Enroll error:', err);
+    res.status(500).json({ error: 'Failed to enroll faculty' });
+  }
+});
+
+
+// --- Notes & Queries ---
+app.get('/api/notes/:userId/:courseId', async (req, res) => {
+  try {
+    const { userId, courseId } = req.params;
+    const note = await dbManager.getCourseNote(userId, courseId);
+    res.json({ notes_text: note });
+  } catch (err) {
+    console.error('Failed to get notes:', err);
+    res.status(500).json({ error: 'Failed to get notes' });
+  }
+});
+
+app.post('/api/notes', async (req, res) => {
+  try {
+    const { userId, courseId, notesText } = req.body;
+    if (!userId) return res.status(400).json({ error: 'userId is required' });
+    
+    await dbManager.saveCourseNote(userId, courseId || 'c1', notesText || '');
+    res.json({ success: true, message: 'Notes saved' });
+  } catch (err) {
+    console.error('Failed to save notes:', err);
+    res.status(500).json({ error: 'Failed to save notes' });
+  }
+});
+
+app.post('/api/queries', async (req, res) => {
+  try {
+    const { userId, queryText, courseId } = req.body;
+    if (!queryText) return res.status(400).json({ error: 'queryText is required' });
+
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      await transporter.sendMail({
+        from: `"Faculty Portal Queries" <${process.env.SMTP_USER}>`,
+        to: 'forgemini4321@gmail.com',
+        subject: `New Course Query from User: ${userId}`,
+        text: `Query/Complaint from User ID: ${userId}\nCourse ID: ${courseId || 'c1'}\n\n${queryText}`
+      });
+      console.log(`[Query] Email sent to forgemini4321@gmail.com for user ${userId}`);
+    } else {
+      console.warn('[Query] SMTP credentials missing. Query logged to console only:', queryText);
+    }
+
+    res.json({ success: true, message: 'Query submitted successfully' });
+  } catch (err) {
+    console.error('Failed to submit query:', err);
+    res.status(500).json({ error: 'Failed to submit query' });
+  }
+});
 
 // --- Course & Content Management ---
 app.get('/api/courses', async (req, res) => {

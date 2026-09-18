@@ -1,4 +1,5 @@
 // Frontend API Service with local cache fallback
+import mockFacultyData from './mock_faculty.json';
 
 const API_BASE = '/api';
 
@@ -212,11 +213,28 @@ export async function fetchAdminAnalytics() {
 export async function fetchFacultyRecords() {
   try {
     const res = await fetch(`${API_BASE}/admin/faculty-records`);
-    if (res.ok) return await res.json();
+    if (res.ok) {
+      return await res.json();
+    }
   } catch (e) {
     console.warn('[API] Failed to fetch faculty records from server:', e.message);
   }
-  return [];
+
+  return []; // Only return enrolled/active faculty
+}
+
+// Called when a faculty member logs in for the first time — marks them as enrolled
+export async function enrollFacultyOnLogin(userData) {
+  try {
+    await fetch(`${API_BASE}/auth/enroll`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData)
+    });
+  } catch (e) {
+    // Fire-and-forget; failure is non-critical
+    console.warn('[API] enrollFacultyOnLogin failed:', e.message);
+  }
 }
 
 export async function fetchFacultyAttempts(userId) {
@@ -328,4 +346,45 @@ export async function resetAllDataToDefaults() {
   localStorage.removeItem(LOCAL_STORAGE_KEY_COURSE);
   localStorage.removeItem(LOCAL_STORAGE_KEY_ATTEMPTS);
   localStorage.removeItem(LOCAL_STORAGE_KEY_PROGRESS);
+}
+
+// --- Notes & Queries APIs ---
+export async function fetchCourseNote(userId, courseId = 'c1') {
+  try {
+    const response = await fetch(`${API_BASE}/notes/${userId}/${courseId}`);
+    if (!response.ok) return '';
+    const data = await response.json();
+    return data.notes_text || '';
+  } catch (err) {
+    console.error('Error fetching notes:', err);
+    return '';
+  }
+}
+
+export async function saveCourseNote(userId, courseId = 'c1', notesText) {
+  try {
+    const response = await fetch(`${API_BASE}/notes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, courseId, notesText })
+    });
+    return response.ok;
+  } catch (err) {
+    console.error('Error saving notes:', err);
+    return false;
+  }
+}
+
+export async function submitQuery(userId, queryText, courseId = 'c1') {
+  try {
+    const response = await fetch(`${API_BASE}/queries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, queryText, courseId })
+    });
+    return response.ok;
+  } catch (err) {
+    console.error('Error submitting query:', err);
+    return false;
+  }
 }

@@ -615,6 +615,43 @@ class DatabaseManager {
     return null;
   }
 
+  // --- Course Notes APIs ---
+  async getCourseNote(userId, courseId = 'c1') {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(
+          'SELECT notes_text FROM course_notes WHERE user_id = $1 AND course_id = $2',
+          [userId, courseId]
+        );
+        return res.rows[0]?.notes_text || '';
+      } catch (err) {
+        console.error('[DB] getCourseNote query failed:', err.message);
+      }
+    }
+    return '';
+  }
+
+  async saveCourseNote(userId, courseId = 'c1', notesText) {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        await this.pool.query(
+          `INSERT INTO course_notes (user_id, course_id, notes_text, updated_at)
+           VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+           ON CONFLICT (user_id, course_id) DO UPDATE SET 
+             notes_text = EXCLUDED.notes_text,
+             updated_at = CURRENT_TIMESTAMP`,
+          [userId, courseId, notesText]
+        );
+        return true;
+      } catch (err) {
+        console.error('[DB] saveCourseNote query failed:', err.message);
+      }
+    }
+    return false;
+  }
+
   async resetDefaults() {
     await this.ready();
     if (this.usePostgres) {

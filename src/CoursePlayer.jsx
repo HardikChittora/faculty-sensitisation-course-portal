@@ -47,7 +47,8 @@ export default function CoursePlayer({
   userId,
   courseId,
   updateProgress, 
-  onNextModule 
+  onNextModule,
+  isPreviewMode
 }) {
   const activeQuestions = (moduleInfo && moduleInfo.quiz && moduleInfo.quiz.length > 0) 
     ? moduleInfo.quiz 
@@ -372,11 +373,11 @@ export default function CoursePlayer({
       {moduleData?.passed && (
         <div style={{ padding: '16px', background: '#f0fdf4', borderLeft: '4px solid #16a34a', color: '#166534', borderRadius: '8px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <CheckCircle size={20} />
-          <strong>Module Completed!</strong> You have successfully passed this module.
+          <strong>Module Completed!</strong> You have successfully passed this module. You can re-watch the lecture anytime.
         </div>
       )}
 
-      {quizState === 'idle' && (
+      {(quizState === 'idle' || quizState === 'passed') && (
         <>
           {/* Video with Custom Controls */}
           <div style={{ background: '#0f172a', border: '1px solid var(--border-color)', borderRadius: '4px', overflow: 'hidden', marginBottom: '32px' }}>
@@ -459,6 +460,18 @@ export default function CoursePlayer({
               </select>
             </div>
           </div>
+
+          {isPreviewMode && !moduleData?.passed && quizState === 'idle' && !moduleData?.videoWatched && (
+            <div style={{ padding: '0 0 24px 0', display: 'flex', justifyContent: 'flex-end' }}>
+              <button 
+                className="btn btn-outline" 
+                onClick={onEnd}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', borderColor: 'var(--border-color)', fontWeight: '600' }}
+              >
+                <Play size={16} /> Skip Video (Admin Preview)
+              </button>
+            </div>
+          )}
           
           {moduleData?.videoWatched && !moduleData?.passed && (
             <div style={{ padding: '16px 20px', background: 'var(--bg-color)', border: '1px solid var(--border-color)', borderLeft: '4px solid var(--primary)', color: 'var(--text-main)', borderRadius: '4px', marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

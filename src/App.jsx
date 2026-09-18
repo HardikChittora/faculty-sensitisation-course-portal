@@ -3,6 +3,7 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import AdminPortal from './AdminPortal';
 import { ArrowLeft, Shield } from 'lucide-react';
+import { enrollFacultyOnLogin } from './services/api';
 import './index.css';
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
     setUser(userData);
     setIsAdminPreviewingFaculty(false);
     localStorage.setItem('fscp_auth_user', JSON.stringify(userData));
+    // Enroll faculty in the DB on first login so admin portal shows them
+    if (userData.role === 'faculty') {
+      enrollFacultyOnLogin(userData);
+    }
   };
 
   const handleLogout = () => {
@@ -57,7 +62,7 @@ function App() {
             </button>
           </div>
           <div style={{ flex: 1, overflow: 'hidden' }}>
-            <Dashboard user={previewFacultyUser} onLogout={handleLogout} />
+            <Dashboard user={previewFacultyUser} onLogout={handleLogout} isPreviewMode={true} />
           </div>
         </div>
       );

@@ -26,7 +26,7 @@ export async function authenticateZimbra(usernameOrEmail, password) {
   }
 
   // 1. Check for Admin Login
-  if ((username === 'admin' || fullEmail === `admin@${ZIMBRA_DOMAIN}`) && password === 'IITKgpAdmin2026!') {
+  if ((username === 'admin' || fullEmail === `admin@${ZIMBRA_DOMAIN}`) && password === 'admin1234') {
     return {
       success: true,
       user: {

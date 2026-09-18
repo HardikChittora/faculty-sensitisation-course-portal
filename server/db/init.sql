@@ -69,6 +69,14 @@ CREATE TABLE IF NOT EXISTS user_progress (
     PRIMARY KEY (user_id, module_id)
 );
 
+CREATE TABLE IF NOT EXISTS course_notes (
+    user_id VARCHAR(50) REFERENCES users(id) ON DELETE CASCADE,
+    course_id VARCHAR(50) REFERENCES courses(id) ON DELETE CASCADE,
+    notes_text TEXT,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, course_id)
+);
+
 -- Seed Data: Course
 INSERT INTO courses (id, title, description, total_modules, image) VALUES
 ('c1', 'Faculty Sensitization', 'Core principles of modern teaching, diversity, gender inclusivity, and academic integrity for higher education faculty.', 3, 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop')

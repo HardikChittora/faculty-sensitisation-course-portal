@@ -1,0 +1,4712 @@
+[
+  {
+    "id": "ami",
+    "name": "Mahanty Amita  P",
+    "email": "ami@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "amardip_ghosh",
+    "name": "Ghosh Amardip",
+    "email": "amardip.ghosh@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "prasun",
+    "name": "Jana Prasun",
+    "email": "prasun@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "rb",
+    "name": "Bane",
+    "email": "rb@ag.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "gourav",
+    "name": "Bhowmick G D",
+    "email": "gourav@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "kanishka",
+    "name": "Bhunia K",
+    "email": "kanishka@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "abir_28kh",
+    "name": "Chakravorty A",
+    "email": "abir.28kh@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "mohan",
+    "name": "Das M",
+    "email": "mohan@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "prithwi",
+    "name": "Dey P",
+    "email": "prithwi@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "sdey23",
+    "name": "Dey S",
+    "email": "sdey23@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "dibyendu",
+    "name": "Dibyendu K",
+    "email": "dibyendu@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "pganguli",
+    "name": "Ganguli P",
+    "email": "pganguli@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "bmg",
+    "name": "Ghodki B M",
+    "email": "bmg@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "jayrajp",
+    "name": "Jayraj P",
+    "email": "jayrajp@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "nm",
+    "name": "Mallick N",
+    "email": "nm@ag.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "rm",
+    "name": "Mandal R",
+    "email": "rm@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "gayatri",
+    "name": "Mishra   G",
+    "email": "gayatri@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "amey",
+    "name": "Pathak A",
+    "email": "amey@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "bkp",
+    "name": "Panda B K",
+    "email": "bkp@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "ppradhan",
+    "name": "Pradhan P",
+    "email": "ppradhan@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "nsr",
+    "name": "Raghuwanshi N S",
+    "email": "nsr@ag.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "sridharsahoo366",
+    "name": "Sahoo S",
+    "email": "sridharsahoo366@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "pks",
+    "name": "Sappati   P K",
+    "email": "pks@ag.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "ankit_shekhar",
+    "name": "Shekhar   A",
+    "email": "ankit.shekhar@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "prashantanand",
+    "name": "Anand Prashant",
+    "email": "prashantanand@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "arup_das",
+    "name": "Das Arup",
+    "email": "arup.das@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "priyanka",
+    "name": "Dey Priyanka",
+    "email": "priyanka@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "gaurabdasmahapatra",
+    "name": "Das Mahapatra Gaurab",
+    "email": "gaurabdasmahapatra@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "taraknm",
+    "name": "Mazum",
+    "email": "taraknm@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "arjun",
+    "name": "Mukerji Arjun",
+    "email": "arjun@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "krudra",
+    "name": "Koustav Rudra",
+    "email": "krudra@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "mahesh_mohan",
+    "name": "Mahesh Mohan M R",
+    "email": "mahesh.mohan@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "pkmishra",
+    "name": "Mishra P K",
+    "email": "pkmishra@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "adway",
+    "name": "Mitra   A",
+    "email": "adway@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "jiaul",
+    "name": "Paik J H",
+    "email": "jiaul@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "somdyuti",
+    "name": "Paul S",
+    "email": "somdyuti@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "ksreddy",
+    "name": "Reddy K S",
+    "email": "ksreddy@ai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "soumya",
+    "name": "Dey Soumyajit",
+    "email": "soumya@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "somnath_roy",
+    "name": "Roy Somnath",
+    "email": "somnath.roy@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "vikranth_racherla",
+    "name": "Vikrant Racherla",
+    "email": "vikranth.racherla@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "bhaskar",
+    "name": "Bhaduri Bhaskar",
+    "email": "bhaskar@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "monojit",
+    "name": "Chak",
+    "email": "monojit@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "sc",
+    "name": "Chakraborty Sudipto",
+    "email": "sc@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "joy",
+    "name": "Chaudhuri Joydip",
+    "email": "joy@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "sudip",
+    "name": "Das S",
+    "email": "sudip@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "dnikita",
+    "name": "Dewangan   N",
+    "email": "dnikita@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "namrata",
+    "name": "Gaikwad N D",
+    "email": "namrata@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "g_harinadha",
+    "name": "Gidituri H",
+    "email": "g.harinadha@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "akg",
+    "name": "Gupta A K",
+    "email": "akg@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "ajindal",
+    "name": "Jindal   A",
+    "email": "ajindal@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "mkaushal",
+    "name": "Kaushal Manish",
+    "email": "mkaushal@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "surjendu",
+    "name": "Maity S",
+    "email": "surjendu@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "rajesh",
+    "name": "Pavan P N V R",
+    "email": "rajesh@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "rahul",
+    "name": "Ranjan R",
+    "email": "rahul@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "koustuv",
+    "name": "Ray Koustuv",
+    "email": "koustuv@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "ananta",
+    "name": "Sarkar A K",
+    "email": "ananta@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "saum",
+    "name": "Sau M",
+    "email": "saum@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "nks",
+    "name": "Saxena N",
+    "email": "nks@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "strivedi",
+    "name": "Suverna T",
+    "email": "strivedi@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "ta",
+    "name": "Chak",
+    "email": "ta@ci.iitkgp.ac.in",
+    "department": "Centre for Indian Knowledge Systems"
+  },
+  {
+    "id": "aritra",
+    "name": "Chatterjee A",
+    "email": "aritra@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "sujit",
+    "name": "Dash S K",
+    "email": "sujit@ci.iitkgp.ac.in",
+    "department": "Centre for Indian Knowledge Systems"
+  },
+  {
+    "id": "abhishek_dastider",
+    "name": "Dastider A G",
+    "email": "abhishek.dastider@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "pta",
+    "name": "Gupta A K",
+    "email": "pta@ci.iitkgp.ac.in",
+    "department": "Centre for Indian Knowledge Systems"
+  },
+  {
+    "id": "sjh",
+    "name": "Hossa",
+    "email": "sjh@ci.iitkgp.ac.in",
+    "department": "Centre for Indian Knowledge Systems"
+  },
+  {
+    "id": "vvkulkarni",
+    "name": "Kulkarni V V",
+    "email": "vvkulkarni@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "pratyush",
+    "name": "Kumar Pratyush",
+    "email": "pratyush@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "mpandey",
+    "name": "Pandey M",
+    "email": "mpandey@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "amitpassi",
+    "name": "Passi A",
+    "email": "amitpassi@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "puneet_patra",
+    "name": "Patra   P K",
+    "email": "puneet.patra@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "madhumita",
+    "name": "Paul M",
+    "email": "madhumita@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "lsr",
+    "name": "Ramachandra   L S",
+    "email": "lsr@civ.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "hpr",
+    "name": "Ramachandra   L S",
+    "email": "hpr@ci.iitkgp.ac.in",
+    "department": "Centre for Indian Knowledge Systems"
+  },
+  {
+    "id": "fi",
+    "name": "Engi",
+    "email": "fi@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "niloy",
+    "name": "Engi",
+    "email": "niloy@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "saditya",
+    "name": "Aditya Somak",
+    "email": "saditya@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "sarani",
+    "name": "Bhattacharya   S",
+    "email": "sarani@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "abhijnan",
+    "name": "Chak",
+    "email": "abhijnan@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "rschakraborty",
+    "name": "Chak",
+    "email": "rschakraborty@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "abir",
+    "name": "Das Abir",
+    "email": "abir@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "palash_dey",
+    "name": "Dey Palash",
+    "email": "palash.dey@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "pta",
+    "name": "Gupta Arobinda",
+    "email": "pta@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "aritrah",
+    "name": "Hazra Aritra",
+    "email": "aritrah@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "skolay",
+    "name": "Kolay Sudeshna",
+    "email": "skolay@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "monosij",
+    "name": "Maitra   Monosij",
+    "email": "monosij@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "smisra",
+    "name": "Misra Sudip",
+    "email": "smisra@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "itra",
+    "name": "Mitra Pabitra",
+    "email": "itra@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "mainack",
+    "name": "Mondal Mainack",
+    "email": "mainack@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "jibesh",
+    "name": "Patra Jibesh",
+    "email": "jibesh@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "somindu",
+    "name": "Patra Jibesh",
+    "email": "somindu@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "ksrao",
+    "name": "Patra Jibesh",
+    "email": "ksrao@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "debaditya",
+    "name": "Roy D",
+    "email": "debaditya@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "drc",
+    "name": "Roychowdhury D",
+    "email": "drc@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "shamik",
+    "name": "Sural Shamik",
+    "email": "shamik@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "cc",
+    "name": "Chak",
+    "email": "cc@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ishekchatterjee",
+    "name": "Chatter",
+    "email": "ishekchatterjee@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "skd",
+    "name": "Dam S K",
+    "email": "skd@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "kaustav",
+    "name": "Dey Kaustav",
+    "email": "kaustav@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "sanjay_ghosh",
+    "name": "Ghosh   S",
+    "email": "sanjay.ghosh@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "arpan",
+    "name": "Hota Arpan",
+    "email": "arpan@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ahota",
+    "name": "Hota A R",
+    "email": "ahota@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "bhargav",
+    "name": "Jha   B",
+    "email": "bhargav@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "atreyee",
+    "name": "Kundu Atreyee",
+    "email": "atreyee@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "arijit",
+    "name": "Arijit",
+    "email": "arijit@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "debashis",
+    "name": "Mandal D",
+    "email": "debashis@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "debranjan",
+    "name": "Mukherjee D",
+    "email": "debranjan@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "prajit",
+    "name": "Nandi Pr",
+    "email": "prajit@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "amit",
+    "name": "Patra Amit",
+    "email": "amit@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "drpullaguram",
+    "name": "Pullagura",
+    "email": "drpullaguram@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ssau",
+    "name": "Sau Shambhu",
+    "email": "ssau@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ot",
+    "name": "Sheet D",
+    "email": "ot@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "saumik",
+    "name": "Bhattacha",
+    "email": "saumik@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "anbh303",
+    "name": "Aniruddha",
+    "email": "anbh303@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "tkb",
+    "name": "Bhattacharyya   T K",
+    "email": "tkb@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "amitalok",
+    "name": "Budkuley A J",
+    "email": "amitalok@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "gdas",
+    "name": "Das   Goutam",
+    "email": "gdas@gssst.iitkgp.ac.in",
+    "department": "G S Sanyal School of Telecommunications"
+  },
+  {
+    "id": "jithin",
+    "name": "Jithin R",
+    "email": "jithin@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "smukherjee",
+    "name": "Mukherjee S",
+    "email": "smukherjee@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "vinay",
+    "name": "Pechetti Sasi Vinay",
+    "email": "vinay@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "eek",
+    "name": "Adhya Aneek",
+    "email": "eek@gssst.iitkgp.ac.in",
+    "department": "G S Sanyal School of Telecommunications"
+  },
+  {
+    "id": "saswat",
+    "name": "Chakrabarti   S",
+    "email": "saswat@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "suvra",
+    "name": "Das S S",
+    "email": "suvra@gssst.iitkgp.ac.in",
+    "department": "G S Sanyal School of Telecommunications"
+  },
+  {
+    "id": "amitdutta",
+    "name": "Dutta A K",
+    "email": "amitdutta@gssst.iitkgp.ac.in",
+    "department": "G S Sanyal School of Telecommunications"
+  },
+  {
+    "id": "pabitrabadhuk",
+    "name": "Badhuk Pabitra",
+    "email": "pabitrabadhuk@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "snb",
+    "name": "Bhattacharyya S N",
+    "email": "snb@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "biswajitb",
+    "name": "Biswajit B",
+    "email": "biswajitb@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ndaschakladar",
+    "name": "Chakladar N D",
+    "email": "ndaschakladar@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "pkd",
+    "name": "Das P K",
+    "email": "pkd@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sankha_deb",
+    "name": "Deb Sankha",
+    "email": "sankha.deb@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "purbarun",
+    "name": "Dhar Purbarun",
+    "email": "purbarun@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "moulic",
+    "name": "Ghosh Moulic S",
+    "email": "moulic@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "a_guha",
+    "name": "Guha Abhijit",
+    "email": "a.guha@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sangupta",
+    "name": "Gupta Sanjay",
+    "email": "sangupta@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ar",
+    "name": "Chakladar N D",
+    "email": "ar@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "kalyani",
+    "name": "Kalyani A M",
+    "email": "kalyani@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "kumar",
+    "name": "Kumar C S",
+    "email": "kumar@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "prashant",
+    "name": "Kumar P",
+    "email": "prashant@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sourav",
+    "name": "Mitra Sourav",
+    "email": "sourav@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "amukherjee",
+    "name": "Mukherjee Aghna",
+    "email": "amukherjee@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ramg",
+    "name": "Ram",
+    "email": "ramg@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "somnath_roy",
+    "name": "Somnath",
+    "email": "somnath.roy@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "skumarm",
+    "name": "Shyam Kumar M",
+    "email": "skumarm@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "riyal",
+    "name": "Sundriyal P",
+    "email": "riyal@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "stamang",
+    "name": "Tamag Siddharth",
+    "email": "stamang@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "gda53",
+    "name": "Adhika",
+    "email": "gda53@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "chenna_borra",
+    "name": "Borra C R",
+    "email": "chenna.borra@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "j_das",
+    "name": "Das Jayanta",
+    "email": "j.das@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sdas",
+    "name": "Das   Siddhartha",
+    "email": "sdas@me.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "amlan_dutta",
+    "name": "Dutta Amlan",
+    "email": "amlan.dutta@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "sankha",
+    "name": "Mukherjee S",
+    "email": "sankha@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "manas_paliwal",
+    "name": "Paliwal M",
+    "email": "manas.paliwal@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "siddhartha",
+    "name": "Siddhar",
+    "email": "siddhartha@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "chandra_tiwari",
+    "name": "Tiwary C S",
+    "email": "chandra.tiwari@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "dc",
+    "name": "Chak",
+    "email": "dc@mi.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "rkumar",
+    "name": "Kumar Rakesh",
+    "email": "rkumar@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "akm",
+    "name": "Majum",
+    "email": "akm@mi.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "bbmandal",
+    "name": "Mandal B B",
+    "email": "bbmandal@mi.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "smishra",
+    "name": "Mishra Sunita",
+    "email": "smishra@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "paluchamyb",
+    "name": "Paluchamy B",
+    "email": "paluchamyb@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "shantanu_patel",
+    "name": "Patel S K",
+    "email": "shantanu.patel@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "islavathsreenivas",
+    "name": "Prus",
+    "email": "islavathsreenivas@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "ssinha",
+    "name": "Sinha S",
+    "email": "ssinha@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "mchakraborty",
+    "name": "Chakraborty M",
+    "email": "mchakraborty@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "sdip",
+    "name": "Chowd",
+    "email": "sdip@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "kiranadhithya",
+    "name": "Kiran A R",
+    "email": "kiranadhithya@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "mrii",
+    "name": "Islam R I",
+    "email": "mrii@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "jagadeesh",
+    "name": "Kadiyam",
+    "email": "jagadeesh@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "sm",
+    "name": "Maitra S",
+    "email": "sm@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "lakshmivasudev",
+    "name": "Vasudev   K L",
+    "email": "lakshmivasudev@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "soumyadip_choudhury",
+    "name": "Choudhury S",
+    "email": "soumyadip.choudhury@rtc.iitkgp.ac.in",
+    "department": "Rubber Technology Centre"
+  },
+  {
+    "id": "titash",
+    "name": "Mondal Titash",
+    "email": "titash@rtc.iitkgp.ac.in",
+    "department": "Rubber Technology Centre"
+  },
+  {
+    "id": "knaskar",
+    "name": "Naskar Kinsuk",
+    "email": "knaskar@rtc.iitkgp.ac.in",
+    "department": "Rubber Technology Centre"
+  },
+  {
+    "id": "pmvaruni",
+    "name": "Pullela M",
+    "email": "pmvaruni@rtc.iitkgp.ac.in",
+    "department": "Rubber Technology Centre"
+  },
+  {
+    "id": "nks",
+    "name": "Sin",
+    "email": "nks@rtc.iitkgp.ac.in",
+    "department": "Rubber Technology Centre"
+  },
+  {
+    "id": "rajib",
+    "name": "Civil",
+    "email": "rajib@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "smukh",
+    "name": "Mukhopadhyay   S",
+    "email": "smukh@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "anandaroop",
+    "name": "Bhattacharya A",
+    "email": "anandaroop@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "arnab",
+    "name": "Arnab Roy",
+    "email": "arnab@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "bapi",
+    "name": "Priyadarshi Patnaik",
+    "email": "bapi@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "joysen",
+    "name": "Joy Sen",
+    "email": "joysen@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "amitk",
+    "name": "Das A K",
+    "email": "amitk@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "ritesh_ghosh",
+    "name": "Ghosh R",
+    "email": "ritesh.ghosh@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "vinaypatel",
+    "name": "Patel V",
+    "email": "vinaypatel@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "hoc",
+    "name": "De Arijit",
+    "email": "hoc@iks.iitkgp.ac.in",
+    "department": "Indian Knowledge Systems"
+  },
+  {
+    "id": "smsh",
+    "name": "Somesh Kumar",
+    "email": "smsh@math.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "richachopra",
+    "name": "Chopra R",
+    "email": "richachopra@iks.iitkgp.ac.in",
+    "department": "Indian Knowledge Systems"
+  },
+  {
+    "id": "jayashree",
+    "name": "Gajjam J A",
+    "email": "jayashree@iks.iitkgp.ac.in",
+    "department": "Indian Knowledge Systems"
+  },
+  {
+    "id": "dipesh",
+    "name": "Katira D V",
+    "email": "dipesh@iks.iitkgp.ac.in",
+    "department": "Indian Knowledge Systems"
+  },
+  {
+    "id": "mahesh",
+    "name": "Mahesh K",
+    "email": "mahesh@iks.iitkgp.ac.in",
+    "department": "Indian Knowledge Systems"
+  },
+  {
+    "id": "chairperson",
+    "name": "Das Soumen",
+    "email": "chairperson@coeah.iitkgp.ac.in",
+    "department": "Centre of Excellence in Art and Heritage"
+  },
+  {
+    "id": "richa",
+    "name": "Ahuja R",
+    "email": "richa@coesea.iitkgp.ac.in",
+    "department": "Center of Excellence in Safety Engineering and Analytics"
+  },
+  {
+    "id": "lsbisht",
+    "name": "Bisht L S",
+    "email": "lsbisht@coesea.iitkgp.ac.in",
+    "department": "Center of Excellence in Safety Engineering and Analytics"
+  },
+  {
+    "id": "harshad",
+    "name": "Shrigondekar H H",
+    "email": "harshad@coesea.iitkgp.ac.in",
+    "department": "Center of Excellence in Safety Engineering and Analytics"
+  },
+  {
+    "id": "ayantika",
+    "name": "Chatter",
+    "email": "ayantika@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "syamsunderde",
+    "name": "De Syamsundar",
+    "email": "syamsunderde@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "plahiri",
+    "name": "Lahiri Pooja",
+    "email": "plahiri@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "prasun_mishra",
+    "name": "Mishra Prasun",
+    "email": "prasun.mishra@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "anibratam",
+    "name": "Mukherjee B",
+    "email": "anibratam@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "arnab",
+    "name": "Sarkar A",
+    "email": "arnab@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "sengupta_s",
+    "name": "Sengupta S",
+    "email": "sengupta.s@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "shaili",
+    "name": "Sett S",
+    "email": "shaili@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "pran",
+    "name": "Gangopadhyay   P",
+    "email": "pran@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "abhay",
+    "name": "Gour A S",
+    "email": "abhay@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "vaisakh",
+    "name": "Vadakkumbatt   V",
+    "email": "vaisakh@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "sou",
+    "name": "Officiating",
+    "email": "sou@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "mrinal",
+    "name": "Acharya M   K",
+    "email": "mrinal@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "arijita",
+    "name": "Ban",
+    "email": "arijita@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "param_biochem",
+    "name": "Banerjee   P",
+    "email": "param_biochem@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "aritri",
+    "name": "Bir   A",
+    "email": "aritri@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "mandritachatterjee",
+    "name": "Chatterjee M",
+    "email": "mandritachatterjee@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "droindriladhar",
+    "name": "Dhar O",
+    "email": "droindriladhar@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "arindam",
+    "name": "Ghosh A",
+    "email": "arindam@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "barnaligdoc",
+    "name": "Ghosh B",
+    "email": "barnaligdoc@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "drnabarun",
+    "name": "Karmakar   N",
+    "email": "drnabarun@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "payal",
+    "name": "Kasat P A",
+    "email": "payal@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "alahiri",
+    "name": "Lahiri A",
+    "email": "alahiri@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "manjunatha_s",
+    "name": "Manjunatha S",
+    "email": "manjunatha.s@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "dravijitmondal",
+    "name": "Mondal A",
+    "email": "dravijitmondal@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "dr_samirrana",
+    "name": "Rana S",
+    "email": "dr.samirrana@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "drparmeshwar",
+    "name": "Satpathy P",
+    "email": "drparmeshwar@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "drspv",
+    "name": "Satya Prasad V",
+    "email": "drspv@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "shirin",
+    "name": "Shirin Dasgupta",
+    "email": "shirin@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "sumana",
+    "name": "Samanta S",
+    "email": "sumana@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "anandabraham",
+    "name": "Abraham A J",
+    "email": "anandabraham@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "mj",
+    "name": "Jenamani Mamata",
+    "email": "mj@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "bgmenon",
+    "name": "Menon B G",
+    "email": "bgmenon@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "sroychowdhury",
+    "name": "Roychowdhury S",
+    "email": "sroychowdhury@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "subhajit",
+    "name": "Sidhanta Subhajit",
+    "email": "subhajit@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "sab",
+    "name": "Chakraborty B",
+    "email": "sab@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "rajat",
+    "name": "Das R K",
+    "email": "rajat@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "vidya",
+    "name": "Kochat Vidya",
+    "email": "vidya@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "hemakesh_m",
+    "name": "Mohapatra H",
+    "email": "hemakesh.m@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "ayan",
+    "name": "Roy Choudhuri A",
+    "email": "ayan@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "shibayan",
+    "name": "Roy Shibayan",
+    "email": "shibayan@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "ahinroy",
+    "name": "Roy Ahin",
+    "email": "ahinroy@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "prasana",
+    "name": "Sahoo P K",
+    "email": "prasana@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "ncdas",
+    "name": "Das N C",
+    "email": "ncdas@rtc.iitkgp.ac.in",
+    "department": "Rubber Technology Centre"
+  },
+  {
+    "id": "mamoni",
+    "name": "Banerj",
+    "email": "mamoni@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "titas",
+    "name": "Bhattacha",
+    "email": "titas@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "mrigank",
+    "name": "Sharad Mrigank",
+    "email": "mrigank@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "debashree_smst",
+    "name": "Adhya D G",
+    "email": "debashree_smst@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "ant",
+    "name": "Chakravorty Nishant",
+    "email": "ant@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "oel",
+    "name": "Chakravorty Nishant",
+    "email": "oel@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "g_dutta",
+    "name": "Dutta G",
+    "email": "g.dutta@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "andal",
+    "name": "Mandal   S",
+    "email": "andal@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "raj",
+    "name": "Manna R K",
+    "email": "raj@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "bmukherjee",
+    "name": "Mukherjee B",
+    "email": "bmukherjee@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "gayatri_mukherjee",
+    "name": "Mukherjee G",
+    "email": "gayatri.mukherjee@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "pcshukla",
+    "name": "Shukla P C",
+    "email": "pcshukla@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "pranab",
+    "name": "Deb Pranab",
+    "email": "pranab@co.iitkgp.ac.in",
+    "department": "Centre of Excellence"
+  },
+  {
+    "id": "rashmi",
+    "name": "Nayak R R",
+    "email": "rashmi@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "nairita_pal",
+    "name": "Pal N",
+    "email": "nairita.pal@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "abhishek",
+    "name": "Rai A K",
+    "email": "abhishek@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "nirmalya",
+    "name": "Bag Nirmalya",
+    "email": "nirmalya@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "sanjoy",
+    "name": "Bandyopadhyay   S",
+    "email": "sanjoy@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "mxb",
+    "name": "Bhattacharje",
+    "email": "mxb@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "pradipc",
+    "name": "Chakraborty P K",
+    "email": "pradipc@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "mcdas",
+    "name": "Das M C",
+    "email": "mcdas@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "swagata",
+    "name": "Dasgupta S",
+    "email": "swagata@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "tapas_debsharma",
+    "name": "Debsharma T",
+    "email": "tapas.debsharma@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "dibakar",
+    "name": "Dhara Dibakar",
+    "email": "dibakar@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "kiran",
+    "name": "Gore K R",
+    "email": "kiran@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "mintu",
+    "name": "Halder Mintu",
+    "email": "mintu@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "ppj",
+    "name": "Jana P P",
+    "email": "ppj@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "bjash",
+    "name": "Jash B",
+    "email": "bjash@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "kbiradha",
+    "name": "Kumar Biradha",
+    "email": "kbiradha@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "msm",
+    "name": "Maji M S",
+    "email": "msm@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "sukanta_mandal",
+    "name": "Mandal Sukanta",
+    "email": "sukanta.mandal@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "gmani",
+    "name": "Mani Gane",
+    "email": "gmani@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "pmishra",
+    "name": "Mishra   P",
+    "email": "pmishra@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "mishra",
+    "name": "Mishra   P",
+    "email": "mishra@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "snanda",
+    "name": "Nanda Samik",
+    "email": "snanda@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "spanda",
+    "name": "Panda Santanu",
+    "email": "spanda@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "spalei",
+    "name": "Palei   S",
+    "email": "spalei@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "rambabu",
+    "name": "Reddi   R",
+    "email": "rambabu@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "avik_samanta",
+    "name": "Samanta   A",
+    "email": "avik.samanta@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "sksamanta",
+    "name": "Samanta S K",
+    "email": "sksamanta@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "ganesh_v",
+    "name": "Venkataraman G",
+    "email": "ganesh.v@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "ncnayak",
+    "name": "Nayak N C",
+    "email": "ncnayak@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "aadhikary",
+    "name": "Adhikary   A",
+    "email": "aadhikary@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "apramita_chand",
+    "name": "Chand   A",
+    "email": "apramita.chand@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "l_roy",
+    "name": "Roy Lisa",
+    "email": "l.roy@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "anupam",
+    "name": "Midya   A",
+    "email": "anupam@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "ashutosh",
+    "name": "Mohanty   A",
+    "email": "ashutosh@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "raj",
+    "name": "Sadhu R K",
+    "email": "raj@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "manasseal",
+    "name": "Seal Manas",
+    "email": "manasseal@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "asaxena",
+    "name": "Saxena   A",
+    "email": "asaxena@edu.iitkgp.ac.in",
+    "department": "Centre of Educational Technology"
+  },
+  {
+    "id": "tathagata",
+    "name": "Roy   Choudhury   T",
+    "email": "tathagata@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "saptarshi",
+    "name": "Dey S",
+    "email": "saptarshi@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "cpdubey",
+    "name": "Dubey   C P",
+    "email": "cpdubey@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "sambit",
+    "name": "Ghosh S",
+    "email": "sambit@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "spaul",
+    "name": "Paul Subhabrata",
+    "email": "spaul@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "mkp",
+    "name": "Pan",
+    "email": "mkp@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "pareshsr",
+    "name": "Roy Ankur",
+    "email": "pareshsr@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "dipks21",
+    "name": "Singha D K",
+    "email": "dipks21@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "nvats",
+    "name": "Vats Nishant",
+    "email": "nvats@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "bbanerjee",
+    "name": "Banerjee B",
+    "email": "bbanerjee@ma.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "soumyarup",
+    "name": "Banerjee S",
+    "email": "soumyarup@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "mithun",
+    "name": "Bhowmik   M",
+    "email": "mithun@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "aniket_biswas",
+    "name": "Biswas An",
+    "email": "aniket.biswas@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "prateep",
+    "name": "Chak",
+    "email": "prateep@mat.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "gargnk",
+    "name": "Garg N K",
+    "email": "gargnk@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "soumitra",
+    "name": "Ghara S",
+    "email": "soumitra@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "dipankar",
+    "name": "Ghosh Dipankar",
+    "email": "dipankar@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "mi",
+    "name": "Adrijit",
+    "email": "mi@ma.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "nabakumarjana",
+    "name": "Jana N",
+    "email": "nabakumarjana@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "smsh",
+    "name": "Kumar Somesh",
+    "email": "smsh@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "hsmahato",
+    "name": "Mahato H S",
+    "email": "hsmahato@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "pvsnm",
+    "name": "Murt",
+    "email": "pvsnm@ma.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "ak",
+    "name": "Murt",
+    "email": "ak@mat.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "rkp",
+    "name": "Pan",
+    "email": "rkp@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "broy",
+    "name": "Roy Bodhayan",
+    "email": "broy@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "parvez",
+    "name": "Sarwar H P",
+    "email": "parvez@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "phyoffice",
+    "name": "Physics",
+    "email": "phyoffice@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "jyoti",
+    "name": "Bhatt",
+    "email": "jyoti@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "saikat",
+    "name": "Das S",
+    "email": "saikat@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "sitikantha_das",
+    "name": "Das S D",
+    "email": "sitikantha.das@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "tamoghna",
+    "name": "Das T",
+    "email": "tamoghna@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "sajaldhara",
+    "name": "Dhara Sajal",
+    "email": "sajaldhara@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "rghara",
+    "name": "Ghara R",
+    "email": "rghara@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "sudhansu",
+    "name": "Mandal S S",
+    "email": "sudhansu@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "patraaniket177",
+    "name": "Patra A",
+    "email": "patraaniket177@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "pintupatra",
+    "name": "Patra P",
+    "email": "pintupatra@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "sandipan",
+    "name": "Sengupta S",
+    "email": "sandipan@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "viswanath_shukla",
+    "name": "Shukla V",
+    "email": "viswanath.shukla@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "kkntnu",
+    "name": "Bhagat K K",
+    "email": "kkntnu@cet.iitkgp.ac.in",
+    "department": "Centre for Educational Technology"
+  },
+  {
+    "id": "dripto",
+    "name": "Bakshi Dripto",
+    "email": "dripto@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "anuradha_sanskrit",
+    "name": "Choudry Anuradha",
+    "email": "anuradha.sanskrit@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "ssd",
+    "name": "Das S S",
+    "email": "ssd@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "sunandan",
+    "name": "Ghosh S",
+    "email": "sunandan@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "mkm",
+    "name": "Maha",
+    "email": "mkm@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "jenia",
+    "name": "Mukherjee Jenia",
+    "email": "jenia@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "anway",
+    "name": "Mukhopadhyay A",
+    "email": "anway@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "archana",
+    "name": "Patnaik Archana",
+    "email": "archana@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "anubhab",
+    "name": "Pattanayak A",
+    "email": "anubhab@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "dripta",
+    "name": "Piplai D M",
+    "email": "dripta@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "prantik",
+    "name": "Prantik B",
+    "email": "prantik@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "mahima",
+    "name": "Raina M",
+    "email": "mahima@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "bks",
+    "name": "Sahoo B K",
+    "email": "bks@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "kbls",
+    "name": "Srivastava K B L",
+    "email": "kbls@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "thakurv",
+    "name": "Thakur V",
+    "email": "thakurv@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "binita",
+    "name": "Tiwari B",
+    "email": "binita@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "is",
+    "name": "Yadav I S",
+    "email": "is@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "pmishra",
+    "name": "Mishra Pulak",
+    "email": "pmishra@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "atasim",
+    "name": "Atasi",
+    "email": "atasim@cet.iitkgp.ac.in",
+    "department": "Centre for Educational Technology"
+  },
+  {
+    "id": "avnish",
+    "name": "Bhatt A",
+    "email": "avnish@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "varuna_chakraborty",
+    "name": "Chakraborty V",
+    "email": "varuna.chakraborty@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "shakti",
+    "name": "Deb Shakti",
+    "email": "shakti@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "ajit",
+    "name": "Indra",
+    "email": "ajit@rg.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "gouri",
+    "name": "Gargate G A",
+    "email": "gouri@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "shuvro",
+    "name": "Sarker S P",
+    "email": "shuvro@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "prakash",
+    "name": "Sharma P",
+    "email": "prakash@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "ndran",
+    "name": "Thiruthy N",
+    "email": "ndran@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "tutan",
+    "name": "Ahmed Tutan",
+    "email": "tutan@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "et",
+    "name": "Abhijeet",
+    "email": "et@vg.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "sanjib",
+    "name": "Chowdhury Sanjib",
+    "email": "sanjib@vg.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "anupam",
+    "name": "Ghosh Anupam",
+    "email": "anupam@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "nti",
+    "name": "Mukherjee Srabanti",
+    "email": "nti@vg.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "susmita",
+    "name": "Mukhopadhyay S",
+    "email": "susmita@vg.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "spunia",
+    "name": "Punia Sushil",
+    "email": "spunia@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "shaili",
+    "name": "Singh Shaili",
+    "email": "shaili@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "vinay",
+    "name": "Yadav Vinay",
+    "email": "vinay@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "library",
+    "name": "Library",
+    "email": "library@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "ements",
+    "name": "Placement Cell",
+    "email": "ements@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "mdp",
+    "name": "Placement Cell",
+    "email": "mdp@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "rksen",
+    "name": "Ramkrishna Sen",
+    "email": "rksen@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "dipadube",
+    "name": "Dube Dipa",
+    "email": "dipadube@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "aditya",
+    "name": "Bandopadhyay A",
+    "email": "aditya@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "eic",
+    "name": "Banerjee S",
+    "email": "eic@spmsh.iitkgp.ac.in",
+    "department": "Subir Chowdhury School of Quality and Reliability"
+  },
+  {
+    "id": "pkb",
+    "name": "Biswas P K",
+    "email": "pkb@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "pabitra",
+    "name": "Mitra  Pabitra",
+    "email": "pabitra@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "rphall",
+    "name": "Hall",
+    "email": "rphall@ii.iitkgp.ac.in",
+    "department": "Centre for Indian Knowledge Systems"
+  },
+  {
+    "id": "chaitanyasog",
+    "name": "Mittal C",
+    "email": "chaitanyasog@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "gsen",
+    "name": "Sen Goutam",
+    "email": "gsen@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "spsarmah",
+    "name": "Sharma A",
+    "email": "spsarmah@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "akh",
+    "name": "Vadakkumbatt V",
+    "email": "akh@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "pks",
+    "name": "Sappati P K",
+    "email": "pks@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "debarghya",
+    "name": "Chakraborty D",
+    "email": "debarghya@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "nitin_gupta",
+    "name": "Gupta Nitin",
+    "email": "nitin.gupta@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "bcmeikap",
+    "name": "Meikap B C",
+    "email": "bcmeikap@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "aneek",
+    "name": "Adhya Aneek",
+    "email": "aneek@gssst.iitkgp.ac.in",
+    "department": "G S Sanyal School of Telecommunications"
+  },
+  {
+    "id": "anwesha",
+    "name": "Aditya Anwesha",
+    "email": "anwesha@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "venimadhav",
+    "name": "Adyam V",
+    "email": "venimadhav@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "saud",
+    "name": "Afzal Md",
+    "email": "saud@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "sudha",
+    "name": "Agrahari Sudha",
+    "email": "sudha@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "saich",
+    "name": "Aich Shampa",
+    "email": "saich@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "sanand",
+    "name": "Athalye S D A",
+    "email": "sanand@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "arnab",
+    "name": "Atta Arnab",
+    "email": "arnab@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "baidya",
+    "name": "Baidya D K",
+    "email": "baidya@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "bajpai",
+    "name": "Bajpai Prabodh",
+    "email": "bajpai@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ppb",
+    "name": "Bandyopadhyay P P",
+    "email": "ppb@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sharba",
+    "name": "Bandyopadhyay S",
+    "email": "sharba@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "tapas",
+    "name": "Bandyopadhyay T K",
+    "email": "tapas@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "123_arindam",
+    "name": "Banerjee A",
+    "email": "123.arindam@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "biswanath",
+    "name": "Banerjee B",
+    "email": "biswanath@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "bbanerjee",
+    "name": "Banerjee B",
+    "email": "bbanerjee@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "debamalya",
+    "name": "Banerjee D",
+    "email": "debamalya@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "krittikaban",
+    "name": "Banerjee K",
+    "email": "krittikaban@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "rb",
+    "name": "Banerjee Rintu",
+    "email": "rb@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "susanta",
+    "name": "Banerjee S",
+    "email": "susanta@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "haimanti",
+    "name": "Banerji Haimanti",
+    "email": "haimanti@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "pallab",
+    "name": "Banerji Pallab",
+    "email": "pallab@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "parama",
+    "name": "Barai Parama",
+    "email": "parama@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "skbarai",
+    "name": "Barai S K",
+    "email": "skbarai@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "jbarman",
+    "name": "Barman Jaydip",
+    "email": "jbarman@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "anupam",
+    "name": "Basu Anupam",
+    "email": "anupam@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "abasu",
+    "name": "Basu Arindam",
+    "email": "abasu@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "bhagirath",
+    "name": "Behera B",
+    "email": "bhagirath@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "mdbehera",
+    "name": "Behera M D",
+    "email": "mdbehera@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "melinda",
+    "name": "Bera M K",
+    "email": "melinda@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "kiranbhaktha",
+    "name": "Bhaktha S N B",
+    "email": "kiranbhaktha@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "somnath",
+    "name": "Bharadwaj S",
+    "email": "somnath@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "ule",
+    "name": "Bharule S P",
+    "email": "ule@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "pkbhaskaran",
+    "name": "Bhaskaran P K",
+    "email": "pkbhaskaran@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "amitabha",
+    "name": "Bhattacharya A",
+    "email": "amitabha@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "rya",
+    "name": "Bhattacharya B",
+    "email": "rya@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "niharika",
+    "name": "Bhattacharya N S",
+    "email": "niharika@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "ta",
+    "name": "Bhattacharya P",
+    "email": "ta@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "susmita",
+    "name": "Bhattacharyya   S",
+    "email": "susmita@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "sourangshu",
+    "name": "Bhattacharya S",
+    "email": "sourangshu@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "sujoybtc",
+    "name": "Bhattacharya S",
+    "email": "sujoybtc@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "spb",
+    "name": "Bhattacharya S P",
+    "email": "spb@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "btanmoy",
+    "name": "Bhattacharya T",
+    "email": "btanmoy@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ab",
+    "name": "Bhattacharyya A",
+    "email": "ab@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "king",
+    "name": "Bhattacharyya K",
+    "email": "king@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "rbmail",
+    "name": "Bhattacharyya R",
+    "email": "rbmail@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "nath",
+    "name": "Bhattacharyya S",
+    "email": "nath@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "prabha",
+    "name": "Bhola Prabha",
+    "email": "prabha@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "skar",
+    "name": "Bhowmick B",
+    "email": "skar@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "plaban",
+    "name": "Bhowmick P K",
+    "email": "plaban@cai.iitkgp.ac.in",
+    "department": "Centre of Artificial Intelligence"
+  },
+  {
+    "id": "pb",
+    "name": "Bhowmick Partha",
+    "email": "pb@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "santanu",
+    "name": "Bhowmik S K",
+    "email": "santanu@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "priya",
+    "name": "Biswas Debapriya",
+    "email": "priya@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "karabi",
+    "name": "Biswas Karabi",
+    "email": "karabi@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "k_biswas",
+    "name": "Biswas Koushik",
+    "email": "k_biswas@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "somjeetbiswas",
+    "name": "Biswas Somjeet",
+    "email": "somjeetbiswas@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "mohan",
+    "name": "Bosukonda M M",
+    "email": "mohan@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "psburada",
+    "name": "Burada P S",
+    "email": "psburada@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "debalay",
+    "name": "Chakrabarti D",
+    "email": "debalay@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "indrajit",
+    "name": "Chakrabarti I",
+    "email": "indrajit@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "arunc",
+    "name": "Chakraborty A",
+    "email": "arunc@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "basab",
+    "name": "Chakraborty B",
+    "email": "basab@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "debjani",
+    "name": "Chakraborty D",
+    "email": "debjani@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "goutam",
+    "name": "Chakraborty G",
+    "email": "goutam@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "jayanta",
+    "name": "Chakraborty J",
+    "email": "jayanta@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "mrityun",
+    "name": "Chakraborty M",
+    "email": "mrityun@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "prateep",
+    "name": "Chakraborty P",
+    "email": "prateep@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "pchak",
+    "name": "Chakraborty P S",
+    "email": "pchak@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "sushanta",
+    "name": "Chakraborty S",
+    "email": "sushanta@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "sandipc",
+    "name": "Chakraborty S",
+    "email": "sandipc@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "suman",
+    "name": "Chakraborty S",
+    "email": "suman@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "dc",
+    "name": "Chakravarty D",
+    "email": "dc@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "nishant",
+    "name": "Chakravorty N",
+    "email": "nishant@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "abhijeet",
+    "name": "Chandra Abhijeet",
+    "email": "abhijeet@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "achandra",
+    "name": "Chandra Amreesh",
+    "email": "achandra@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "avishekchatterjee",
+    "name": "Chatterjee A",
+    "email": "avishekchatterjee@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "cchatterjee",
+    "name": "Chatterjee C",
+    "email": "cchatterjee@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "dheemanc",
+    "name": "Chatterjee D",
+    "email": "dheemanc@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "schat",
+    "name": "Chattopadhyay S",
+    "email": "schat@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "souvik",
+    "name": "Chattopadhyay S",
+    "email": "souvik@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "santanu",
+    "name": "Chattopadhyay S",
+    "email": "santanu@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "siddhartha",
+    "name": "Chattopadhyay S",
+    "email": "siddhartha@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "koel",
+    "name": "Chaudhury Koel",
+    "email": "koel@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "debraj",
+    "name": "Choudhury   Debraj",
+    "email": "debraj@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "ayanc",
+    "name": "Chowdhury Ayan",
+    "email": "ayanc@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "anjib",
+    "name": "Chowdhury Sanjib",
+    "email": "anjib@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "amal",
+    "name": "Das A K",
+    "email": "amal@ph.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "abhij",
+    "name": "Das Abhijit",
+    "email": "abhij@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "apurbadas348",
+    "name": "Das Apurba",
+    "email": "apurbadas348@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "bsdas",
+    "name": "Das B S",
+    "email": "bsdas@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "ddas",
+    "name": "Das Debapriya",
+    "email": "ddas@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "gargi",
+    "name": "Das Gargi",
+    "email": "gargi@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "j_das",
+    "name": "Das Jayanta",
+    "email": "j.das@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "karabi",
+    "name": "Das Karabi",
+    "email": "karabi@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "manab",
+    "name": "Das M K",
+    "email": "manab@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sdasmandal",
+    "name": "Das Mandal S K",
+    "email": "sdasmandal@cet.iitkgp.ac.in",
+    "department": "Centre for Educational Technology"
+  },
+  {
+    "id": "pkd",
+    "name": "Das P K",
+    "email": "pkd@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ssdas",
+    "name": "Das S S",
+    "email": "ssdas@cet.iitkgp.ac.in",
+    "department": "Centre for Educational Technology"
+  },
+  {
+    "id": "saini",
+    "name": "Das Saini",
+    "email": "saini@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "sdas",
+    "name": "Das Siddhartha",
+    "email": "sdas@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "anir",
+    "name": "Dasgupta Anirvan",
+    "email": "anir@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sunando",
+    "name": "Gupta Sunando",
+    "email": "sunando@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "mihir",
+    "name": "Dash M K",
+    "email": "mihir@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "sujit",
+    "name": "Dash S K",
+    "email": "sujit@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "sdash",
+    "name": "Dash S K",
+    "email": "sdash@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "smdash",
+    "name": "Dash S M",
+    "email": "smdash@ae.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "bd",
+    "name": "Datta Biplab",
+    "email": "bd@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "pkdatta",
+    "name": "Datta P K",
+    "email": "pkdatta@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "rajadatta",
+    "name": "Datta Raja",
+    "email": "rajadatta@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "ranadev",
+    "name": "Datta Ranadev",
+    "email": "ranadev@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "arijit",
+    "name": "De Arijit",
+    "email": "arijit@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "debsharma",
+    "name": "Debsharma T",
+    "email": "debsharma@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "sde",
+    "name": "De Sirshendu",
+    "email": "sde@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "alokkanti",
+    "name": "Deb A K",
+    "email": "alokkanti@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "arghya",
+    "name": "Deb Arghya",
+    "email": "arghya@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "deb",
+    "name": "Deb Debasis",
+    "email": "deb@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "kousik",
+    "name": "Deb Kousik",
+    "email": "kousik@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "pranab",
+    "name": "Deb Pranab",
+    "email": "pranab@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "ddebnath",
+    "name": "Debnath D",
+    "email": "ddebnath@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "parag",
+    "name": "Deshpande P A",
+    "email": "parag@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "nirjhar",
+    "name": "Dhang Nirjhar",
+    "email": "nirjhar@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "asd",
+    "name": "Dhar A S",
+    "email": "asd@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "adhar",
+    "name": "Achintya",
+    "email": "adhar@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "anirban",
+    "name": "Dhar Anirban",
+    "email": "anirban@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "sdhara",
+    "name": "Dhara Santanu",
+    "email": "sdhara@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "vdixit",
+    "name": "Dixit Vivek",
+    "email": "vdixit@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "indrajit",
+    "name": "Dube Indra",
+    "email": "indrajit@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "bkdubey",
+    "name": "Dubey B K",
+    "email": "bkdubey@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "gdutta",
+    "name": "Dutta Gourab",
+    "email": "gdutta@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "pkd",
+    "name": "Dutta P K",
+    "email": "pkd@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "ratna",
+    "name": "Dutta Ratna",
+    "email": "ratna@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "snganguly",
+    "name": "Ganguly Somenath",
+    "email": "snganguly@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "rupanwita",
+    "name": "Gayen Rupanwita",
+    "email": "rupanwita@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "abraham",
+    "name": "George Abhraham",
+    "email": "abraham@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "ghangrekar",
+    "name": "Ghangrekar M M",
+    "email": "ghangrekar@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "psghosal",
+    "name": "Ghosal P S",
+    "email": "psghosal@swr.iitkgp.ac.in",
+    "department": "School of Water Resources"
+  },
+  {
+    "id": "asghosh",
+    "name": "Ghosh A S",
+    "email": "asghosh@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "anup",
+    "name": "Ghosh Anup",
+    "email": "anup@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "bghosh",
+    "name": "Ghosh Bratin",
+    "email": "bghosh@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "indranil",
+    "name": "Ghosh Indranil",
+    "email": "indranil@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "nirmalya",
+    "name": "Ghosh Nirmalya",
+    "email": "nirmalya@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "psghosh",
+    "name": "Ghosh P",
+    "email": "psghosh@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "sudip",
+    "name": "Ghosh S K",
+    "email": "sudip@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "skg",
+    "name": "Ghosh S K",
+    "email": "skg@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "sujoy_ghosh",
+    "name": "Ghosh S K",
+    "email": "sujoy.ghosh@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "saptarshi",
+    "name": "Ghosh Saptarshi",
+    "email": "saptarshi@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "satrajit",
+    "name": "Ghosh Satrajit",
+    "email": "satrajit@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "sghosh",
+    "name": "Ghosh Somnath",
+    "email": "sghosh@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "koeli",
+    "name": "Ghoshal Koeli",
+    "email": "koeli@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "ik",
+    "name": "Ghoshal Ritwik",
+    "email": "ik@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "gnanesh",
+    "name": "Gnaneshwar N",
+    "email": "gnanesh@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "sudhagoel",
+    "name": "Goel Sudha",
+    "email": "sudhagoel@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "goswami",
+    "name": "Goswami Adrijit",
+    "email": "goswami@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "dipak",
+    "name": "Goswami D K",
+    "email": "dipak@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "kishor",
+    "name": "Goswami Kishor",
+    "email": "kishor@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "gshiremath",
+    "name": "Gourishankar S H",
+    "email": "gshiremath@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "pawang",
+    "name": "Goyal Pawan",
+    "email": "pawang@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "pkguha",
+    "name": "Guha P K",
+    "email": "pkguha@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "rajg",
+    "name": "Guha R   L",
+    "email": "rajg@cet.iitkgp.ac.in",
+    "department": "Centre for Educational Technology"
+  },
+  {
+    "id": "agupta",
+    "name": "Gupta A K",
+    "email": "agupta@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "ang",
+    "name": "Gupta A N",
+    "email": "ang@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "agupta",
+    "name": "Gupta Arobinda",
+    "email": "agupta@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "saibal",
+    "name": "Gupta Saibal",
+    "email": "saibal@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "sumana",
+    "name": "Gupta Sumana",
+    "email": "sumana@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "hari",
+    "name": "Harikrishnan G",
+    "email": "hari@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "sjh",
+    "name": "Hossain S J",
+    "email": "sjh@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "sikhahota",
+    "name": "Hota Sikha",
+    "email": "sikhahota@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "cjacob",
+    "name": "Jacob Chacko",
+    "email": "cjacob@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "atuljain",
+    "name": "Jain Atul",
+    "email": "atuljain@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "akjana",
+    "name": "Jana A K",
+    "email": "akjana@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "jayan",
+    "name": "Jayanarayanan K",
+    "email": "jayan@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "jkjha",
+    "name": "Jha J K",
+    "email": "jkjha@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "madan",
+    "name": "Jha M K",
+    "email": "madan@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "jratan",
+    "name": "Joarder Ratan",
+    "email": "jratan@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "kalelkar",
+    "name": "Kalelkar C D",
+    "email": "kalelkar@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "skapat",
+    "name": "Kapat Santanu",
+    "email": "skapat@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "sujoy_kar",
+    "name": "Kar Debraj",
+    "email": "sujoy.kar@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "sayan",
+    "name": "Kar Sayan",
+    "email": "sayan@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "skarmakar",
+    "name": "Karmakar S",
+    "email": "skarmakar@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "al",
+    "name": "Kasat P A",
+    "email": "al@bcrmrc.iitkgp.ac.in",
+    "department": "B C Roy Multi Speciality Research Centre"
+  },
+  {
+    "id": "kastha",
+    "name": "Kastha D",
+    "email": "kastha@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "mkaushik",
+    "name": "Kaushik Mrinal",
+    "email": "mkaushik@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "srkhare",
+    "name": "Khare S R",
+    "email": "srkhare@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "pratik",
+    "name": "Khastgir S P",
+    "email": "pratik@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "khatuabb",
+    "name": "Khastgir S P",
+    "email": "khatuabb@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "kishor",
+    "name": "Kishore N K",
+    "email": "kishor@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "komalesha",
+    "name": "Komalesha H S",
+    "email": "komalesha@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "kulkarni",
+    "name": "Kulkarni V V",
+    "email": "kulkarni@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "akumar",
+    "name": "Kumar Akhilesh",
+    "email": "akumar@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "kumar",
+    "name": "Kumar C S",
+    "email": "kumar@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "kumar",
+    "name": "Kumar Krishna",
+    "email": "kumar@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "pawan",
+    "name": "Kumar Pawan",
+    "email": "pawan@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "srikrishna",
+    "name": "Kumar S K",
+    "email": "srikrishna@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "kranthi",
+    "name": "Kuna K K",
+    "email": "kranthi@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "tkkundu",
+    "name": "Kun",
+    "email": "tkkundu@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "laha",
+    "name": "Laha Tapas",
+    "email": "laha@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "blahiri",
+    "name": "Lahiri Basudeb",
+    "email": "blahiri@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "bornini",
+    "name": "Lahiri Bornini",
+    "email": "bornini@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "rlakkaraju",
+    "name": "Lakkaraju R",
+    "email": "rlakkaraju@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ritwik",
+    "name": "Layek R K",
+    "email": "ritwik@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "rajendra",
+    "name": "Machavaram R",
+    "email": "rajendra@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "jmahakud",
+    "name": "Mahakud Jitendra",
+    "email": "jmahakud@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "sudipta",
+    "name": "Mahapatra S",
+    "email": "sudipta@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "mailapalli",
+    "name": "Mailapalli D R",
+    "email": "mailapalli@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "dkmaiti",
+    "name": "Maiti D K",
+    "email": "dkmaiti@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "jmaiti",
+    "name": "Maiti Jhareswar",
+    "email": "jmaiti@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "maitimk",
+    "name": "Maiti M K",
+    "email": "maitimk@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "maiti",
+    "name": "Maiti Sabyasachi",
+    "email": "maiti@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "aiti",
+    "name": "Maiti Suman",
+    "email": "aiti@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "bhargab",
+    "name": "Maitra Bhargab",
+    "email": "bhargab@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "ashis",
+    "name": "Maity Ashis",
+    "email": "ashis@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "dmaity",
+    "name": "Maity Damodar",
+    "email": "dmaity@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "jyotsna",
+    "name": "Majumdar J D",
+    "email": "jyotsna@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "subhasish",
+    "name": "Majumde",
+    "email": "subhasish@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "akm",
+    "name": "Majumder A K",
+    "email": "akm@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "sonjoym",
+    "name": "Majumder Sonjoy",
+    "email": "sonjoym@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "amalik",
+    "name": "Malik Aradhna",
+    "email": "amalik@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "nm",
+    "name": "Mallick Nirupama",
+    "email": "nm@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "mamtani",
+    "name": "Mamtani M A",
+    "email": "mamtani@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "bbmandal",
+    "name": "Mandal B B",
+    "email": "bbmandal@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "mkmandal",
+    "name": "Mandal M K",
+    "email": "mkmandal@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "mahitosh",
+    "name": "Mandal Mahitosh",
+    "email": "mahitosh@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "mousumi",
+    "name": "Mandal Mousumi",
+    "email": "mousumi@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "pradip",
+    "name": "Mandal Pradip",
+    "email": "pradip@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "smandal",
+    "name": "Mandal Subhamoy",
+    "email": "smandal@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "sumantra_mandal",
+    "name": "Mandal Sumantra",
+    "email": "sumantra.mandal@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "mmaha2",
+    "name": "Manjunatha M",
+    "email": "mmaha2@smst.iitkgp.ac.in",
+    "department": "School of Medical Science and Technology"
+  },
+  {
+    "id": "imanna",
+    "name": "Manna Indranil",
+    "email": "imanna@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "bmmanoj",
+    "name": "Manoj B M",
+    "email": "bmmanoj@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "shreya",
+    "name": "Matilal Shreya",
+    "email": "shreya@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "araknm",
+    "name": "Mazumder T N",
+    "email": "araknm@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "akmishra",
+    "name": "Mishra A K",
+    "email": "akmishra@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "amishra",
+    "name": "Mishra Ashok",
+    "email": "amishra@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "csmishra",
+    "name": "Mishra C S",
+    "email": "csmishra@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "hnm",
+    "name": "Mishra H N",
+    "email": "hnm@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "isra",
+    "name": "Misra A K",
+    "email": "isra@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "smisra",
+    "name": "Misra Sudip",
+    "email": "smisra@sit.iitkgp.ac.in",
+    "department": "School of Information Technology"
+  },
+  {
+    "id": "csmistry",
+    "name": "Mistry C S",
+    "email": "csmistry@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "adin",
+    "name": "Mitra Adinpunya",
+    "email": "adin@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "bivas",
+    "name": "Mitra Bivas",
+    "email": "bivas@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "jayeeta_mitra",
+    "name": "Mitra Jayeeta",
+    "email": "jayeeta.mitra@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "mira",
+    "name": "Mitra Mira",
+    "email": "mira@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "pralay",
+    "name": "Mitra Pralay",
+    "email": "pralay@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "rahul",
+    "name": "Mitra Rahul",
+    "email": "rahul@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "sourav",
+    "name": "Mitra Sourav",
+    "email": "sourav@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "amohanty",
+    "name": "Mohanty A R",
+    "email": "amohanty@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "wkmohanty",
+    "name": "Mohanty W K",
+    "email": "wkmohanty@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "h_m",
+    "name": "Mohapatra H",
+    "email": "h.m@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "manoj",
+    "name": "Mondal M K",
+    "email": "manoj@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "smondal",
+    "name": "Mondal Sourav",
+    "email": "smondal@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "surojit",
+    "name": "Mookherjee S",
+    "email": "surojit@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "animeshm",
+    "name": "Mukherjee A",
+    "email": "animeshm@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "abhijit",
+    "name": "Mukherjee Abhijit",
+    "email": "abhijit@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "banibratam",
+    "name": "Mukherjee   B",
+    "email": "banibratam@atdc.iitkgp.ac.in",
+    "department": "Advanced Technology Development Centre"
+  },
+  {
+    "id": "rabibrata",
+    "name": "Mukherjee   Rabibrata",
+    "email": "rabibrata@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "srabanti",
+    "name": "Mukherjee Srabanti",
+    "email": "srabanti@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "debdeep",
+    "name": "Mukhopadhyay D",
+    "email": "debdeep@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "jay",
+    "name": "Mukhopadhyay D",
+    "email": "jay@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "smukho",
+    "name": "Mukhopadhyay S",
+    "email": "smukho@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "sourav",
+    "name": "Mukhopadhyay S",
+    "email": "sourav@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "susmita",
+    "name": "Mukh",
+    "email": "susmita@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "vamsi",
+    "name": "Munagala V N V",
+    "email": "vamsi@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "pvsnm",
+    "name": "Murthy P   V   S   N",
+    "email": "pvsnm@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "wanath_n",
+    "name": "Vishwanath",
+    "email": "wanath_n@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "barnali_nag",
+    "name": "Nag Barnali",
+    "email": "barnali.nag@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "cnahak",
+    "name": "Nahak C",
+    "email": "cnahak@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "tkn_cryo",
+    "name": "Nandi T K",
+    "email": "tkn_cryo@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "nanduri",
+    "name": "Nanduri R",
+    "email": "nanduri@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "tnath",
+    "name": "Nath T K",
+    "email": "tnath@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "swati",
+    "name": "Neogi Swati",
+    "email": "swati@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "mpadma",
+    "name": "Padmavati M",
+    "email": "mpadma@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "skpal",
+    "name": "Pal S K",
+    "email": "skpal@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "spp",
+    "name": "Pal S P",
+    "email": "spp@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "geetanjali",
+    "name": "Panda Geetanjali",
+    "email": "geetanjali@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "spanda",
+    "name": "Panda S K",
+    "email": "spanda@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "susanta_panda",
+    "name": "Panda S K",
+    "email": "susanta.panda@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "da",
+    "name": "Samik",
+    "email": "da@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "debapratim",
+    "name": "Pandit Debapratim",
+    "email": "debapratim@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "panigrahi",
+    "name": "Panigrahi K L",
+    "email": "panigrahi@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "pratima",
+    "name": "Panigrahi P",
+    "email": "pratima@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "khanindra",
+    "name": "Pathak Khanindra",
+    "email": "khanindra@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "ana",
+    "name": "Patnaik Archana",
+    "email": "ana@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "akpatra",
+    "name": "Patra A K",
+    "email": "akpatra@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "skpatra",
+    "name": "Patra S K",
+    "email": "skpatra@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "sourav",
+    "name": "Sourav",
+    "email": "sourav@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "skpaul",
+    "name": "Paul S K",
+    "email": "skpaul@arp.iitkgp.ac.in",
+    "department": "Architecture and Regional Planning"
+  },
+  {
+    "id": "spaul",
+    "name": "Soumitra",
+    "email": "spaul@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sarang",
+    "name": "Pendharker S",
+    "email": "sarang@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "nkpeyada",
+    "name": "Peyada N K",
+    "email": "nkpeyada@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "ddar",
+    "name": "Poddar G",
+    "email": "ddar@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "akpradhan",
+    "name": "Pradhan A K",
+    "email": "akpradhan@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "deb",
+    "name": "Pradhan Debabrata",
+    "email": "deb@matsc.iitkgp.ac.in",
+    "department": "Materials Science Centre"
+  },
+  {
+    "id": "ncp",
+    "name": "Pradhan N C",
+    "email": "ncp@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "rkpradhan",
+    "name": "Pradhan P",
+    "email": "rkpradhan@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "rudrap",
+    "name": "Pradhan R P",
+    "email": "rudrap@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "scp",
+    "name": "Pradhan S C",
+    "email": "scp@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "ap",
+    "name": "Prakash Akshay",
+    "email": "ap@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "saurav_pramanik",
+    "name": "Pramanik Saurav",
+    "email": "saurav.pramanik@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "dkpra",
+    "name": "Pratihar D K",
+    "email": "dkpra@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "pruseth",
+    "name": "Pruseth K L",
+    "email": "pruseth@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "ty",
+    "name": "Prusty B K",
+    "email": "ty@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "nsr",
+    "name": "Raghuwanshi N S",
+    "email": "nsr@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "hifjur",
+    "name": "Raheman Hifjur",
+    "email": "hifjur@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "rishabh",
+    "name": "Rai Rishabh",
+    "email": "rishabh@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "crraj",
+    "name": "Raj C R",
+    "email": "crraj@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "raja",
+    "name": "Rajakumar A",
+    "email": "raja@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "prabina",
+    "name": "Rajib Prabina",
+    "email": "prabina@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "kdraju",
+    "name": "Raju K D",
+    "email": "kdraju@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "lsr",
+    "name": "Ramachandra L S",
+    "email": "lsr@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "ramg",
+    "name": "Ramgopal M",
+    "email": "ramg@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "mkrao",
+    "name": "Rao M K",
+    "email": "mkrao@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "rao",
+    "name": "Rao P Srinivasa",
+    "email": "rao@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "dray",
+    "name": "Ray Debashis",
+    "email": "dray@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "mcray",
+    "name": "Ray M C",
+    "email": "mcray@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "physkr",
+    "name": "Ray S K",
+    "email": "physkr@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "sray",
+    "name": "Ray Sanghamitra",
+    "email": "sray@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "tsray",
+    "name": "Ray T S",
+    "email": "tsray@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "hpr",
+    "name": "Reddy H P",
+    "email": "hpr@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "ksreddy",
+    "name": "Reddy K S",
+    "email": "ksreddy@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "renji_remesan",
+    "name": "Remesan Renji",
+    "email": "renji.remesan@swr.iitkgp.ac.in",
+    "department": "School of Water Resources"
+  },
+  {
+    "id": "aroutray",
+    "name": "Routray Aurbindo",
+    "email": "aroutray@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "anushree",
+    "name": "Roy Anushree",
+    "email": "anushree@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "roycp",
+    "name": "Roy Chaudhuri P",
+    "email": "roycp@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "archie",
+    "name": "Roy Choudhury A",
+    "email": "archie@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ebasis",
+    "name": "Roy Debasis",
+    "email": "ebasis@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "ggroy",
+    "name": "Roy G G",
+    "email": "ggroy@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "mroy",
+    "name": "Roy Mangal",
+    "email": "mroy@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "rambabu",
+    "name": "Roy R B",
+    "email": "rambabu@see.iitkgp.ac.in",
+    "department": "School of Energy Science and Engineering"
+  },
+  {
+    "id": "royr",
+    "name": "Roy Rajarshi",
+    "email": "royr@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "samudra_roy",
+    "name": "Roy Samudra",
+    "email": "samudra.roy@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "suroy",
+    "name": "Roy Subhransu",
+    "email": "suroy@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "psaha",
+    "name": "Saha Partha",
+    "email": "psaha@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "ssaha",
+    "name": "Saha Sandeep",
+    "email": "ssaha@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "rajiv",
+    "name": "Sahay R R",
+    "email": "rajiv@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "sahney",
+    "name": "Sahney Sangeeta",
+    "email": "sahney@vgsom.iitkgp.ac.in",
+    "department": "Vinod Gupta School of Management"
+  },
+  {
+    "id": "bsahoo",
+    "name": "Sahoo Bhabagrahi",
+    "email": "bsahoo@swr.iitkgp.ac.in",
+    "department": "School of Water Resources"
+  },
+  {
+    "id": "tsahoo",
+    "name": "Sahoo Trilochan",
+    "email": "tsahoo@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "samantab",
+    "name": "Samanta B",
+    "email": "samantab@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "rsamanta",
+    "name": "Samanta R",
+    "email": "rsamanta@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "samantaray",
+    "name": "Samantaray A K",
+    "email": "samantaray@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "pavit",
+    "name": "Sandilya Pavitra",
+    "email": "pavit@cryo.iitkgp.ac.in",
+    "department": "Cryogenic Engineering Centre"
+  },
+  {
+    "id": "psar",
+    "name": "Sar Pinaki",
+    "email": "psar@bt.iitkgp.ac.in",
+    "department": "Biotechnology"
+  },
+  {
+    "id": "smihir",
+    "name": "Sarangi Mihir",
+    "email": "smihir@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "anindya",
+    "name": "Sarkar Anindya",
+    "email": "anindya@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "arun",
+    "name": "Sarkar Arunjyoti",
+    "email": "arun@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "dsarkar",
+    "name": "Sarkar Debasis",
+    "email": "dsarkar@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "koraksarkar",
+    "name": "Sarkar Korak",
+    "email": "koraksarkar@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "nilmoni",
+    "name": "Sarkar Nilmoni",
+    "email": "nilmoni@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "sudeshna",
+    "name": "Sarkar Sudeshna",
+    "email": "sudeshna@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "bssastry",
+    "name": "Sastry B S",
+    "email": "bssastry@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "anvsatya",
+    "name": "Satyanarayana A N V",
+    "email": "anvsatya@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "trajasekhar",
+    "name": "Sekhar T Raja",
+    "email": "trajasekhar@maths.iitkgp.ac.in",
+    "department": "Mathematics"
+  },
+  {
+    "id": "amrita_sen",
+    "name": "Sen Amrita",
+    "email": "amrita.sen@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "debarati",
+    "name": "Sen Debarati",
+    "email": "debarati@gssst.iitkgp.ac.in",
+    "department": "G S Sanyal School of Telecommunications"
+  },
+  {
+    "id": "dsen",
+    "name": "Sen Debashis",
+    "email": "dsen@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "djsen",
+    "name": "Sen Dhrubajyoti",
+    "email": "djsen@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "indrani_sen",
+    "name": "Sen Indrani",
+    "email": "indrani.sen@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "isg",
+    "name": "Sengupta I",
+    "email": "isg@cse.iitkgp.ac.in",
+    "department": "Computer Science and Engineering"
+  },
+  {
+    "id": "probal",
+    "name": "Sengupta Probal",
+    "email": "probal@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "lis",
+    "name": "Sengupta S",
+    "email": "lis@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "ops",
+    "name": "Sha O   P",
+    "email": "ops@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "cshaji",
+    "name": "Shaji C",
+    "email": "cshaji@coral.iitkgp.ac.in",
+    "department": "CORAL"
+  },
+  {
+    "id": "uday",
+    "name": "Shankar Uday",
+    "email": "uday@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "abhishek",
+    "name": "Sharma A",
+    "email": "abhishek@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "spsharma",
+    "name": "Sharma S P",
+    "email": "spsharma@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "abshaw",
+    "name": "Shaw Amit",
+    "email": "abshaw@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "debdoot",
+    "name": "Sheet Debdoot",
+    "email": "debdoot@ee.iitkgp.ac.in",
+    "department": "Electrical Engineering"
+  },
+  {
+    "id": "shukla",
+    "name": "Shukla Pragya",
+    "email": "shukla@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "bksidhu",
+    "name": "Sidhu B K",
+    "email": "bksidhu@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "ajaymsidpara",
+    "name": "Sidpara A M",
+    "email": "ajaymsidpara@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "singh",
+    "name": "Singh A K",
+    "email": "singh@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "arun",
+    "name": "Singh Arun",
+    "email": "arun@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "bnsingh",
+    "name": "Singh B N",
+    "email": "bnsingh@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "chandrani",
+    "name": "Singh Chandrani",
+    "email": "chandrani@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "rsingh",
+    "name": "Singh Rajendra",
+    "email": "rsingh@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "sbs22",
+    "name": "Singh S B",
+    "email": "sbs22@metal.iitkgp.ac.in",
+    "department": "Metallurgical and Materials Engineering"
+  },
+  {
+    "id": "seema",
+    "name": "Singh Seema",
+    "email": "seema@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  },
+  {
+    "id": "aniket",
+    "name": "Singha Aniket",
+    "email": "aniket@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "masinha",
+    "name": "Sinha Manoranjan",
+    "email": "masinha@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "kalyanps",
+    "name": "Sinhamahapatra K P",
+    "email": "kalyanps@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "pps",
+    "name": "Srivastav P P",
+    "email": "pps@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "srivastava",
+    "name": "Srivastava D K",
+    "email": "srivastava@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sanjeev",
+    "name": "Srivastava S K",
+    "email": "sanjeev@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "subramanian",
+    "name": "Subramanian S",
+    "email": "subramanian@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "psundriyal",
+    "name": "Sundriyal P",
+    "email": "psundriyal@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "sunny",
+    "name": "Sunny M R",
+    "email": "sunny@aero.iitkgp.ac.in",
+    "department": "Aerospace Engineering"
+  },
+  {
+    "id": "swain",
+    "name": "Swain D K",
+    "email": "swain@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "swambabu",
+    "name": "Swambabu V",
+    "email": "swambabu@che.iitkgp.ac.in",
+    "department": "Chemical Engineering"
+  },
+  {
+    "id": "umarm",
+    "name": "Shyam Kumar M",
+    "email": "umarm@mech.iitkgp.ac.in",
+    "department": "Mechanical Engineering"
+  },
+  {
+    "id": "suchanataral",
+    "name": "Taral S",
+    "email": "suchanataral@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "arghya",
+    "name": "Taraphder A",
+    "email": "arghya@phy.iitkgp.ac.in",
+    "department": "Physics"
+  },
+  {
+    "id": "srabani",
+    "name": "Taraphder S",
+    "email": "srabani@chem.iitkgp.ac.in",
+    "department": "Chemistry"
+  },
+  {
+    "id": "narendran",
+    "name": "Thiruthy N",
+    "email": "narendran@rgsoipl.iitkgp.ac.in",
+    "department": "Rajiv Gandhi School of IP Law"
+  },
+  {
+    "id": "vareed",
+    "name": "Thomas   E V",
+    "email": "vareed@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "mktiwari9",
+    "name": "Tiwari M K",
+    "email": "mktiwari9@iem.iitkgp.ac.in",
+    "department": "Industrial and Systems Engineering"
+  },
+  {
+    "id": "punam",
+    "name": "Tripathy P P",
+    "email": "punam@agfe.iitkgp.ac.in",
+    "department": "Agricultural and Food Engineering"
+  },
+  {
+    "id": "dewashish",
+    "name": "Upadhyay D",
+    "email": "dewashish@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "vravikant",
+    "name": "Vadlamani R",
+    "email": "vravikant@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "ts",
+    "name": "Vats Nishant",
+    "email": "ts@gg.iitkgp.ac.in",
+    "department": "Geology and Geophysics"
+  },
+  {
+    "id": "skvarshney",
+    "name": "Varshney S K",
+    "email": "skvarshney@ece.iitkgp.ac.in",
+    "department": "Electronics and Electrical Communication"
+  },
+  {
+    "id": "akverma",
+    "name": "Verma A K",
+    "email": "akverma@mining.iitkgp.ac.in",
+    "department": "Mining Engineering"
+  },
+  {
+    "id": "shubha",
+    "name": "Verma Shubha",
+    "email": "shubha@civil.iitkgp.ac.in",
+    "department": "Civil Engineering"
+  },
+  {
+    "id": "kiran_vijayan",
+    "name": "Vijayan Kiran",
+    "email": "kiran.vijayan@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "warrior",
+    "name": "Warrior H V",
+    "email": "warrior@naval.iitkgp.ac.in",
+    "department": "Ocean Engineering and Naval Architecture"
+  },
+  {
+    "id": "yadavis",
+    "name": "Yadav I S",
+    "email": "yadavis@hss.iitkgp.ac.in",
+    "department": "Humanities and Social Sciences"
+  }
+]

@@ -8,6 +8,7 @@ import {
   fetchCourseData, updateModuleContent, fetchAdminAnalytics, 
   fetchFacultyRecords, fetchFacultyAttempts, resetAllDataToDefaults, addModule 
 } from './services/api';
+import mockFacultyData from './services/mock_faculty.json';
 
 export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
   const [activeTab, setActiveTab] = useState('completions'); // 'completions' | 'content'
@@ -161,17 +162,45 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
   };
 
   // Filter faculty records
-  const filteredFaculty = facultyList.filter(faculty => {
-    const matchesSearch = 
-      faculty.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      faculty.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      faculty.department.toLowerCase().includes(searchQuery.toLowerCase());
+  // Derive lists
+  // Enrolled are only those from DB (facultyList).
+  // For 'uncompleted', we want to show all from mock who haven't completed.
+  const enrolledFaculty = facultyList; // from DB
+  const uncompletedList = [
+    ...enrolledFaculty.filter(f => !f.isCompleted),
+    ...mockFacultyData.filter(m => !enrolledFaculty.find(e => e.email === m.email)).map(m => ({
+      ...m, totalModules: 3, completedModulesCount: 0, progressPercent: 0, totalAttempts: 0, isCompleted: false
+    }))
+  ];
 
-    if (!matchesSearch) return false;
-    if (statusFilter === 'completed') return faculty.isCompleted;
-    if (statusFilter === 'in-progress') return !faculty.isCompleted && faculty.completedModulesCount > 0;
-    return true;
+  let displayList = [];
+  if (statusFilter === 'all') {
+    displayList = enrolledFaculty;
+  } else if (statusFilter === 'completed') {
+    displayList = enrolledFaculty.filter(f => f.isCompleted);
+  } else if (statusFilter === 'in-progress') {
+    displayList = enrolledFaculty.filter(f => !f.isCompleted && f.completedModulesCount > 0);
+  } else if (statusFilter === 'uncompleted') {
+    displayList = uncompletedList;
+  }
+
+  const filteredFaculty = displayList.filter(faculty => {
+    if (!searchQuery) return true;
+    const searchLower = searchQuery.toLowerCase();
+    const matchesSearch = 
+      faculty.name.toLowerCase().includes(searchLower) || 
+      faculty.email.toLowerCase().includes(searchLower) || 
+      faculty.department.toLowerCase().includes(searchLower);
+    return matchesSearch;
   });
+
+  const groupedFaculty = {};
+  filteredFaculty.forEach(f => {
+    const dept = f.department || 'Unknown Department';
+    if (!groupedFaculty[dept]) groupedFaculty[dept] = [];
+    groupedFaculty[dept].push(f);
+  });
+  const sortedDepartments = Object.keys(groupedFaculty).sort();
 
   return (
     <div className="admin-container">
@@ -315,19 +344,25 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
                       className={`filter-pill ${statusFilter === 'all' ? 'active' : ''}`}
                       onClick={() => setStatusFilter('all')}
                     >
-                      All ({facultyList.length})
+                      All Enrolled ({enrolledFaculty.length})
                     </button>
                     <button 
                       className={`filter-pill ${statusFilter === 'completed' ? 'active' : ''}`}
                       onClick={() => setStatusFilter('completed')}
                     >
-                      Completed
+                      Completed ({enrolledFaculty.filter(f => f.isCompleted).length})
                     </button>
                     <button 
                       className={`filter-pill ${statusFilter === 'in-progress' ? 'active' : ''}`}
                       onClick={() => setStatusFilter('in-progress')}
                     >
-                      In Progress
+                      In Progress ({enrolledFaculty.filter(f => !f.isCompleted && f.completedModulesCount > 0).length})
+                    </button>
+                    <button 
+                      className={`filter-pill ${statusFilter === 'uncompleted' ? 'active' : ''}`}
+                      onClick={() => setStatusFilter('uncompleted')}
+                    >
+                      Uncompleted ({uncompletedList.length})
                     </button>
                   </div>
                 </div>
@@ -348,75 +383,84 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredFaculty.map(faculty => (
-                      <tr key={faculty.id}>
-                        <td>
-                          <div className="faculty-cell">
-                            <div className="faculty-avatar">
-                              {faculty.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                            </div>
-                            <div>
-                              <div className="faculty-name">{faculty.name}</div>
-                              <div className="faculty-email">{faculty.email}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <span className="dept-tag">{faculty.department}</span>
-                        </td>
-                        <td>
-                          <strong style={{ color: 'var(--text-main)' }}>
-                            {faculty.completedModulesCount} / {faculty.totalModules}
-                          </strong> Modules
-                        </td>
-                        <td style={{ minWidth: '160px' }}>
-                          <div className="progress-bar-wrap">
-                            <div className="progress-bar-bg">
-                              <div 
-                                className="progress-bar-fill" 
-                                style={{ 
-                                  width: `${faculty.progressPercent}%`,
-                                  backgroundColor: faculty.isCompleted ? '#16a34a' : '#2563eb'
-                                }}
-                              />
-                            </div>
-                            <span className="progress-bar-pct">{faculty.progressPercent}%</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="attempts-pill-badge">
-                            <RotateCcw size={13} />
-                            <span><strong>{faculty.totalAttempts}</strong> attempts</span>
-                          </div>
-                        </td>
-                        <td>
-                          {faculty.isCompleted ? (
-                            <span className="status-badge status-completed">
-                              <CheckCircle size={14} /> Certified Complete
-                            </span>
-                          ) : faculty.completedModulesCount > 0 ? (
-                            <span className="status-badge status-progress">
-                              <Clock size={14} /> In Progress
-                            </span>
-                          ) : (
-                            <span className="status-badge status-notstarted">
-                              Not Started
-                            </span>
-                          )}
-                        </td>
-                        <td style={{ textAlign: 'right' }}>
-                          <button 
-                            className="btn btn-outline btn-sm"
-                            onClick={() => handleOpenAttempts(faculty)}
-                            title="Inspect module-by-module assessment attempts and timestamps"
-                          >
-                            <Eye size={14} /> View Attempt History
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-
-                    {filteredFaculty.length === 0 && (
+                    {sortedDepartments.length > 0 ? (
+                      sortedDepartments.map(dept => (
+                        <React.Fragment key={dept}>
+                          <tr style={{ background: '#f8fafc' }}>
+                            <td colSpan="7" style={{ padding: '12px 24px', borderTop: '2px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
+                              <h4 style={{ margin: 0, color: 'var(--primary)', fontSize: '15px' }}>{dept} <span style={{color: 'var(--text-muted)', fontWeight: 'normal', fontSize: '13px', marginLeft: '8px'}}>({groupedFaculty[dept].length} faculty)</span></h4>
+                            </td>
+                          </tr>
+                          {groupedFaculty[dept].map(faculty => (
+                            <tr key={faculty.id}>
+                              <td>
+                                <div className="faculty-cell">
+                                  <div className="faculty-avatar">
+                                    {faculty.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                                  </div>
+                                  <div>
+                                    <div className="faculty-name">{faculty.name}</div>
+                                    <div className="faculty-email">{faculty.email}</div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span className="dept-tag">{faculty.department}</span>
+                              </td>
+                              <td>
+                                <strong style={{ color: 'var(--text-main)' }}>
+                                  {faculty.completedModulesCount} / {faculty.totalModules}
+                                </strong> Modules
+                              </td>
+                              <td style={{ minWidth: '160px' }}>
+                                <div className="progress-bar-wrap">
+                                  <div className="progress-bar-bg">
+                                    <div 
+                                      className="progress-bar-fill" 
+                                      style={{ 
+                                        width: `${faculty.progressPercent}%`,
+                                        backgroundColor: faculty.isCompleted ? '#16a34a' : '#2563eb'
+                                      }}
+                                    />
+                                  </div>
+                                  <span className="progress-bar-pct">{faculty.progressPercent}%</span>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="attempts-pill-badge">
+                                  <RotateCcw size={13} />
+                                  <span><strong>{faculty.totalAttempts}</strong> attempts</span>
+                                </div>
+                              </td>
+                              <td>
+                                {faculty.isCompleted ? (
+                                  <span className="status-badge status-completed">
+                                    <CheckCircle size={14} /> Certified Complete
+                                  </span>
+                                ) : faculty.completedModulesCount > 0 ? (
+                                  <span className="status-badge status-progress">
+                                    <Clock size={14} /> In Progress
+                                  </span>
+                                ) : (
+                                  <span className="status-badge status-notstarted">
+                                    Not Started
+                                  </span>
+                                )}
+                              </td>
+                              <td style={{ textAlign: 'right' }}>
+                                <button 
+                                  className="btn btn-outline btn-sm"
+                                  onClick={() => handleOpenAttempts(faculty)}
+                                  title="Inspect module-by-module assessment attempts and timestamps"
+                                >
+                                  <Eye size={14} /> View Attempt History
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </React.Fragment>
+                      ))
+                    ) : (
                       <tr>
                         <td colSpan="7" style={{ textAlign: 'center', padding: '48px', color: 'var(--text-muted)' }}>
                           No faculty members match the selected filter or search query.

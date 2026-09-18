@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { 
   BookOpen, CheckCircle, LogOut, ArrowLeft, 
-  ChevronDown, ChevronRight, PlayCircle, FileText, Award 
+  ChevronDown, ChevronRight, PlayCircle, FileText, Award, AlertCircle
 } from 'lucide-react';
 import CoursePlayer from './CoursePlayer';
-import { fetchCourseData, fetchUserProgress, updateUserProgressApi } from './services/api';
+import { 
+  fetchCourseData, fetchUserProgress, updateUserProgressApi, 
+  fetchCourseNote, saveCourseNote, submitQuery
+} from './services/api';
 
-export default function Dashboard({ user, onLogout }) {
+export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
   const [currentView, setCurrentView] = useState('browse'); // 'browse', 'completed', 'course'
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [activeModule, setActiveModule] = useState(null);
@@ -14,6 +17,13 @@ export default function Dashboard({ user, onLogout }) {
   
   const [courseData, setCourseData] = useState(null);
   const [progress, setProgress] = useState({});
+
+  // Notes & Queries State
+  const [notesText, setNotesText] = useState('');
+  const [isSavingNote, setIsSavingNote] = useState(false);
+  const [queryText, setQueryText] = useState('');
+  const [isSubmittingQuery, setIsSubmittingQuery] = useState(false);
+  const [courseMainView, setCourseMainView] = useState('player'); // 'player', 'notes', 'queries'
 
   useEffect(() => {
     async function loadData() {
@@ -34,12 +44,35 @@ export default function Dashboard({ user, onLogout }) {
       if (user?.id) {
         const userProg = await fetchUserProgress(user.id, course.id || 'c1');
         setProgress({ ...initialProgress, ...userProg });
+        
+        const note = await fetchCourseNote(user.id, course.id || 'c1');
+        setNotesText(note);
       } else {
         setProgress(initialProgress);
       }
     }
     loadData();
   }, [user]);
+
+  const handleSaveNote = async () => {
+    if (!user?.id || !selectedCourse) return;
+    setIsSavingNote(true);
+    await saveCourseNote(user.id, selectedCourse.id, notesText);
+    setIsSavingNote(false);
+  };
+
+  const handleSubmitQuery = async () => {
+    if (!user?.id || !selectedCourse || !queryText.trim()) return;
+    setIsSubmittingQuery(true);
+    const success = await submitQuery(user.id, queryText, selectedCourse.id);
+    setIsSubmittingQuery(false);
+    if (success) {
+      setQueryText('');
+      alert('Your query has been submitted successfully.');
+    } else {
+      alert('Failed to submit query. Please try again later.');
+    }
+  };
 
   const coursesList = courseData ? [courseData] : [];
 
@@ -48,6 +81,7 @@ export default function Dashboard({ user, onLogout }) {
     if (progress[modKey]?.unlocked) {
       setActiveModule({ courseId, modNum, modKey });
       setExpandedModules(prev => ({ ...prev, [modNum]: true }));
+      setCourseMainView('player');
     }
   };
 
@@ -106,6 +140,7 @@ export default function Dashboard({ user, onLogout }) {
     setCurrentView('browse');
     setSelectedCourse(null);
     setActiveModule(null);
+    setCourseMainView('player');
   };
 
   // --- RENDER SIDEBAR ---
@@ -124,12 +159,12 @@ export default function Dashboard({ user, onLogout }) {
             <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)' }}>{selectedCourse.totalModules} Modules</p>
           </div>
 
-          <div className="nav-section" style={{ flex: 1, padding: '0 16px', overflowY: 'auto' }}>
+          <div className="nav-section" style={{ flex: 1, padding: '16px 16px 80px 16px', overflowY: 'auto' }}>
             {Object.keys(selectedCourse.modules || {}).map(Number).sort((a,b)=>a-b).map(modNum => {
               const modKey = `${selectedCourse.id}-m${modNum}`;
               const modData = progress[modKey] || { unlocked: modNum === 1, passed: false };
               const isExpanded = expandedModules[modNum];
-              const isActiveMod = activeModule?.modKey === modKey;
+              const isActiveMod = activeModule?.modKey === modKey && courseMainView === 'player';
               const isLocked = !modData.unlocked;
 
               return (
@@ -175,6 +210,23 @@ export default function Dashboard({ user, onLogout }) {
                 </div>
               );
             })}
+
+            <div style={{ borderTop: '1px solid var(--border-color)', margin: '16px 0', paddingTop: '16px' }}>
+              <div 
+                className={`nav-item ${courseMainView === 'notes' ? 'active' : ''}`}
+                onClick={() => setCourseMainView('notes')}
+                style={{ padding: '12px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', background: courseMainView === 'notes' ? '#f4f4f5' : 'transparent', color: courseMainView === 'notes' ? 'var(--primary)' : 'var(--text-main)', fontWeight: courseMainView === 'notes' ? '600' : '500' }}
+              >
+                <FileText size={18} /> Course Notes
+              </div>
+              <div 
+                className={`nav-item ${courseMainView === 'queries' ? 'active' : ''}`}
+                onClick={() => setCourseMainView('queries')}
+                style={{ padding: '12px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', background: courseMainView === 'queries' ? '#f4f4f5' : 'transparent', color: courseMainView === 'queries' ? 'var(--primary)' : 'var(--text-main)', fontWeight: courseMainView === 'queries' ? '600' : '500' }}
+              >
+                <AlertCircle size={18} /> Queries & Complaints
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -219,28 +271,80 @@ export default function Dashboard({ user, onLogout }) {
 
   // --- RENDER MAIN AREA ---
   const renderMainArea = () => {
-    if (currentView === 'course' && activeModule && selectedCourse) {
-      const currentModuleInfo = courseData?.modules?.[activeModule.modNum];
+    if (currentView === 'course' && selectedCourse) {
+      if (courseMainView === 'notes') {
+        return (
+          <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <h1 style={{ marginBottom: '8px' }}>Course Notes</h1>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Write your personal notes for {selectedCourse.title}. They will be saved securely to your profile.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '60vh' }}>
+              <textarea 
+                value={notesText}
+                onChange={(e) => setNotesText(e.target.value)}
+                style={{ flex: 1, padding: '24px', border: '1px solid var(--border-color)', borderRadius: '12px', resize: 'none', fontFamily: 'inherit', fontSize: '16px', lineHeight: '1.6' }}
+                placeholder="Start typing your notes here..."
+              />
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <button className="btn btn-primary" onClick={handleSaveNote} disabled={isSavingNote} style={{ padding: '12px 32px' }}>
+                  {isSavingNote ? 'Saving...' : 'Save Notes'}
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (courseMainView === 'queries') {
+        return (
+          <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <h1 style={{ marginBottom: '8px' }}>Queries & Complaints</h1>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Have a complaint or a question about {selectedCourse.title}? Submit a query below and the academic office will be notified.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '50vh' }}>
+              <textarea 
+                value={queryText}
+                onChange={(e) => setQueryText(e.target.value)}
+                style={{ flex: 1, padding: '24px', border: '1px solid var(--border-color)', borderRadius: '12px', resize: 'none', fontFamily: 'inherit', fontSize: '16px', lineHeight: '1.6' }}
+                placeholder="Describe your issue or query..."
+              />
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <button className="btn btn-primary" onClick={handleSubmitQuery} disabled={isSubmittingQuery || !queryText.trim()} style={{ padding: '12px 32px' }}>
+                  {isSubmittingQuery ? 'Submitting...' : 'Submit Query'}
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (courseMainView === 'player' && activeModule) {
+        const currentModuleInfo = courseData?.modules?.[activeModule.modNum];
+        return (
+          <CoursePlayer 
+            moduleKey={activeModule.modKey} 
+            moduleNum={activeModule.modNum}
+            courseTitle={selectedCourse.title}
+            moduleData={progress[activeModule.modKey]}
+            moduleInfo={currentModuleInfo}
+            userId={user.id}
+            courseId={selectedCourse.id}
+            isPreviewMode={isPreviewMode}
+            updateProgress={updateModuleProgress}
+            onNextModule={() => {
+              const nextMod = activeModule.modNum + 1;
+              if (nextMod <= selectedCourse.totalModules) {
+                handleModuleClick(selectedCourse.id, nextMod);
+              } else {
+                handleGoBack();
+              }
+            }}
+          />
+        );
+      }
 
       return (
-        <CoursePlayer 
-          moduleKey={activeModule.modKey} 
-          moduleNum={activeModule.modNum}
-          courseTitle={selectedCourse.title}
-          moduleData={progress[activeModule.modKey]}
-          moduleInfo={currentModuleInfo}
-          userId={user.id}
-          courseId={selectedCourse.id}
-          updateProgress={updateModuleProgress}
-          onNextModule={() => {
-            const nextMod = activeModule.modNum + 1;
-            if (nextMod <= selectedCourse.totalModules) {
-              handleModuleClick(selectedCourse.id, nextMod);
-            } else {
-              handleGoBack();
-            }
-          }}
-        />
+        <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>
+          <h2>Select a module from the sidebar to begin.</h2>
+        </div>
       );
     }
 
