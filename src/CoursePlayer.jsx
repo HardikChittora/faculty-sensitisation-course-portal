@@ -396,8 +396,7 @@ export default function CoursePlayer({
                     controls: 0, 
                     disablekb: 1,
                     rel: 0,
-                    modestbranding: 1,
-                    end: 10
+                    modestbranding: 1
                   }
                 }}
               />

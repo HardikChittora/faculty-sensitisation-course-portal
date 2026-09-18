@@ -150,6 +150,37 @@ export async function updateModuleContent(courseId, modNum, updates) {
   return null;
 }
 
+export async function addModule(courseId) {
+  try {
+    const res = await fetch(`${API_BASE}/courses/${courseId}/modules`, {
+      method: 'POST'
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.module;
+    }
+  } catch (e) {
+    // fallback
+  }
+
+  const cached = localStorage.getItem(LOCAL_STORAGE_KEY_COURSE);
+  const course = cached ? JSON.parse(cached) : JSON.parse(JSON.stringify(DEFAULT_COURSE));
+  const nextNum = (course.totalModules || Object.keys(course.modules).length) + 1;
+  const newMod = {
+    id: `${courseId}-m${nextNum}`,
+    moduleNum: nextNum,
+    title: `New Module ${nextNum}`,
+    description: 'Enter module description here',
+    videoId: 'jNQXAC9IVRw',
+    passingThreshold: 80,
+    quiz: []
+  };
+  course.modules[nextNum] = newMod;
+  course.totalModules = nextNum;
+  localStorage.setItem(LOCAL_STORAGE_KEY_COURSE, JSON.stringify(course));
+  return newMod;
+}
+
 export async function fetchAdminAnalytics() {
   try {
     const res = await fetch(`${API_BASE}/admin/analytics`);

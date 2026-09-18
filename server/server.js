@@ -163,6 +163,19 @@ app.put('/api/courses/:courseId/modules/:moduleNum', async (req, res) => {
   }
 });
 
+app.post('/api/courses/:courseId/modules', async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const newMod = await dbManager.addModule(courseId);
+    if (!newMod) {
+      return res.status(500).json({ error: 'Failed to create new module' });
+    }
+    res.json({ message: 'Module created successfully', module: newMod });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to create module' });
+  }
+});
+
 // --- Admin Analytics & Attempts Drilldown ---
 app.get('/api/admin/faculty-records', async (req, res) => {
   try {

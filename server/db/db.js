@@ -223,6 +223,41 @@ class DatabaseManager {
     return null;
   }
 
+  async addModule(courseId) {
+    await this.ready();
+    if (this.usePostgres) {
+      try {
+        const res = await this.pool.query(`SELECT MAX(module_num) as max_num FROM modules WHERE course_id = $1`, [courseId]);
+        const nextNum = (res.rows[0].max_num || 0) + 1;
+        const newModId = `${courseId}-m${nextNum}`;
+
+        await this.pool.query(
+          `INSERT INTO modules (id, course_id, module_num, title, description, youtube_video_id, passing_threshold) 
+           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [newModId, courseId, nextNum, `New Module ${nextNum}`, 'Enter module description here', 'jNQXAC9IVRw', 80]
+        );
+
+        await this.pool.query(
+          `UPDATE courses SET total_modules = $1 WHERE id = $2`,
+          [nextNum, courseId]
+        );
+
+        return {
+          id: newModId,
+          moduleNum: nextNum,
+          title: `New Module ${nextNum}`,
+          description: 'Enter module description here',
+          videoId: 'jNQXAC9IVRw',
+          passingThreshold: 80,
+          quiz: []
+        };
+      } catch (err) {
+        console.error('[DB] addModule query failed:', err.message);
+      }
+    }
+    return null;
+  }
+
   // --- OTP APIs ---
   async saveOtp(email, otp, expiresAt) {
     await this.ready();

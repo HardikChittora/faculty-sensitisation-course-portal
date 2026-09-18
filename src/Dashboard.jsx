@@ -13,19 +13,29 @@ export default function Dashboard({ user, onLogout }) {
   const [expandedModules, setExpandedModules] = useState({ 1: true });
   
   const [courseData, setCourseData] = useState(null);
-  const [progress, setProgress] = useState({
-    'c1-m1': { unlocked: true, passed: false, videoWatched: false, maxTimeWatched: 0 },
-    'c1-m2': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-    'c1-m3': { unlocked: false, passed: false, videoWatched: false, maxTimeWatched: 0 },
-  });
+  const [progress, setProgress] = useState({});
 
   useEffect(() => {
     async function loadData() {
       const course = await fetchCourseData();
       setCourseData(course);
+      
+      let initialProgress = {};
+      const totalMods = course.totalModules || Object.keys(course.modules || {}).length || 3;
+      for (let i = 1; i <= totalMods; i++) {
+        initialProgress[`${course.id || 'c1'}-m${i}`] = { 
+          unlocked: i === 1, 
+          passed: false, 
+          videoWatched: false, 
+          maxTimeWatched: 0 
+        };
+      }
+
       if (user?.id) {
         const userProg = await fetchUserProgress(user.id, course.id || 'c1');
-        setProgress(userProg);
+        setProgress({ ...initialProgress, ...userProg });
+      } else {
+        setProgress(initialProgress);
       }
     }
     loadData();
@@ -115,7 +125,7 @@ export default function Dashboard({ user, onLogout }) {
           </div>
 
           <div className="nav-section" style={{ flex: 1, padding: '0 16px', overflowY: 'auto' }}>
-            {[1, 2, 3].map(modNum => {
+            {Object.keys(selectedCourse.modules || {}).map(Number).sort((a,b)=>a-b).map(modNum => {
               const modKey = `${selectedCourse.id}-m${modNum}`;
               const modData = progress[modKey] || { unlocked: modNum === 1, passed: false };
               const isExpanded = expandedModules[modNum];

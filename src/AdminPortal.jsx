@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { 
   fetchCourseData, updateModuleContent, fetchAdminAnalytics, 
-  fetchFacultyRecords, fetchFacultyAttempts, resetAllDataToDefaults 
+  fetchFacultyRecords, fetchFacultyAttempts, resetAllDataToDefaults, addModule 
 } from './services/api';
 
 export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
@@ -72,7 +72,6 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
     }
   };
 
-  // Content Management: Save Module
   const handleSaveModule = async () => {
     if (!editingModule) return;
     setSaving(true);
@@ -87,6 +86,20 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
       alert('Failed to save module: ' + err.message);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleAddModule = async () => {
+    if (window.confirm('Are you sure you want to add a new module?')) {
+      try {
+        const newMod = await addModule('c1');
+        const updatedCourse = await fetchCourseData();
+        setCourseData(updatedCourse);
+        setSelectedModNum(newMod.moduleNum);
+        alert(`Module ${newMod.moduleNum} added successfully!`);
+      } catch (err) {
+        alert('Failed to add module: ' + err.message);
+      }
     }
   };
 
@@ -435,7 +448,7 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
                   <p className="card-subtitle-sm">Select a module to edit its video lecture and assessment quiz.</p>
 
                   <div className="module-selector-list">
-                    {[1, 2, 3].map(mNum => {
+                    {Object.keys(courseData?.modules || {}).map(Number).sort((a,b)=>a-b).map(mNum => {
                       const mod = courseData?.modules?.[mNum];
                       const isSelected = selectedModNum === mNum;
                       return (
@@ -452,6 +465,16 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
                         </div>
                       );
                     })}
+                  </div>
+
+                  <div style={{ marginTop: '16px' }}>
+                    <button 
+                      className="btn btn-primary" 
+                      style={{ width: '100%', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                      onClick={handleAddModule}
+                    >
+                      <Plus size={16} /> Add Module
+                    </button>
                   </div>
 
                   <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
