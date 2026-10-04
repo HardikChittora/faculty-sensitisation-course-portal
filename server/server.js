@@ -80,15 +80,22 @@ app.post('/api/auth/request-otp', async (req, res) => {
     console.log(`[OTP] Generated for ${fullEmail}: ${otp}`);
 
     if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      await transporter.sendMail({
-        from: `"Faculty Portal" <${process.env.SMTP_USER}>`,
-        to: fullEmail,
-        subject: 'Your Login Verification Code - Faculty Portal',
-        html: `<p>Your verification code for the Faculty Sensitisation Portal is:</p>
-               <h2 style="font-size:36px;letter-spacing:8px;">${otp}</h2>
-               <p>This code will expire in 5 minutes. Do not share it with anyone.</p>`
-      });
-      console.log(`[OTP] Email sent via SMTP to ${fullEmail}`);
+      try {
+        await transporter.sendMail({
+          from: `"Faculty Portal" <${process.env.SMTP_USER}>`,
+          to: fullEmail,
+          subject: 'Your Login Verification Code - Faculty Portal',
+          html: `<p>Your verification code for the Faculty Sensitisation Portal is:</p>
+                 <h2 style="font-size:36px;letter-spacing:8px;">${otp}</h2>
+                 <p>This code will expire in 5 minutes. Do not share it with anyone.</p>`
+        });
+        console.log(`[OTP] Email sent via SMTP to ${fullEmail}`);
+      } catch (emailErr) {
+        // Email failed (e.g. SMTP port blocked) but OTP is saved in DB
+        // Log OTP to console as fallback so it can be retrieved from server logs
+        console.error(`[OTP] WARNING: Email delivery failed: ${emailErr.message}`);
+        console.warn(`[OTP] FALLBACK - Code for ${fullEmail} is: ${otp} (valid 5 mins)`);
+      }
     } else {
       console.warn('[OTP] SMTP credentials missing. OTP logged to console only:', otp);
     }
