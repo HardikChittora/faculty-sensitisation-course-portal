@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import YouTube from 'react-youtube';
-import { AlertCircle, CheckCircle, Play, Pause, Volume2, VolumeX, ArrowRight, RotateCcw } from 'lucide-react';
+import Plyr from 'plyr-react';
+import 'plyr-react/plyr.css';
+import { AlertCircle, CheckCircle, Play, ArrowRight, RotateCcw } from 'lucide-react';
 import { recordQuizAttempt } from './services/api';
 
 const DEFAULT_QUIZ_QUESTIONS = [
@@ -31,13 +32,6 @@ const DEFAULT_QUIZ_QUESTIONS = [
   }
 ];
 
-function formatTime(seconds) {
-  if (!seconds || isNaN(seconds)) return "0:00";
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${s < 10 ? '0' : ''}${s}`;
-}
-
 export default function CoursePlayer({ 
   moduleKey, 
   moduleNum, 
@@ -62,17 +56,9 @@ export default function CoursePlayer({
   const [answers, setAnswers] = useState(Array(activeQuestions.length).fill(null));
   const [score, setScore] = useState(0);
 
-  // Custom Controls State
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(100);
-  const [isMuted, setIsMuted] = useState(false);
-  const [playbackRate, setPlaybackRate] = useState(1);
-
-  const intervalRef = useRef(null);
-  const playerRef = useRef(null);
+  const plyrRef = useRef(null);
   const maxTimeRef = useRef(moduleData?.maxTimeWatched || 0);
+  const hasEndedRef = useRef(false);
 
   // Reset state on module switch
   useEffect(() => {
@@ -81,114 +67,111 @@ export default function CoursePlayer({
     setAnswers(Array(activeQuestions.length).fill(null));
     setScore(moduleData?.passed ? activeQuestions.length : 0);
     maxTimeRef.current = moduleData?.maxTimeWatched || 0;
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+    hasEndedRef.current = false;
   }, [moduleKey, moduleData?.passed, activeQuestions.length]);
 
   useEffect(() => {
     maxTimeRef.current = moduleData?.maxTimeWatched || 0;
   }, [moduleData?.maxTimeWatched]);
 
-  const onPlayerReady = (event) => {
-    playerRef.current = event.target;
-    try {
-      const realDur = playerRef.current.getDuration();
-      setDuration(realDur > 0 ? realDur : (moduleInfo?.durationSeconds || 600));
-      setVolume(playerRef.current.getVolume());
-      setIsMuted(playerRef.current.isMuted());
-      setPlaybackRate(playerRef.current.getPlaybackRate());
-    } catch (e) {
-      console.error(e);
-      setDuration(moduleInfo?.durationSeconds || 600);
-    }
-    
-    if (moduleData?.maxTimeWatched > 0 && !moduleData?.passed) {
-      playerRef.current.seekTo(moduleData.maxTimeWatched);
-      setCurrentTime(moduleData.maxTimeWatched);
-    }
-  };
+  useEffect(() => {
+    const player = plyrRef.current?.plyr;
+    if (!player || typeof player.on !== 'function') return;
 
-  const onStateChange = (event) => {
-    const player = event.target;
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+    const timeUpdateHandler = () => {
+      if (player.seeking || hasEndedRef.current) return;
+      
+      const currentTime = player.currentTime;
+      const currentSpeed = player.speed || 1;
+      const allowedBuffer = Math.max(4, currentSpeed * 2.5);
 
-    if (event.data === YouTube.PlayerState.PLAYING) {
-      setIsPlaying(true);
-      intervalRef.current = setInterval(() => {
-        const timeNow = player.getCurrentTime();
-        setCurrentTime(timeNow);
-        
-        const currentSpeed = player.getPlaybackRate() || 1;
-        const allowedBuffer = Math.max(4, currentSpeed * 2.5); 
-        
-        if (timeNow > maxTimeRef.current + allowedBuffer) {
-          player.seekTo(maxTimeRef.current);
-        } else {
-          maxTimeRef.current = Math.max(maxTimeRef.current, timeNow);
-          updateProgress(moduleKey, { maxTimeWatched: maxTimeRef.current });
+      if (currentTime > maxTimeRef.current + allowedBuffer && !moduleData?.passed) {
+        player.currentTime = maxTimeRef.current;
+      } else {
+        if (currentTime > maxTimeRef.current) {
+          maxTimeRef.current = currentTime;
+          if (Math.floor(currentTime) % 5 === 0) {
+            updateProgress(moduleKey, { maxTimeWatched: maxTimeRef.current });
+          }
         }
-      }, 1000);
-    } else {
-      setIsPlaying(false);
-      setCurrentTime(player.getCurrentTime());
-    }
-  };
-
-  const onEnd = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    setIsPlaying(false);
-    updateProgress(moduleKey, { videoWatched: true });
-  };
-
-  // --- CONTROL ACTIONS ---
-  const togglePlayPause = () => {
-    if (playerRef.current) {
-      if (isPlaying) playerRef.current.pauseVideo();
-      else playerRef.current.playVideo();
-    }
-  };
-
-  const toggleMute = () => {
-    if (!playerRef.current) return;
-    if (isMuted) {
-      playerRef.current.unMute();
-      setIsMuted(false);
-      if (volume === 0) {
-        setVolume(50);
-        playerRef.current.setVolume(50);
       }
-    } else {
-      playerRef.current.mute();
-      setIsMuted(true);
-    }
+
+      // Robust end detection for YouTube
+      if (player.duration > 0 && (player.duration - currentTime) <= 2 && !hasEndedRef.current) {
+        endedHandler();
+      }
+    };
+
+    const seekingHandler = () => {
+      if (moduleData?.passed) return;
+      if (player.currentTime > maxTimeRef.current + 2) {
+         player.currentTime = maxTimeRef.current;
+      }
+    };
+
+    const endedHandler = () => {
+      hasEndedRef.current = true;
+      updateProgress(moduleKey, { videoWatched: true, maxTimeWatched: maxTimeRef.current });
+    };
+
+    const readyHandler = () => {
+      if (moduleData?.maxTimeWatched > 0 && !moduleData?.passed) {
+        player.currentTime = moduleData.maxTimeWatched;
+      }
+    };
+
+    player.on('timeupdate', timeUpdateHandler);
+    player.on('seeking', seekingHandler);
+    player.on('ended', endedHandler);
+    player.on('ready', readyHandler);
+
+    return () => {
+      if (typeof player.off === 'function') {
+        player.off('timeupdate', timeUpdateHandler);
+        player.off('seeking', seekingHandler);
+        player.off('ended', endedHandler);
+        player.off('ready', readyHandler);
+      }
+    };
+  }, [moduleKey, moduleData?.passed]);
+
+  const startQuiz = () => {
+    setQuizState('taking');
   };
 
-  const handleVolumeChange = (e) => {
-    if (!playerRef.current) return;
-    const val = Number(e.target.value);
-    setVolume(val);
-    playerRef.current.setVolume(val);
-    
-    if (val === 0 && !isMuted) {
-      playerRef.current.mute();
-      setIsMuted(true);
-    } else if (val > 0 && isMuted) {
-      playerRef.current.unMute();
-      setIsMuted(false);
-    }
+  const videoIds = {
+    1: 'jNQXAC9IVRw', 
+    2: 'M7lc1UVf-VE', 
+    3: 'tPEE9ZwTmy0'
   };
 
-  const handleSpeedChange = (e) => {
-    if (!playerRef.current) return;
-    const rate = Number(e.target.value);
-    setPlaybackRate(rate);
-    playerRef.current.setPlaybackRate(rate);
-  };
+  const currentVideoId = moduleInfo?.videoId || videoIds[moduleNum] || 'jNQXAC9IVRw';
+
+  const plyrSource = React.useMemo(() => ({
+    type: 'video',
+    sources: [
+      {
+        src: currentVideoId,
+        provider: 'youtube',
+      },
+    ],
+    tracks: [
+      {
+        kind: 'captions',
+        label: 'English',
+        srclang: 'en',
+        src: 'data:text/vtt;base64,V0VCVlRUDQoNCjENCjAwOjAwOjAwLjAwMCAtPiAwMDowMDoxMC4wMDANCihDYXB0aW9ucyB0b2dnbGVkKQ0K',
+        default: false
+      }
+    ]
+  }), [currentVideoId]);
+
+  const plyrOptions = React.useMemo(() => ({
+    controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
+    settings: ['captions', 'quality', 'speed', 'loop'],
+    captions: { active: false, update: true, language: 'en' },
+    youtube: { noCookie: false, rel: 0, showinfo: 0, iv_load_policy: 3, modestbranding: 1, cc_load_policy: 1 }
+  }), []);
 
   // --- QUIZ LOGIC ---
   const handleAnswerSelect = (optIdx) => {
@@ -203,7 +186,6 @@ export default function CoursePlayer({
     if (currentQuestionIdx < activeQuestions.length - 1) {
       setCurrentQuestionIdx(prev => prev + 1);
     } else {
-      // Evaluate score
       let calculatedScore = 0;
       activeQuestions.forEach((q, idx) => {
         if (answers[idx] === q.correct) {
@@ -215,7 +197,6 @@ export default function CoursePlayer({
       const percentage = (calculatedScore / activeQuestions.length) * 100;
       const passed = percentage >= passingThreshold;
       
-      // Record attempt into database/attempts log
       recordQuizAttempt({
         userId: userId || '123',
         courseId: courseId || 'c1',
@@ -241,26 +222,19 @@ export default function CoursePlayer({
     setScore(0);
     maxTimeRef.current = 0;
     updateProgress(moduleKey, { videoWatched: false, maxTimeWatched: 0, passed: false });
-    if (playerRef.current) {
-      playerRef.current.seekTo(0);
-      setCurrentTime(0);
-      playerRef.current.playVideo();
+    
+    const player = plyrRef.current?.plyr;
+    if (player && typeof player.play === 'function') {
+      player.currentTime = 0;
+      player.play();
     }
   };
 
-  const startQuiz = () => {
-    setQuizState('taking');
+  const onEndPreview = () => {
+    hasEndedRef.current = true;
+    updateProgress(moduleKey, { videoWatched: true });
   };
 
-  const videoIds = {
-    1: 'jNQXAC9IVRw', 
-    2: 'M7lc1UVf-VE', 
-    3: 'tPEE9ZwTmy0'
-  };
-
-  const currentVideoId = moduleInfo?.videoId || videoIds[moduleNum] || 'jNQXAC9IVRw';
-
-  // --- RENDER HELPERS ---
   const renderQuizContent = () => {
     if (quizState === 'taking') {
       const question = activeQuestions[currentQuestionIdx];
@@ -362,7 +336,7 @@ export default function CoursePlayer({
   };
 
   return (
-    <div>
+    <div className="course-player-container">
       <div className="content-header">
         <div>
           <h1>Module {moduleNum}: {moduleInfo?.title || ''}</h1>
@@ -378,94 +352,26 @@ export default function CoursePlayer({
       )}
 
       {(quizState === 'idle' || quizState === 'passed') && (
-        <>
-          {/* Video with Custom Controls */}
-          <div style={{ background: '#0f172a', border: '1px solid var(--border-color)', borderRadius: '4px', overflow: 'hidden', marginBottom: '32px' }}>
-            
-            <div className="video-wrapper">
-              <YouTube
-                videoId={currentVideoId}
-                onReady={onPlayerReady}
-                onStateChange={onStateChange}
-                onEnd={onEnd}
-                className="youtube-container"
-                iframeClassName="youtube-iframe"
-                opts={{
-                  width: '100%',
-                  height: '100%',
-                  playerVars: {
-                    controls: 0, 
-                    disablekb: 1,
-                    rel: 0,
-                    modestbranding: 1
-                  }
-                }}
+          <>
+            {!moduleData?.passed && (
+              <style>
+                {`.plyr-no-skip .plyr__progress { pointer-events: none !important; opacity: 0.9; }`}
+              </style>
+            )}
+            {/* Plyr Video Player */}
+            <div className={!moduleData?.passed ? 'plyr-no-skip' : ''} style={{ background: '#0f172a', border: '1px solid var(--border-color)', borderRadius: '8px', overflow: 'hidden', margin: '0 auto 32px auto', width: '100%', maxWidth: 'calc(70vh * 16 / 9)' }}>
+              <Plyr 
+                ref={plyrRef} 
+                source={plyrSource} 
+                options={plyrOptions} 
               />
             </div>
-            
-            {/* Read-Only Playbar */}
-            <div style={{ display: 'flex', alignItems: 'center', padding: '12px 20px', gap: '16px', color: '#fff', flexWrap: 'wrap' }}>
-              <button 
-                onClick={togglePlayPause}
-                style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
-              </button>
-              
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <button onClick={toggleMute} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px', display: 'flex' }}>
-                  {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </button>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="100" 
-                  value={isMuted ? 0 : volume} 
-                  onChange={handleVolumeChange} 
-                  style={{ width: '60px', accentColor: '#fff', cursor: 'pointer' }}
-                />
-              </div>
-
-              <div style={{ fontSize: '13px', fontFamily: 'monospace', color: '#94a3b8', marginLeft: 'auto' }}>
-                {formatTime(currentTime)}
-              </div>
-              
-              <div style={{ flex: 1, minWidth: '100px', height: '6px', background: '#334155', borderRadius: '3px', overflow: 'hidden' }}>
-                <div 
-                  style={{ 
-                    height: '100%', 
-                    background: '#fff', 
-                    width: `${duration > 0 ? Math.min((currentTime / duration) * 100, 100) : 0}%`,
-                    transition: 'width 0.2s linear'
-                  }} 
-                />
-              </div>
-              
-              <div style={{ fontSize: '13px', fontFamily: 'monospace', color: '#94a3b8' }}>
-                {formatTime(duration)}
-              </div>
-
-              <select 
-                value={playbackRate} 
-                onChange={handleSpeedChange}
-                style={{ 
-                  background: '#1e293b', color: '#fff', border: '1px solid #334155', 
-                  borderRadius: '4px', padding: '4px 8px', fontSize: '13px', cursor: 'pointer' 
-                }}
-              >
-                <option value={0.5}>0.5x</option>
-                <option value={1}>1.0x</option>
-                <option value={1.5}>1.5x</option>
-                <option value={2}>2.0x</option>
-              </select>
-            </div>
-          </div>
 
           {isPreviewMode && !moduleData?.passed && quizState === 'idle' && !moduleData?.videoWatched && (
             <div style={{ padding: '0 0 24px 0', display: 'flex', justifyContent: 'flex-end' }}>
               <button 
                 className="btn btn-outline" 
-                onClick={onEnd}
+                onClick={onEndPreview}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)', borderColor: 'var(--border-color)', fontWeight: '600' }}
               >
                 <Play size={16} /> Skip Video (Admin Preview)

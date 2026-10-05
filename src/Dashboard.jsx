@@ -14,6 +14,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [activeModule, setActiveModule] = useState(null);
   const [expandedModules, setExpandedModules] = useState({ 1: true });
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
   
   const [courseData, setCourseData] = useState(null);
   const [progress, setProgress] = useState({});
@@ -78,7 +79,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
 
   const handleModuleClick = (courseId, modNum) => {
     const modKey = `${courseId}-m${modNum}`;
-    if (progress[modKey]?.unlocked) {
+    if (progress[modKey]?.unlocked || modNum === 1) {
       setActiveModule({ courseId, modNum, modKey });
       setExpandedModules(prev => ({ ...prev, [modNum]: true }));
       setCourseMainView('player');
@@ -212,13 +213,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
             })}
 
             <div style={{ borderTop: '1px solid var(--border-color)', margin: '16px 0', paddingTop: '16px' }}>
-              <div 
-                className={`nav-item ${courseMainView === 'notes' ? 'active' : ''}`}
-                onClick={() => setCourseMainView('notes')}
-                style={{ padding: '12px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', background: courseMainView === 'notes' ? '#f4f4f5' : 'transparent', color: courseMainView === 'notes' ? 'var(--primary)' : 'var(--text-main)', fontWeight: courseMainView === 'notes' ? '600' : '500' }}
-              >
-                <FileText size={18} /> Course Notes
-              </div>
+              {/* Course Notes button removed from here */}
               <div 
                 className={`nav-item ${courseMainView === 'queries' ? 'active' : ''}`}
                 onClick={() => setCourseMainView('queries')}
@@ -271,6 +266,26 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
 
   // --- RENDER MAIN AREA ---
   const renderMainArea = () => {
+    if (currentView === 'course-completed' && selectedCourse) {
+      return (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '40px' }}>
+          <div style={{ background: '#f0fdf4', borderRadius: '16px', padding: '60px', border: '2px solid #bbf7d0', textAlign: 'center', maxWidth: '600px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}>
+            <Award size={80} color="#16a34a" style={{ margin: '0 auto 24px' }} />
+            <h1 style={{ color: '#166534', margin: '0 0 16px', fontSize: '36px' }}>Congratulations!</h1>
+            <p style={{ color: '#15803d', fontSize: '20px', marginBottom: '16px', fontWeight: '500' }}>
+              You have successfully completed {selectedCourse.title}.
+            </p>
+            <p style={{ color: '#166534', marginBottom: '40px', fontSize: '16px', lineHeight: '1.6' }}>
+              Thank you for dedicating your time to this important sensitization program. Your commitment helps foster a better academic environment at IIT Kharagpur. You can always review the materials from the 'Courses Completed' tab.
+            </p>
+            <button className="btn btn-primary" onClick={handleGoBack} style={{ padding: '16px 32px', fontSize: '18px' }}>
+              Return to Dashboard
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     if (currentView === 'course' && selectedCourse) {
       if (courseMainView === 'notes') {
         return (
@@ -334,7 +349,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
               if (nextMod <= selectedCourse.totalModules) {
                 handleModuleClick(selectedCourse.id, nextMod);
               } else {
-                handleGoBack();
+                setCurrentView('course-completed');
               }
             }}
           />
@@ -424,10 +439,76 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
   };
 
   return (
-    <div className="app-layout">
+    <div className="app-layout" style={{ position: 'relative' }}>
       {renderSidebar()}
-      <div className="main-area">
+      <div className="main-area" style={{ position: 'relative', flex: 1 }}>
         {renderMainArea()}
+        
+        {/* Floating Notes Toggle Button */}
+        {currentView === 'course' && (
+          <button 
+            onClick={() => setIsNotesOpen(!isNotesOpen)}
+            style={{
+              position: 'absolute',
+              right: isNotesOpen ? '320px' : '0',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'var(--primary)',
+              color: 'white',
+              border: 'none',
+              padding: '16px 8px',
+              borderTopLeftRadius: '8px',
+              borderBottomLeftRadius: '8px',
+              cursor: 'pointer',
+              zIndex: 50,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '8px',
+              transition: 'right 0.3s ease',
+              boxShadow: '-2px 0 8px rgba(0,0,0,0.1)'
+            }}
+          >
+            <FileText size={20} />
+            <span style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '600', letterSpacing: '2px' }}>NOTES</span>
+          </button>
+        )}
+      </div>
+
+      {/* Right Side Notes Panel */}
+      <div style={{
+        width: '320px',
+        background: 'white',
+        borderLeft: '1px solid var(--border-color)',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'absolute',
+        right: isNotesOpen ? '0' : '-320px',
+        top: 0,
+        bottom: 0,
+        transition: 'right 0.3s ease',
+        zIndex: 40,
+        boxShadow: isNotesOpen ? '-4px 0 16px rgba(0,0,0,0.05)' : 'none'
+      }}>
+        <div style={{ padding: '24px', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}><FileText size={18} /> My Notes</h3>
+          <button onClick={() => setIsNotesOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}>
+            <span style={{ fontSize: '20px', fontWeight: 'bold' }}>&times;</span>
+          </button>
+        </div>
+        <div style={{ flex: 1, padding: '16px', display: 'flex', flexDirection: 'column' }}>
+          <textarea 
+            value={notesText}
+            onChange={(e) => setNotesText(e.target.value)}
+            style={{ flex: 1, width: '100%', padding: '16px', border: '1px solid var(--border-color)', borderRadius: '8px', resize: 'none', fontFamily: 'inherit', fontSize: '14px', lineHeight: '1.6', background: '#fafafa' }}
+            placeholder="Write your notes here while watching the lecture..."
+          />
+        </div>
+        <div style={{ padding: '16px', borderTop: '1px solid var(--border-color)' }}>
+          <button className="btn btn-primary" onClick={handleSaveNote} disabled={isSavingNote} style={{ width: '100%', justifyContent: 'center' }}>
+            {isSavingNote ? 'Saving...' : 'Save Notes'}
+          </button>
+        </div>
       </div>
     </div>
   );

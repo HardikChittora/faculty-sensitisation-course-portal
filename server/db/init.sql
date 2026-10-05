@@ -6,8 +6,13 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     department VARCHAR(100) NOT NULL,
     role VARCHAR(20) DEFAULT 'faculty', -- 'faculty' or 'admin'
+    status VARCHAR(20) DEFAULT 'not_enrolled', -- 'not_enrolled', 'enrolled', 'in_progress', 'completed'
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Add status column if upgrading from older schema
+ALTER TABLE users ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'not_enrolled';
+
 
 CREATE TABLE IF NOT EXISTS otps (
     email VARCHAR(100) PRIMARY KEY,

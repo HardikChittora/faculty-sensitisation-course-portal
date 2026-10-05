@@ -8,13 +8,14 @@ import {
   fetchCourseData, updateModuleContent, fetchAdminAnalytics, 
   fetchFacultyRecords, fetchFacultyAttempts, resetAllDataToDefaults, addModule 
 } from './services/api';
-import mockFacultyData from './services/mock_faculty.json';
+
 
 export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
   const [activeTab, setActiveTab] = useState('completions'); // 'completions' | 'content'
   const [analytics, setAnalytics] = useState(null);
   const [facultyList, setFacultyList] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('department');
   const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'completed', 'in-progress'
 
   // Attempt Drilldown Modal State
@@ -161,27 +162,17 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
     }
   };
 
-  // Filter faculty records
-  // Derive lists
-  // Enrolled are only those from DB (facultyList).
-  // For 'uncompleted', we want to show all from mock who haven't completed.
-  const enrolledFaculty = facultyList; // from DB
-  const uncompletedList = [
-    ...enrolledFaculty.filter(f => !f.isCompleted),
-    ...mockFacultyData.filter(m => !enrolledFaculty.find(e => e.email === m.email)).map(m => ({
-      ...m, totalModules: 3, completedModulesCount: 0, progressPercent: 0, totalAttempts: 0, isCompleted: false
-    }))
-  ];
-
-  let displayList = [];
+    let displayList = [];
   if (statusFilter === 'all') {
-    displayList = enrolledFaculty;
-  } else if (statusFilter === 'completed') {
-    displayList = enrolledFaculty.filter(f => f.isCompleted);
+    displayList = facultyList;
+  } else if (statusFilter === 'not_enrolled') {
+    displayList = facultyList.filter(f => f.status === 'not_enrolled');
+  } else if (statusFilter === 'enrolled') {
+    displayList = facultyList.filter(f => f.status === 'enrolled');
   } else if (statusFilter === 'in-progress') {
-    displayList = enrolledFaculty.filter(f => !f.isCompleted && f.completedModulesCount > 0);
-  } else if (statusFilter === 'uncompleted') {
-    displayList = uncompletedList;
+    displayList = facultyList.filter(f => f.status === 'in_progress');
+  } else if (statusFilter === 'completed') {
+    displayList = facultyList.filter(f => f.status === 'completed');
   }
 
   const filteredFaculty = displayList.filter(faculty => {
@@ -328,7 +319,7 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
                 </div>
                 
                 {/* Search & Filter controls */}
-                <div className="table-controls">
+                <div className="table-controls" style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
                   <div className="search-input-wrap">
                     <Search size={16} className="search-icon" />
                     <input 
@@ -339,30 +330,48 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
                     />
                   </div>
 
+                  <div className="filter-group" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <label style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Sort By:</label>
+                    <select 
+                      value={sortBy} 
+                      onChange={(e) => setSortBy(e.target.value)}
+                      style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--border-color)', outline: 'none' }}
+                    >
+                      <option value="department">Department</option>
+                      <option value="name">Name (A-Z)</option>
+                      <option value="completion">Completion %</option>
+                    </select>
+                  </div>
                   <div className="filter-pill-group">
                     <button 
                       className={`filter-pill ${statusFilter === 'all' ? 'active' : ''}`}
                       onClick={() => setStatusFilter('all')}
                     >
-                      All Enrolled ({enrolledFaculty.length})
+                      All Faculty ({facultyList.length})
                     </button>
                     <button 
-                      className={`filter-pill ${statusFilter === 'completed' ? 'active' : ''}`}
-                      onClick={() => setStatusFilter('completed')}
+                      className={`filter-pill ${statusFilter === 'not_enrolled' ? 'active' : ''}`}
+                      onClick={() => setStatusFilter('not_enrolled')}
                     >
-                      Completed ({enrolledFaculty.filter(f => f.isCompleted).length})
+                      Not Enrolled ({facultyList.filter(f => f.status === 'not_enrolled').length})
+                    </button>
+                    <button 
+                      className={`filter-pill ${statusFilter === 'enrolled' ? 'active' : ''}`}
+                      onClick={() => setStatusFilter('enrolled')}
+                    >
+                      Enrolled ({facultyList.filter(f => f.status === 'enrolled').length})
                     </button>
                     <button 
                       className={`filter-pill ${statusFilter === 'in-progress' ? 'active' : ''}`}
                       onClick={() => setStatusFilter('in-progress')}
                     >
-                      In Progress ({enrolledFaculty.filter(f => !f.isCompleted && f.completedModulesCount > 0).length})
+                      In Progress ({facultyList.filter(f => f.status === 'in_progress').length})
                     </button>
                     <button 
-                      className={`filter-pill ${statusFilter === 'uncompleted' ? 'active' : ''}`}
-                      onClick={() => setStatusFilter('uncompleted')}
+                      className={`filter-pill ${statusFilter === 'completed' ? 'active' : ''}`}
+                      onClick={() => setStatusFilter('completed')}
                     >
-                      Uncompleted ({uncompletedList.length})
+                      Completed ({facultyList.filter(f => f.status === 'completed').length})
                     </button>
                   </div>
                 </div>
@@ -580,15 +589,20 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
 
                       <div className="form-row">
                         <div className="input-group" style={{ flex: 1 }}>
-                          <label>YouTube Video ID or Key</label>
+                          <label>YouTube Video URL</label>
                           <input 
                             type="text" 
                             value={editingModule.videoId} 
-                            onChange={(e) => setEditingModule({ ...editingModule, videoId: e.target.value })}
-                            placeholder="e.g. jNQXAC9IVRw"
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              const match = val.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+                              const parsedId = match ? match[1] : val;
+                              setEditingModule({ ...editingModule, videoId: parsedId });
+                            }}
+                            placeholder="Paste full YouTube video link..."
                           />
                           <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>
-                            Enter the 11-character YouTube video ID from the lecture URL.
+                            Paste the full YouTube video URL. The system will automatically extract the video key.
                           </small>
                         </div>
 

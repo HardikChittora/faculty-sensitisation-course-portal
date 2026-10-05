@@ -334,11 +334,13 @@ class DatabaseManager {
     if (this.usePostgres) {
       try {
         const res = await this.pool.query(
-          `INSERT INTO users (id, email, name, department, role)
-           VALUES ($1, $2, $3, $4, $5)
-           ON CONFLICT (id) DO UPDATE SET 
+          `INSERT INTO users (id, email, name, department, role, status)
+           VALUES ($1, $2, $3, $4, $5, 'enrolled')
+           ON CONFLICT (email) DO UPDATE SET 
              name = EXCLUDED.name, 
-             department = EXCLUDED.department
+             department = EXCLUDED.department,
+             id = EXCLUDED.id,
+             status = CASE WHEN users.status = 'not_enrolled' THEN 'enrolled' ELSE users.status END
            RETURNING *`,
           [id, email.toLowerCase(), name, department || 'Faculty', role || 'faculty']
         );
@@ -375,26 +377,33 @@ class DatabaseManager {
             u.name, 
             u.email, 
             u.department,
+            u.status,
             3 AS "totalModules",
             COALESCE(SUM(CASE WHEN p.passed = true THEN 1 ELSE 0 END), 0)::int AS "completedModulesCount",
+            COALESCE(SUM(CASE WHEN p.video_watched = true THEN 1 ELSE 0 END), 0)::int AS "watchedVideosCount",
             COALESCE(COUNT(DISTINCT a.id), 0)::int AS "totalAttempts",
             MAX(a.timestamp) AS "latestAttemptDate"
           FROM users u
           LEFT JOIN user_progress p ON u.id = p.user_id
           LEFT JOIN assessment_attempts a ON u.id = a.user_id
           WHERE u.role = 'faculty'
-          GROUP BY u.id, u.name, u.email, u.department, u.created_at
-          ORDER BY u.created_at DESC;
+          GROUP BY u.id, u.name, u.email, u.department, u.status, u.created_at
+          ORDER BY u.name ASC;
         `;
         const res = await this.pool.query(query);
         return res.rows.map(r => {
           const completedCount = Number(r.completedModulesCount);
           const totalMods = 3;
+          // Derive effective status from progress data
+          let effectiveStatus = r.status || 'not_enrolled';
+          if (completedCount >= totalMods) effectiveStatus = 'completed';
+          else if (completedCount > 0 || Number(r.watchedVideosCount) > 0) effectiveStatus = 'in_progress';
           return {
             id: r.id,
             name: r.name,
             email: r.email,
             department: r.department,
+            status: effectiveStatus,
             totalModules: totalMods,
             completedModulesCount: completedCount,
             progressPercent: Math.round((completedCount / totalMods) * 100),
@@ -409,6 +418,7 @@ class DatabaseManager {
     }
     return [];
   }
+
 
   async getUserAttempts(userId) {
     await this.ready();
