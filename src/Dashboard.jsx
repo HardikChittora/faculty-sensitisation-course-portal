@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { 
   BookOpen, CheckCircle, LogOut, ArrowLeft, 
   ChevronDown, ChevronRight, PlayCircle, FileText, Award, AlertCircle
@@ -10,7 +11,13 @@ import {
 } from './services/api';
 
 export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
-  const [currentView, setCurrentView] = useState('browse'); // 'browse', 'completed', 'course'
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentView = location.pathname.includes('/course-completed') ? 'course-completed'
+                    : location.pathname.includes('/course') ? 'course'
+                    : location.pathname.includes('/completed') ? 'completed'
+                    : 'browse';
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [activeModule, setActiveModule] = useState(null);
   const [expandedModules, setExpandedModules] = useState({ 1: true });
@@ -123,7 +130,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
 
   const handleCourseStart = (course) => {
     setSelectedCourse(course);
-    setCurrentView('course');
+    navigate('/dashboard/course');
     
     let modToOpen = 1;
     for (let i = 1; i <= course.totalModules; i++) {
@@ -138,7 +145,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
   };
 
   const handleGoBack = () => {
-    setCurrentView('browse');
+    navigate('/dashboard/browse');
     setSelectedCourse(null);
     setActiveModule(null);
     setCourseMainView('player');
@@ -241,14 +248,14 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
         <div className="nav-section">
           <div 
             className={`nav-item ${currentView === 'browse' ? 'active' : ''}`}
-            onClick={() => setCurrentView('browse')}
+            onClick={() => navigate('/dashboard/browse')}
           >
             <BookOpen size={18} /> Browse Courses
           </div>
           
           <div 
             className={`nav-item ${currentView === 'completed' ? 'active' : ''}`}
-            onClick={() => setCurrentView('completed')}
+            onClick={() => navigate('/dashboard/completed')}
           >
             <Award size={18} /> Courses Completed
           </div>
@@ -349,7 +356,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
               if (nextMod <= selectedCourse.totalModules) {
                 handleModuleClick(selectedCourse.id, nextMod);
               } else {
-                setCurrentView('course-completed');
+                navigate('/dashboard/course-completed');
               }
             }}
           />
