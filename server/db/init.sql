@@ -120,5 +120,5 @@ ON CONFLICT (module_id, question_idx) DO UPDATE SET
 
 -- Seed Data: Admin Account
 INSERT INTO users (id, email, name, department, role) VALUES
-('admin', 'admin@institute.edu.in', 'Dean of Academic Affairs (Admin)', 'Institute Administration', 'admin')
+('admin', 'admin@institute.edu.in', 'DEAN, Student Wellbeing', 'Institute Administration', 'admin')
 ON CONFLICT (id) DO NOTHING;

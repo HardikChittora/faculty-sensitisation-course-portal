@@ -378,22 +378,19 @@ class DatabaseManager {
             u.email, 
             u.department,
             u.status,
-            3 AS "totalModules",
-            COALESCE(SUM(CASE WHEN p.passed = true THEN 1 ELSE 0 END), 0)::int AS "completedModulesCount",
-            COALESCE(SUM(CASE WHEN p.video_watched = true THEN 1 ELSE 0 END), 0)::int AS "watchedVideosCount",
-            COALESCE(COUNT(DISTINCT a.id), 0)::int AS "totalAttempts",
-            MAX(a.timestamp) AS "latestAttemptDate"
+            (SELECT COUNT(*) FROM modules)::int AS "totalModules",
+            (SELECT COUNT(*) FROM user_progress WHERE user_id = u.id AND passed = true)::int AS "completedModulesCount",
+            (SELECT COUNT(*) FROM user_progress WHERE user_id = u.id AND video_watched = true)::int AS "watchedVideosCount",
+            (SELECT COUNT(*) FROM assessment_attempts WHERE user_id = u.id)::int AS "totalAttempts",
+            (SELECT MAX(timestamp) FROM assessment_attempts WHERE user_id = u.id) AS "latestAttemptDate"
           FROM users u
-          LEFT JOIN user_progress p ON u.id = p.user_id
-          LEFT JOIN assessment_attempts a ON u.id = a.user_id
           WHERE u.role = 'faculty'
-          GROUP BY u.id, u.name, u.email, u.department, u.status, u.created_at
           ORDER BY u.name ASC;
         `;
         const res = await this.pool.query(query);
         return res.rows.map(r => {
           const completedCount = Number(r.completedModulesCount);
-          const totalMods = 3;
+          const totalMods = Number(r.totalModules) || 3;
           // Derive effective status from progress data
           let effectiveStatus = r.status || 'not_enrolled';
           if (completedCount >= totalMods) effectiveStatus = 'completed';
@@ -605,7 +602,11 @@ class DatabaseManager {
         if (newPassed) {
           const parts = modKey.split('-m');
           const nextNum = parseInt(parts[1], 10) + 1;
-          if (nextNum <= 3) {
+          
+          const maxModsRes = await this.pool.query('SELECT COUNT(*) FROM modules');
+          const maxMods = parseInt(maxModsRes.rows[0].count, 10);
+          
+          if (nextNum <= maxMods) {
             const nextKey = `${parts[0]}-m${nextNum}`;
             await this.pool.query(
               `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)

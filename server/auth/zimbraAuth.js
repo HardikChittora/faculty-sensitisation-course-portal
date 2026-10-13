@@ -32,7 +32,7 @@ export async function authenticateZimbra(usernameOrEmail, password) {
       user: {
         id: 'admin',
         email: fullEmail,
-        name: 'Dean of Academic Affairs (Admin)',
+        name: 'DEAN, Student Wellbeing',
         department: 'Institute Administration',
         role: 'admin',
         authMethod: 'Zimbra-Admin'

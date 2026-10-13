@@ -79,9 +79,8 @@ function formatTime(seconds) {
 
 
 export default function CoursePlayer({ 
-
+  totalModules = 3,
   moduleKey, 
-
   moduleNum, 
 
   courseTitle, 
@@ -702,9 +701,7 @@ export default function CoursePlayer({
             onClick={onNextModule}
 
           >
-
-            {moduleNum < 3 ? `Continue to Module ${moduleNum + 1}` : "Return to Dashboard"} <ArrowRight size={20} />
-
+            {moduleNum < totalModules ? `Continue to Module ${moduleNum + 1}` : "Return to Dashboard"} <ArrowRight size={20} />
           </button>
 
         </div>

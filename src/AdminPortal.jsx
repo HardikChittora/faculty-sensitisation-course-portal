@@ -95,8 +95,7 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
     if (window.confirm('Are you sure you want to add a new module?')) {
       try {
         const newMod = await addModule('c1');
-        const updatedCourse = await fetchCourseData();
-        setCourseData(updatedCourse);
+        await loadPortalData();
         setSelectedModNum(newMod.moduleNum);
         alert(`Module ${newMod.moduleNum} added successfully!`);
       } catch (err) {
@@ -218,10 +217,9 @@ export default function AdminPortal({ user, onLogout, onPreviewFaculty }) {
           </button>
           
           <div className="admin-user-pill">
-            <div className="admin-avatar">AD</div>
+            <div className="admin-avatar">SWB</div>
             <div className="admin-user-info">
               <span className="admin-name">{user?.name || 'Administrator'}</span>
-              <span className="admin-role">Academic Office</span>
             </div>
           </div>
 

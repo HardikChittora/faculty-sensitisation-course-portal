@@ -46,7 +46,7 @@ function MainApp() {
     <Routes>
       <Route path="/login" element={<Navigate to={user.role === 'admin' ? '/admin' : '/dashboard'} replace />} />
       
-      <Route path="/admin" element={
+      <Route path="/admin/*" element={
         user.role === 'admin' ? (
           isAdminPreviewingFaculty ? (
             <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>

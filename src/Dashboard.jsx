@@ -13,6 +13,7 @@ import {
 export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const basePath = isPreviewMode ? '/admin' : '/dashboard';
 
   const currentView = location.pathname.includes('/course-completed') ? 'course-completed'
                     : location.pathname.includes('/course') ? 'course'
@@ -86,7 +87,13 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
 
   const handleModuleClick = (courseId, modNum) => {
     const modKey = `${courseId}-m${modNum}`;
-    if (progress[modKey]?.unlocked || modNum === 1) {
+    const prevModKey = `${courseId}-m${modNum - 1}`;
+    
+    // A module is unlocked if explicitly marked unlocked, if it's the first module, 
+    // or if the immediately preceding module has been passed.
+    const isUnlocked = progress[modKey]?.unlocked || modNum === 1 || progress[prevModKey]?.passed;
+    
+    if (isUnlocked) {
       setActiveModule({ courseId, modNum, modKey });
       setExpandedModules(prev => ({ ...prev, [modNum]: true }));
       setCourseMainView('player');
@@ -130,12 +137,15 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
 
   const handleCourseStart = (course) => {
     setSelectedCourse(course);
-    navigate('/dashboard/course');
+    navigate(`${basePath}/course`);
     
     let modToOpen = 1;
     for (let i = 1; i <= course.totalModules; i++) {
       const modData = progress[`${course.id}-m${i}`];
-      if (modData?.unlocked && !modData?.passed) {
+      const prevPassed = i === 1 || progress[`${course.id}-m${i-1}`]?.passed;
+      const isUnlocked = modData?.unlocked || prevPassed;
+      
+      if (isUnlocked && !modData?.passed) {
         modToOpen = i;
         break;
       }
@@ -145,7 +155,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
   };
 
   const handleGoBack = () => {
-    navigate('/dashboard/browse');
+    navigate(`${basePath}/browse`);
     setSelectedCourse(null);
     setActiveModule(null);
     setCourseMainView('player');
@@ -173,7 +183,9 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
               const modData = progress[modKey] || { unlocked: modNum === 1, passed: false };
               const isExpanded = expandedModules[modNum];
               const isActiveMod = activeModule?.modKey === modKey && courseMainView === 'player';
-              const isLocked = !modData.unlocked;
+              const prevModKey = `${selectedCourse.id}-m${modNum - 1}`;
+              const prevPassed = progress[prevModKey]?.passed;
+              const isLocked = !modData.unlocked && modNum !== 1 && !prevPassed;
 
               return (
                 <div key={modKey} style={{ marginBottom: '12px' }}>
@@ -248,14 +260,14 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
         <div className="nav-section">
           <div 
             className={`nav-item ${currentView === 'browse' ? 'active' : ''}`}
-            onClick={() => navigate('/dashboard/browse')}
+            onClick={() => navigate(`${basePath}/browse`)}
           >
             <BookOpen size={18} /> Browse Courses
           </div>
           
           <div 
             className={`nav-item ${currentView === 'completed' ? 'active' : ''}`}
-            onClick={() => navigate('/dashboard/completed')}
+            onClick={() => navigate(`${basePath}/completed`)}
           >
             <Award size={18} /> Courses Completed
           </div>
@@ -344,6 +356,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
           <CoursePlayer 
             moduleKey={activeModule.modKey} 
             moduleNum={activeModule.modNum}
+            totalModules={selectedCourse.totalModules}
             courseTitle={selectedCourse.title}
             moduleData={progress[activeModule.modKey]}
             moduleInfo={currentModuleInfo}
@@ -356,7 +369,7 @@ export default function Dashboard({ user, onLogout, isPreviewMode = false }) {
               if (nextMod <= selectedCourse.totalModules) {
                 handleModuleClick(selectedCourse.id, nextMod);
               } else {
-                navigate('/dashboard/course-completed');
+                navigate(`${basePath}/course-completed`);
               }
             }}
           />
