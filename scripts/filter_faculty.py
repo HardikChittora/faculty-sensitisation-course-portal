@@ -1,6 +1,14 @@
+import argparse
 import json
+from pathlib import Path
 
-with open('src/services/mock_faculty.json', 'r') as f:
+parser = argparse.ArgumentParser(description="Prepare faculty directory JSON")
+parser.add_argument("file", nargs="?", type=Path,
+                    default=Path(__file__).resolve().parents[1] / "data/faculty.json")
+args = parser.parse_args()
+
+
+with args.file.open('r', encoding='utf-8') as f:
     data = json.load(f)
 
 filtered = []
@@ -43,5 +51,5 @@ for item in data:
 
 print(f"Original: {len(data)}, Filtered: {len(filtered)}")
 
-with open('src/services/mock_faculty.json', 'w') as f:
+with args.file.open('w', encoding='utf-8') as f:
     json.dump(filtered, f, indent=2)

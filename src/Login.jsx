@@ -119,7 +119,7 @@ export default function Login({ onLogin }) {
                   type="text" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@iitkgp.ac.in"
+                  placeholder="Enter your admin ID or email"
                   required
                 />
               </div>

@@ -1,5 +1,4 @@
 // Frontend API Service with local cache fallback
-import mockFacultyData from './mock_faculty.json';
 
 const API_BASE = '/api';
 
@@ -119,7 +118,7 @@ export async function fetchCourseData() {
       localStorage.setItem(LOCAL_STORAGE_KEY_COURSE, JSON.stringify(data));
       return data;
     }
-  } catch (e) {
+  } catch {
     // ignore and use local cache
   }
   const cached = localStorage.getItem(LOCAL_STORAGE_KEY_COURSE);
@@ -137,7 +136,7 @@ export async function updateModuleContent(courseId, modNum, updates) {
       const data = await res.json();
       return data.module;
     }
-  } catch (e) {
+  } catch {
     // fallback
   }
 
@@ -160,7 +159,7 @@ export async function addModule(courseId) {
       const data = await res.json();
       return data.module;
     }
-  } catch (e) {
+  } catch {
     // fallback
   }
 
@@ -186,7 +185,7 @@ export async function fetchAdminAnalytics() {
   try {
     const res = await fetch(`${API_BASE}/admin/analytics`);
     if (res.ok) return await res.json();
-  } catch (e) {
+  } catch {
     // fallback to calculating from live records
   }
 
@@ -255,7 +254,7 @@ export async function recordQuizAttempt({ userId, courseId, moduleNum, score, to
       body: JSON.stringify({ userId, courseId, moduleNum, score, totalQuestions, passed })
     });
     if (res.ok) return await res.json();
-  } catch (e) {
+  } catch {
     // local fallback
   }
 
@@ -299,7 +298,7 @@ export async function fetchUserProgress(userId, courseId = 'c1') {
   try {
     const res = await fetch(`${API_BASE}/progress/${userId}/${courseId}`);
     if (res.ok) return await res.json();
-  } catch (e) {
+  } catch {
     // local fallback
   }
 
@@ -323,7 +322,7 @@ export async function updateUserProgressApi(userId, modKey, updates) {
       body: JSON.stringify(updates)
     });
     if (res.ok) return await res.json();
-  } catch (e) {
+  } catch {
     // fallback
   }
 
@@ -342,7 +341,7 @@ export async function updateUserProgressApi(userId, modKey, updates) {
 export async function resetAllDataToDefaults() {
   try {
     await fetch(`${API_BASE}/admin/reset-defaults`, { method: 'POST' });
-  } catch (e) {}
+  } catch {}
   localStorage.removeItem(LOCAL_STORAGE_KEY_COURSE);
   localStorage.removeItem(LOCAL_STORAGE_KEY_ATTEMPTS);
   localStorage.removeItem(LOCAL_STORAGE_KEY_PROGRESS);

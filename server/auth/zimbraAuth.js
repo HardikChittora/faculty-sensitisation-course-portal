@@ -1,19 +1,23 @@
 import tls from 'tls';
 import dotenv from 'dotenv';
 import { dbManager } from '../db/db.js';
+import { verifyPassword } from './passwords.js';
 
 dotenv.config();
 
-const ZIMBRA_HOST = process.env.ZIMBRA_HOST || 'mail.institute.edu.in';
+const ZIMBRA_HOST = process.env.ZIMBRA_HOST || '';
 const ZIMBRA_PORT = parseInt(process.env.ZIMBRA_PORT || '993', 10);
-const ZIMBRA_DOMAIN = process.env.ZIMBRA_DOMAIN || 'institute.edu.in';
-const ZIMBRA_DEV_MODE = process.env.ZIMBRA_DEV_MODE !== 'false';
+const ZIMBRA_DOMAIN = process.env.ZIMBRA_DOMAIN || 'iitkgp.ac.in';
+const ZIMBRA_DEV_MODE = process.env.ZIMBRA_DEV_MODE === 'true' && process.env.NODE_ENV !== 'production';
 
 /**
  * Authenticates against Zimbra Mail Server via IMAPS (port 993)
  * or falls back to institute development directory.
  */
 export async function authenticateZimbra(usernameOrEmail, password) {
+  if (typeof usernameOrEmail !== 'string' || typeof password !== 'string' || !usernameOrEmail.trim() || !password) {
+    return { success: false, message: 'Email and password are required.' };
+  }
   const cleanInput = usernameOrEmail.trim().toLowerCase();
   
   // Normalize email
@@ -25,25 +29,27 @@ export async function authenticateZimbra(usernameOrEmail, password) {
     fullEmail = `${cleanInput}@${ZIMBRA_DOMAIN}`;
   }
 
-  // 1. Check for Admin Login
-  if ((username === 'admin' || fullEmail === `admin@${ZIMBRA_DOMAIN}`) && password === 'admin1234') {
+  // PostgreSQL is the only source of administrator identities and passwords.
+  // A wrong password must never fall through to faculty/development login.
+  const admin = await dbManager.getAdminForLogin(cleanInput);
+  if (admin) {
+    if (!await verifyPassword(password, admin.password_hash)) {
+      return { success: false, message: 'Invalid administrator credentials.' };
+    }
     return {
       success: true,
       user: {
-        id: 'admin',
-        email: fullEmail,
-        name: 'DEAN, Student Wellbeing',
-        department: 'Institute Administration',
+        id: admin.id,
+        email: admin.email,
+        name: admin.name,
+        department: admin.department,
         role: 'admin',
-        authMethod: 'Zimbra-Admin'
+        authMethod: 'Database-Admin'
       }
     };
   }
 
-  // 2. Check for Faculty Demo Account ('123' / '123')
-  // Removed mock faculty account for real Zimbra login
-  
-  // 3. If Live Zimbra connection is enabled & not in pure dev mode, attempt IMAPS authentication
+  // Live faculty authentication through Zimbra IMAPS.
   if (!ZIMBRA_DEV_MODE && ZIMBRA_HOST && ZIMBRA_HOST !== 'localhost') {
     try {
       const imapAuthSuccess = await tryImapsZimbraLogin(fullEmail, password);
@@ -59,14 +65,14 @@ export async function authenticateZimbra(usernameOrEmail, password) {
             role: 'faculty'
           });
         }
-        return { success: true, user: { ...user, authMethod: 'Zimbra-IMAPS' } };
+        return { success: true, user: { ...user, role: 'faculty', authMethod: 'Zimbra-IMAPS' } };
       }
     } catch (err) {
       console.warn(`[Zimbra Auth] Live IMAPS server connection to ${ZIMBRA_HOST} failed:`, err.message);
     }
   }
 
-  // 4. Development mode / local testing fallback
+  // Explicit local development bypass; disabled in production.
   if (ZIMBRA_DEV_MODE) {
     let user = await dbManager.getUserById(username) || await dbManager.getUserById(fullEmail);
     if (!user) {
@@ -82,6 +88,7 @@ export async function authenticateZimbra(usernameOrEmail, password) {
       success: true,
       user: {
         ...user,
+        role: 'faculty',
         authMethod: 'Zimbra-DevMode'
       }
     };

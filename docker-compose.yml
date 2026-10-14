@@ -1,52 +1,42 @@
-version: '3.8'
-
 services:
-  # 1. Local PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: fscp-postgres
-    restart: always
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: fscp_admin
-      POSTGRES_PASSWORD: fscp_secret_pass
-      POSTGRES_DB: faculty_course_portal
+      POSTGRES_USER: ${DB_USER:-fscp_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      POSTGRES_DB: ${DB_NAME:-faculty_course_portal}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:${DB_PORT:-5440}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U fscp_admin -d faculty_course_portal"]
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
       interval: 5s
       timeout: 5s
-      retries: 5
-    networks:
-      - fscp-network
+      retries: 10
 
-  # 2. Application (React frontend + Express backend)
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fscp-app
-    restart: always
+    build: .
+    restart: unless-stopped
     depends_on:
       postgres:
         condition: service_healthy
     ports:
-      - "5000:5000"
+      - "${PORT:-9501}:${PORT:-9501}"
     env_file:
       - .env
     environment:
-      PORT: 5000
-      DATABASE_URL: postgresql://fscp_admin:fscp_secret_pass@postgres:5432/faculty_course_portal
-    networks:
-      - fscp-network
+      NODE_ENV: production
+      PORT: ${PORT:-9501}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-fscp_admin}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      DB_NAME: ${DB_NAME:-faculty_course_portal}
+      # Compose uses its own database even if a legacy .env contains DATABASE_URL.
+      DATABASE_URL: ""
 
 volumes:
   pgdata:
-    driver: local
-
-networks:
-  fscp-network:
-    driver: bridge

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   BookOpen, CheckCircle, LogOut, ArrowLeft, 
   ChevronDown, ChevronRight, PlayCircle, FileText, Award, AlertCircle

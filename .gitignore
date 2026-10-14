@@ -11,8 +11,16 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
-.env*.local
+.env*
+!.env.example
+.vite/
+coverage/
+__pycache__/
+*.pyc
+
+# Generated directory-parser output
+pdf_raw.txt
+parsed_profs.json
 
 # Editor directories and files
 .vscode/*

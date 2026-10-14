@@ -1,37 +1,19 @@
 // Parse comdir.pdf - IIT KGP Communication Directory
 // Format per row: HindiName EnglishName OffExt [ResExt] email@dept [QuarterNo]
 // Email like "susmita@aero" → "susmita@aero.iitkgp.ac.in"
-// Run: node server/parse_cjs.cjs
+// Run: npm run faculty:parse -- [input.pdf] [output.json]
 
-const { PDFParse } = require('pdf-parse');
+const pdfParse = require('pdf-parse');
 const fs = require('fs');
 const path = require('path');
 
-const pdfPath = path.join(__dirname, '../comdir.pdf');
+const pdfPath = process.argv[2] || path.join(__dirname, '../data/comdir.pdf');
+const jsonPath = process.argv[3] || path.join(__dirname, '../data/faculty.json');
 
 async function extractAllText() {
-  const buf = fs.readFileSync(pdfPath);
-  const uint8 = new Uint8Array(buf);
-  const parser = new PDFParse({ verbosity: -1, data: uint8 });
-  await parser.load();
-  const doc = parser.doc;
-  const numPages = doc.numPages || 102;
-  console.log('Pages:', numPages);
-
-  let fullText = '';
-  for (let pageNum = 1; pageNum <= numPages; pageNum++) {
-    try {
-      const page = await doc.getPage(pageNum);
-      const content = await page.getTextContent();
-      const pageText = content.items.map(item => item.str).join(' ');
-      fullText += `\n---PAGE ${pageNum}---\n` + pageText;
-      if (pageNum % 10 === 0) process.stdout.write(`\r  Page ${pageNum}/${numPages}...`);
-    } catch (e) {
-      console.error(`\nPage ${pageNum}:`, e.message);
-    }
-  }
-  console.log('\nDone extracting.');
-  return fullText;
+  const { text, numpages } = await pdfParse(fs.readFileSync(pdfPath));
+  console.log(`Extracted text from ${numpages} pages.`);
+  return text;
 }
 
 function parseFacultyFromText(text) {
@@ -87,7 +69,7 @@ function parseFacultyFromText(text) {
   ];
 
   // Email regex - matches partial emails like "susmita@aero" or full emails
-  const emailPattern = /([a-zA-Z0-9][a-zA-Z0-9._+\-]*@[a-zA-Z0-9._\-]+)/g;
+  const emailPattern = /([a-zA-Z0-9][a-zA-Z0-9._+-]*@[a-zA-Z0-9._-]+)/g;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -112,17 +94,11 @@ function parseFacultyFromText(text) {
         continue;
       }
 
-      // Complete partial emails: "user@dept" → "user@dept.iitkgp.ac.in"
+      // Complete directory addresses such as "user@aero".
       let email = emailRaw.toLowerCase();
-      if (!email.includes('.')) {
-        email = email + '.iitkgp.ac.in';
-      } else if (!email.includes('.ac.in') && !email.includes('.edu') && !email.includes('.com')) {
-        // Like "user@dept.something" - append iitkgp.ac.in
-        const parts = email.split('@');
-        const domain = parts[1];
-        if (!domain.includes('.')) {
-          email = parts[0] + '@' + domain + '.iitkgp.ac.in';
-        }
+      const domain = email.split('@')[1];
+      if (!domain.includes('.')) {
+        email += '.iitkgp.ac.in';
       }
 
       // Extract English name from line - look for "Lastname Firstname" pattern
@@ -147,7 +123,7 @@ function parseFacultyFromText(text) {
       if (!name || name.length < 2) {
         // Fallback: use email prefix
         name = email.split('@')[0]
-          .replace(/[._\-]/g, ' ')
+          .replace(/[._-]/g, ' ')
           .split(' ')
           .map(w => w.charAt(0).toUpperCase() + w.slice(1))
           .join(' ');
@@ -175,54 +151,9 @@ function parseFacultyFromText(text) {
   return unique;
 }
 
-async function seedDB(facultyList) {
-  const { dbManager } = await import('./db/db.js');
-  await dbManager.ready();
-
-  if (!dbManager.usePostgres) {
-    console.log('⚠️  DB not connected.');
-    return { inserted: 0, skipped: 0 };
-  }
-
-  let inserted = 0, skipped = 0;
-  for (const f of facultyList) {
-    try {
-      await dbManager.pool.query(
-        `INSERT INTO users (id, email, name, department, role)
-         VALUES ($1, $2, $3, $4, 'faculty')
-         ON CONFLICT (id) DO UPDATE SET 
-           name = EXCLUDED.name, 
-           department = EXCLUDED.department`,
-        [f.id, f.email, f.name, f.department]
-      );
-      await dbManager.pool.query(
-        `INSERT INTO user_progress (user_id, module_id, unlocked, passed, video_watched, max_time_watched)
-         VALUES 
-           ($1, 'c1-m1', true,  false, false, 0),
-           ($1, 'c1-m2', false, false, false, 0),
-           ($1, 'c1-m3', false, false, false, 0)
-         ON CONFLICT (user_id, module_id) DO NOTHING`,
-        [f.id]
-      );
-      inserted++;
-    } catch (err) {
-      console.error(`  Failed: ${f.email} — ${err.message}`);
-      skipped++;
-    }
-    if ((inserted + skipped) % 100 === 0) {
-      process.stdout.write(`\r  ${inserted} inserted, ${skipped} failed...`);
-    }
-  }
-  return { inserted, skipped };
-}
-
 async function main() {
   console.log('=== IIT KGP Faculty Directory Parser ===\n');
   const text = await extractAllText();
-
-  const rawPath = path.join(__dirname, '../pdf_raw.txt');
-  fs.writeFileSync(rawPath, text, 'utf8');
-  console.log('Raw text saved → pdf_raw.txt\n');
 
   console.log('Parsing faculty records...');
   const faculty = parseFacultyFromText(text);
@@ -239,15 +170,8 @@ async function main() {
   Object.entries(byDept).sort((a,b) => b[1] - a[1]).forEach(([d, n]) => console.log(`  ${n.toString().padStart(3)}  ${d}`));
 
   // Save JSON for frontend
-  const jsonPath = path.join(__dirname, '../src/services/mock_faculty.json');
   fs.writeFileSync(jsonPath, JSON.stringify(faculty, null, 2), 'utf8');
-  console.log(`\nSaved ${faculty.length} faculty → src/services/mock_faculty.json`);
-
-  // Seed DB
-  console.log('\nSeeding into PostgreSQL...');
-  const { inserted, skipped } = await seedDB(faculty);
-  console.log(`\n✅  Done! ${inserted} inserted, ${skipped} failed.`);
-  process.exit(0);
+  console.log(`\nSaved ${faculty.length} faculty → ${jsonPath}`);
 }
 
 main().catch(e => { console.error('Fatal:', e); process.exit(1); });

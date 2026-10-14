@@ -7,7 +7,7 @@ import { authenticateZimbra } from './auth/zimbraAuth.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9501;
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +15,7 @@ app.use(express.json());
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT || '587'),
   secure: process.env.SMTP_SECURE === 'true',
   auth: {
@@ -55,19 +55,20 @@ app.post('/api/auth/request-otp', async (req, res) => {
     if (!email) return res.status(400).json({ error: 'Email is required' });
 
     let fullEmail = email.trim().toLowerCase();
-    let username = fullEmail;
     
     // Auto-append domain if missing
     const domain = process.env.ZIMBRA_DOMAIN || 'iitkgp.ac.in';
-    if (fullEmail.includes('@')) {
-      username = fullEmail.split('@')[0];
-    } else {
+    if (!fullEmail.includes('@')) {
       fullEmail = `${fullEmail}@${domain}`;
     }
 
     // Validate domain
     if (!fullEmail.endsWith(domain)) {
       return res.status(400).json({ error: `Email must end in ${domain}` });
+    }
+
+    if (await dbManager.getAdminForLogin(fullEmail)) {
+      return res.status(403).json({ error: 'Administrators must sign in with their database password.' });
     }
 
     // Generate 6-digit OTP
@@ -77,9 +78,9 @@ app.post('/api/auth/request-otp', async (req, res) => {
     const saved = await dbManager.saveOtp(fullEmail, otp, expiresAt);
     if (!saved) return res.status(500).json({ error: 'Failed to generate OTP' });
 
-    console.log(`[OTP] Generated for ${fullEmail}: ${otp}`);
-
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+    if (process.env.OTP_DEV_MODE === 'true' && process.env.NODE_ENV !== 'production') {
+      console.log(`[OTP DEV] Code for ${fullEmail}: ${otp} (valid 5 mins)`);
+    } else if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
       try {
         await transporter.sendMail({
           from: `"Faculty Portal" <${process.env.SMTP_USER}>`,
@@ -91,23 +92,16 @@ app.post('/api/auth/request-otp', async (req, res) => {
         });
         console.log(`[OTP] Email sent via SMTP to ${fullEmail}`);
       } catch (emailErr) {
-        // Email failed (e.g. SMTP port blocked) but OTP is saved in DB
-        // Log OTP to console as fallback so it can be retrieved from server logs
         console.error(`[OTP] WARNING: Email delivery failed: ${emailErr.message}`);
-        console.warn(`[OTP] FALLBACK - Code for ${fullEmail} is: ${otp} (valid 5 mins)`);
+        return res.status(502).json({ error: 'Unable to send verification email. Please try again later.' });
       }
     } else {
-      console.warn('[OTP] SMTP credentials missing. OTP logged to console only:', otp);
+      return res.status(503).json({ error: 'Email delivery is not configured.' });
     }
 
     res.json({ message: 'OTP sent successfully', email: fullEmail });
   } catch (err) {
-    // Log detailed SendGrid error if available
-    if (err.response && err.response.body && err.response.body.errors) {
-      console.error('OTP SendGrid error details:', JSON.stringify(err.response.body.errors));
-    } else {
-      console.error('OTP request error:', err);
-    }
+    console.error('OTP request error:', err);
     res.status(500).json({ error: 'Failed to request OTP' });
   }
 });
@@ -117,6 +111,10 @@ app.post('/api/auth/verify-otp', async (req, res) => {
   try {
     const { email, otp } = req.body;
     if (!email || !otp) return res.status(400).json({ error: 'Email and OTP are required' });
+
+    if (await dbManager.getAdminForLogin(email)) {
+      return res.status(403).json({ error: 'Administrators must sign in with their database password.' });
+    }
 
     const isValid = await dbManager.verifyOtp(email, otp);
     if (!isValid) return res.status(401).json({ error: 'Invalid or expired OTP' });
@@ -150,15 +148,19 @@ app.post('/api/auth/verify-otp', async (req, res) => {
 // Upserts the user in the DB so they appear in admin portal records
 app.post('/api/auth/enroll', async (req, res) => {
   try {
-    const { id, email, name, department, role } = req.body;
+    const { id, email, name, department } = req.body;
     if (!id || !email) return res.status(400).json({ error: 'id and email are required' });
+
+    if (await dbManager.getAdminForLogin(email) || await dbManager.getAdminForLogin(id)) {
+      return res.status(403).json({ error: 'An administrator account cannot be enrolled as faculty.' });
+    }
 
     await dbManager.createUserIfNotExists({
       id,
       email: email.toLowerCase(),
       name: name || `Prof. ${id}`,
       department: department || 'Faculty',
-      role: role || 'faculty'
+      role: 'faculty'
     });
 
     res.json({ success: true, message: 'Faculty enrolled successfully' });
@@ -199,16 +201,16 @@ app.post('/api/queries', async (req, res) => {
     const { userId, queryText, courseId } = req.body;
     if (!queryText) return res.status(400).json({ error: 'queryText is required' });
 
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS && process.env.SUPPORT_EMAIL) {
       await transporter.sendMail({
         from: `"Faculty Portal Queries" <${process.env.SMTP_USER}>`,
-        to: 'forgemini4321@gmail.com',
+        to: process.env.SUPPORT_EMAIL,
         subject: `New Course Query from User: ${userId}`,
         text: `Query/Complaint from User ID: ${userId}\nCourse ID: ${courseId || 'c1'}\n\n${queryText}`
       });
-      console.log(`[Query] Email sent to forgemini4321@gmail.com for user ${userId}`);
+      console.log(`[Query] Email sent for user ${userId}`);
     } else {
-      console.warn('[Query] SMTP credentials missing. Query logged to console only:', queryText);
+      return res.status(503).json({ error: 'Course-query email delivery is not configured.' });
     }
 
     res.json({ success: true, message: 'Query submitted successfully' });
@@ -223,7 +225,7 @@ app.get('/api/courses', async (req, res) => {
   try {
     const course = await dbManager.getCourse();
     res.json(course);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch course data' });
   }
 });
@@ -237,7 +239,7 @@ app.put('/api/courses/:courseId/modules/:moduleNum', async (req, res) => {
       return res.status(404).json({ error: 'Module not found' });
     }
     res.json({ message: 'Module updated successfully', module: updatedMod });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to update module' });
   }
 });
@@ -250,7 +252,7 @@ app.post('/api/courses/:courseId/modules', async (req, res) => {
       return res.status(500).json({ error: 'Failed to create new module' });
     }
     res.json({ message: 'Module created successfully', module: newMod });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to create module' });
   }
 });
@@ -260,7 +262,7 @@ app.get('/api/admin/faculty-records', async (req, res) => {
   try {
     const records = await dbManager.getFacultyRecords();
     res.json(records);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch faculty records' });
   }
 });
@@ -270,7 +272,7 @@ app.get('/api/admin/faculty/:userId/attempts', async (req, res) => {
     const { userId } = req.params;
     const attempts = await dbManager.getUserAttempts(userId);
     res.json(attempts);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch user attempts' });
   }
 });
@@ -296,7 +298,7 @@ app.get('/api/admin/analytics', async (req, res) => {
       totalAttempts,
       avgAttempts
     });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to calculate analytics' });
   }
 });
@@ -307,7 +309,7 @@ app.get('/api/progress/:userId/:courseId', async (req, res) => {
     const { userId, courseId } = req.params;
     const progress = await dbManager.getUserProgress(userId, courseId);
     res.json(progress);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch user progress' });
   }
 });
@@ -318,7 +320,7 @@ app.put('/api/progress/:userId/:modKey', async (req, res) => {
     const updates = req.body;
     const progress = await dbManager.updateUserProgress(userId, modKey, updates);
     res.json(progress);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to update progress' });
   }
 });
@@ -335,7 +337,7 @@ app.post('/api/progress/attempt', async (req, res) => {
       passed
     });
     res.json({ success: true, attempt });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to record attempt' });
   }
 });
@@ -344,7 +346,7 @@ app.post('/api/admin/reset-defaults', async (req, res) => {
   try {
     await dbManager.resetDefaults();
     res.json({ message: 'Reset to default data complete' });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Reset failed' });
   }
 });
@@ -371,5 +373,5 @@ if (fs.existsSync(distPath)) {
 
 app.listen(PORT, () => {
   console.log(`[API Server] Faculty Portal backend running on http://localhost:${PORT}`);
-  console.log(`[Zimbra] Zimbra Mail Auth configured for host: ${process.env.ZIMBRA_HOST || 'mail.institute.edu.in'}`);
+  console.log(`[Zimbra] Mail authentication host: ${process.env.ZIMBRA_HOST || 'not configured'}`);
 });

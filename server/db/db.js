@@ -89,8 +89,8 @@ class DatabaseManager {
           }
         : {
             host: process.env.DB_HOST || 'localhost',
-            port: parseInt(process.env.DB_PORT || '5432'),
-            user: process.env.DB_USER || 'postgres',
+            port: parseInt(process.env.DB_PORT || '5440'),
+            user: process.env.DB_USER || 'fscp_admin',
             password: process.env.DB_PASSWORD || '',
             database: process.env.DB_NAME || 'faculty_course_portal',
             connectionTimeoutMillis: 5000
@@ -100,7 +100,7 @@ class DatabaseManager {
 
       const res = await this.pool.query('SELECT NOW()');
       this.usePostgres = true;
-      console.log('[DB] Connected to PostgreSQL cloud database successfully at ' + res.rows[0].now);
+      console.log('[DB] Connected to PostgreSQL successfully at ' + res.rows[0].now);
 
       await this.initSchema();
     } catch (err) {
@@ -310,6 +310,22 @@ class DatabaseManager {
       }
     }
     return [];
+  }
+
+  async getAdminForLogin(identity) {
+    await this.ready();
+    if (!this.usePostgres || !this.pool) throw new Error('PostgreSQL is unavailable for authentication.');
+    const result = await this.pool.query(
+      `SELECT u.id, u.email, u.name, u.department, u.role, c.password_hash
+       FROM users u LEFT JOIN admin_credentials c ON c.user_id = u.id
+       WHERE u.role = 'admin' AND (
+         LOWER(u.email) = $1 OR LOWER(u.id) = $1 OR
+         (POSITION('@' IN $1) = 0 AND split_part(LOWER(u.email), '@', 1) = $1)
+       ) LIMIT 2`,
+      [identity.trim().toLowerCase()]
+    );
+    if (result.rows.length > 1) throw new Error('Ambiguous administrator ID; use the full email address.');
+    return result.rows[0] || null;
   }
 
   async getUserById(idOrEmail) {

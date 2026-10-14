@@ -13,6 +13,12 @@ CREATE TABLE IF NOT EXISTS users (
 -- Add status column if upgrading from older schema
 ALTER TABLE users ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'not_enrolled';
 
+-- Keep password hashes separate from profiles returned by faculty/user APIs.
+CREATE TABLE IF NOT EXISTS admin_credentials (
+    user_id VARCHAR(50) PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE IF NOT EXISTS otps (
     email VARCHAR(100) PRIMARY KEY,
@@ -117,8 +123,3 @@ ON CONFLICT (module_id, question_idx) DO UPDATE SET
   question = EXCLUDED.question,
   options = EXCLUDED.options,
   correct = EXCLUDED.correct;
-
--- Seed Data: Admin Account
-INSERT INTO users (id, email, name, department, role) VALUES
-('admin', 'admin@institute.edu.in', 'DEAN, Student Wellbeing', 'Institute Administration', 'admin')
-ON CONFLICT (id) DO NOTHING;
